@@ -1,0 +1,125 @@
+.header{
+  padding: 16px 6px;
+  border-bottom: 6px solid #eee;  
+}
+.header .title{
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 34rpx;
+}
+.header .price{
+  color: #ff660e;
+margin-bottom: 4px;
+}
+.header .subTitle{
+  color: #666;
+display: flex;
+justify-content: space-between;
+font-size: 28rpx;
+}
+.header .desc{
+  display: flex;
+margin-top: 7px;
+font-size: 28rpx;
+}
+.header .desc .item{
+  border: 1px solid #ff660e;
+border-radius: 4px;
+padding: 2px 4px;
+margin-right: 6px;
+background-color: #ffe7d9;
+color: #ff660e;
+}
+
+.centerContent .list{
+  padding-top:15px
+}
+
+
+.centerContent .list .title{
+  display: flex;
+}
+.centerContent .list .left{
+  width: 90px;
+  padding-left:6px;
+}
+.centerContent .list .left text{
+  width: 1px;
+  height: 13px;  
+background-color: #ff660e;
+border-radius: 3px;
+content: "";
+padding-left: 3px;
+vertical-align: middle;
+margin-right: 4px;
+display: inline-block;
+}
+
+.centerContent .list .right{
+  width: calc(100% - 120px);
+  height: 1px;
+  background-color: #eee;
+  margin-top: 13px;
+  
+}
+.centerContent .list .desc{
+  margin-top:10px;
+padding: 6px;
+color: #666;
+font-size: 14px;
+}
+
+.fuli{display: flex;justify-content: space-around;text-align: center;color: #333;}
+.fuli .item image{
+  width:100rpx;
+  height:100rpx;
+}
+.contactUs{display: flex;background-color: #eee;border-radius: 4px;margin: 4px;padding:10px 5px}
+.contactUs .infoMationOne image{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 6px;  
+}
+.contactUs .infoMationThree image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 30px;
+  margin-top: 10px;  
+}
+.contactUs .infoMationOne{
+  flex: 1;
+}
+.contactUs .infoMationThree{
+  flex: 1;
+}
+.contactUs .infoMationTwo{
+  flex: 5;
+}
+.centerContent{margin-bottom:60px;}
+
+.goBM{
+  position: fixed;
+  bottom: 0;
+  height: 60px;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+.goBM .one{
+  flex: 1;
+  color: #ff660e;
+  padding: 3px 2px;
+  padding-top:7px
+}
+.goBM .two{
+  flex:1;
+  background-color: #ff8f23;
+  color: #fff;
+  padding: 3px 2px;
+  padding-top:7px
+}

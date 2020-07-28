@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/jobDetail/jobDetail",
+    "pages/index/index",
+    "pages/city/city"
+   
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ff660e",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "selectedColor": "#ff660e",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./static/img/footer_index.png",
+        "selectedIconPath": "./static/img/footer_index_hover.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的",
+        "iconPath": "./static/img/footer_my.png",
+        "selectedIconPath": "./static/img/footer_my_hover.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "系统需要获取您的定位以便为您提供优质服务"
+    }
+  },
+  "networkTimeout": {
+    "request": 50000,
+    "connectSocket": 50000,
+    "uploadFile": 50000,
+    "downloadFile": 50000
+  },
+  "sitemapLocation": "sitemap.json"
+}

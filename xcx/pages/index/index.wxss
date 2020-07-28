@@ -1,0 +1,71 @@
+.nav{
+  display: flex;
+  justify-content: space-around;
+  margin-top:30rpx;
+}
+.nav .item{
+  text-align: center;
+}
+.nav .item image{
+  width:80rpx;
+  height:80rpx;
+  margin-bottom: 10rpx;
+}
+.nav .item .text{
+  font-size: 13px;
+}
+.swiperStyle{
+  margin-top:20px;
+}
+.swiperStyle .swiperItem{
+  height:200rpx;
+}
+/* 列表 */
+.hotJianzhi{
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  font-size: 16px;  
+}
+.jianzhiList .list{
+  border-bottom: 1px solid #eee;
+  padding: 15px 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.jianzhiList .list .left{
+  flex: 3;
+}
+.jianzhiList .list .right{
+  flex: 1;
+}
+.jianzhiList .list   .title{
+  color:#000;
+  font-size:32rpx;
+}
+.jianzhiList .list .jiesuanWay{
+  color: #959595;
+  font-size: 15px;
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;  
+}
+.jianzhiList .list .jiesuanWay .cell{
+  margin-right: 10px;
+}
+.jianzhiList .list .butie{
+  display: flex;
+
+}
+.jianzhiList .list .butie .type{
+  background-color: #FDF2EC;
+  color: #959595;
+  font-size: 13px;
+  margin-right: 6px;
+  padding: 3px 3px;  
+}
+.jianzhiList .list  .right .price{
+  color: #ff660e;
+  margin-top: 20rpx;
+}

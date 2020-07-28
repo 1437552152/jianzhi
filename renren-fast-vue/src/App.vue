@@ -8,3 +8,8 @@
   export default {
   }
 </script>
+<style>
+.distpicker-address-wrapper select{
+  padding:4px!important;
+}
+</style>>

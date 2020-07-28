@@ -1,0 +1,120 @@
+<view class="header">
+	<view class="title">天河食品厂暑假工长白班临时工兼职</view>
+	<view class="price">16元/小时</view>
+	<view class="subTitle">
+		<view>天河 | 临时工 | 33859次浏览</view>
+		<view class="date">2020-02-28</view>
+	</view>
+	<view class="desc">
+		<view class="item">完工结</view>
+		<view class="item">招300人</view>
+		<view class="item">男女不限</view>
+	</view>
+</view>
+
+<view class="centerContent">
+	<view class="list">
+		<view class="title">
+			<view class="left"><text></text>工作内容</view>
+			<view class="right"></view>
+		</view>
+		<view class="desc">
+			这个例子中提到了两件事情，第一，我们用#example:before和#example:after来目标锁定相同的元素.严格的说，在代码中他们是伪元素。
+			第二，在内容模块中提到，伪元素如果没有设置“content”属性，伪元素是无用的。
+			在这个例子中，拥有属性id的元素将有一个哈希符号放置内容之前，和一个句号在内容之后。
+			语法笔记
+			你可以设置content属性值为空，并且仅仅把他当做一个内容很少的盒子。像这样:
+			这个例子中提到了两件事情，第一，我们用#example:before和#example:after来目标锁定相同的元素.严格的说，在代码中他们是伪元素。
+			第二，在内容模块中提到，伪元素如果没有设置“content”属性，伪元素是无用的。
+
+			在这个例子中，拥有属性id的元素将有一个哈希符号放置内容之前，和一个句号在内容之后。
+			语法笔记
+			你可以设置content属性值为空，并且仅仅把他当做一个内容很少的盒子。像这样:
+
+		</view>
+	</view>
+
+	<view class="list">
+		<view class="title">
+			<view class="left"><text></text>工作时间</view>
+			<view class="right"></view>
+		</view>
+		<view class="desc">
+			<view>工作种类:销售</view>
+			<view>上班时间:08:00-18:00</view>
+		</view>
+	</view>
+
+
+	<view class="list">
+		<view class="title">
+			<view class="left"><text></text>工作地点</view>
+			<view class="right"></view>
+		</view>
+		<view class="desc">
+			安徽省合肥市新华学院
+			<map id="map" longitude="113.324520" latitude="23.099994" scale="14" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height:200px;"></map>
+		</view>
+	</view>
+
+
+	<view class="list">
+		<view class="title">
+			<view class="left"><text></text>公司福利</view>
+			<view class="right"></view>
+		</view>
+		<view class="desc">
+			<view class="fuli">
+				<view class="item">
+					<image src="../../static/img/home.png"></image>
+					<view>包吃</view>
+				</view>
+				<view class="item">
+					<image src="../../static/img/home.png"></image>
+					<view>包住</view>
+				</view>
+				<view class="item">
+					<image src="../../static/img/home.png"></image>
+					<view>交通补贴</view>
+				</view>
+				<view class="item">
+					<image src="../../static/img/home.png"></image>
+					<view>有提成</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="list">
+		<view class="title">
+			<view class="left"><text></text>机构信息</view>
+			<view class="right"></view>
+		</view>
+		<view class="desc">
+			<view class="contactUs">
+				<view class="infoMationOne">
+					<image src="../../static/img/huo.png" />
+				</view>
+				<view class="infoMationTwo">
+					<view>惠州市徐丽人力资源管理有限公司</view>
+					<view>联系人：徐经理</view>
+				</view>
+				<view class="infoMationThree">
+					<image src="../../static/img/jiantou_right.png" />
+				</view>
+			</view>
+		</view>
+	</view>
+
+</view>
+
+<view class="goBM">
+    <view class="one">
+      <view>分享岗位</view>
+      <view>分享岗位可获得分享佣金</view>
+    </view>
+    <view class="two">
+       <view>我要报名</view>
+      <view>(939人已报名)</view>
+    </view>
+</view>
