@@ -1,13 +1,12 @@
 var app = getApp();
-var host = 'https://www.wighh.com/api/';
+var host = 'http://r182s02546.51mypc.cn/renren-fast/';
 
 var urlApi = (url, method, data={}) => {
   return new Promise((res, rej) => {
     wx.request({
       url: host + url,
       header: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        'Authorization':`Bearer ${wx.getStorageSync('userInfo')&&wx.getStorageSync('userInfo').token}`
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       data: data,
       method: method,

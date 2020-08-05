@@ -9,7 +9,13 @@
           <el-option :label="item.compName" :value="item.compId" v-for="(item,index) in dataList" :key="index"></el-option>
         </el-select>
     </el-form-item>
-    <el-form-item label="工作地点" prop="jobAddress">
+    <el-form-item label="公司经度" prop="compLot">
+      <el-input v-model="dataForm.compLot" placeholder="公司经度"></el-input>
+    </el-form-item>
+    <el-form-item label="公司纬度" prop="compLat">
+      <el-input v-model="dataForm.compLat" placeholder="公司纬度"></el-input>
+    </el-form-item>
+    <el-form-item label="工作详细地址" prop="jobAddress">
       <el-input v-model="dataForm.jobAddress" placeholder="请输入工作地点"></el-input>
     </el-form-item>
     
@@ -125,6 +131,7 @@ import moment from 'moment';
           jobSex:'男女不限',
           jobPaytype:'月'
         },
+
         dataRule: {
           compId: [
             { required: true, message: '公司名称', trigger: 'blur' }

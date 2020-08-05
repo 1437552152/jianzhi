@@ -7,17 +7,17 @@
     <el-form-item label="标题" prop="picTitle">
       <el-input v-model="dataForm.picTitle" placeholder="标题"></el-input>
     </el-form-item>
+   
     <el-form-item label="图片上传" prop="picSaveUrl">
       <el-upload
         class="avatar-uploader"
-        action="http://r182s02546.51mypc.cn/renren-fast/sys/syspic/fileUpload"
+        :action="PicUrl"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload">
         <img v-if="dataForm.picSaveUrl" :src="dataForm.picSaveUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
-      <!-- <el-input v-model="dataForm.picSaveUrl" placeholder="图片保存的服务器地址"></el-input> -->
     </el-form-item>
     <el-form-item label="图片跳转地址" prop="picLinkUrl">
       <el-input v-model="dataForm.picLinkUrl" placeholder="点击图片跳转地址"></el-input>
@@ -47,15 +47,14 @@
     data () {
       return {
         visible: false,
+        PicUrl:`${window.SITE_CONFIG.baseUrl}/sys/syspic/fileUpload`,
         dataForm: {
           picId: 0,
           picTitle: '',
           picSaveUrl: '',
           picLinkUrl: '',
           orderid: '',
-          // createTime: '',
           descript: ''
-          // byzd: ''
         },
         dataRule: {
           picTitle: [
@@ -82,10 +81,12 @@
         }
       }
     },
+   created(){
+console.log(window.SITE_CONFIG.baseUrl)
+   },
     methods: {
 // 图片上传
       handleAvatarSuccess(res, file) {
-        debugger;
         if(!res.code){
            this.dataForm.picSaveUrl = res.url;
         }
@@ -120,9 +121,7 @@
                 this.dataForm.picSaveUrl = data.sysPic.picSaveUrl
                 this.dataForm.picLinkUrl = data.sysPic.picLinkUrl
                 this.dataForm.orderid = data.sysPic.orderid
-                // this.dataForm.createTime = data.sysPic.createTime
                 this.dataForm.descript = data.sysPic.descript
-                // this.dataForm.byzd = data.sysPic.byzd
               }
             })
           }

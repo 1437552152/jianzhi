@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/jobDetail/jobDetail",
     "pages/index/index",
-    "pages/city/city"
+    "pages/mine/mine",
+  
+    "pages/city/city",
+    "pages/jobDetail/jobDetail"
    
   ],
   "window": {
@@ -20,7 +22,7 @@
         "selectedIconPath": "./static/img/footer_index_hover.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/mine/mine",
         "text": "我的",
         "iconPath": "./static/img/footer_my.png",
         "selectedIconPath": "./static/img/footer_my_hover.png"
