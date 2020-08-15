@@ -11,7 +11,7 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      cityName: wx.getStorageSync('cityName') == '' ? '全国' : wx.getStorageSync('cityName')
+      cityName: wx.getStorageSync('location') == '' ? '全国' : wx.getStorageSync('location')
     })
   },
   onReady: function () {
@@ -114,9 +114,9 @@ Page({
     console.log(e);
     var cityName = e.currentTarget.dataset.city;
     this.setData({ cityName: cityName })
-    wx.setStorageSync('cityName', cityName)
+    wx.setStorageSync('location', cityName)
     wx.switchTab({
-      url: '/pages/buycar/buycar',
+      url: '../index/index',
     })
   }
 

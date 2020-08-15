@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/comInfo/comInfo",
     "pages/mine/mine",
-  
     "pages/city/city",
-    "pages/jobDetail/jobDetail"
-   
+    "pages/jobDetail/jobDetail",
+    "pages/jobType/jobType"
   ],
   "window": {
     "backgroundTextStyle": "light",

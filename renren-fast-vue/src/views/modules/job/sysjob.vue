@@ -38,20 +38,20 @@
          width="200"
         label="工作地点">
       </el-table-column>
-      <el-table-column
+    <!--   <el-table-column
         prop="jobIntroduce"
         header-align="center"
         align="center"
          width="200"
         label="工作介绍">
-      </el-table-column>
-      <el-table-column
+      </el-table-column> -->
+    <!--   <el-table-column
         prop="jobDesc"
          width="200"
         header-align="center"
         align="center"
         label="职位描述">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="jobRequireSkill"
         header-align="center"
@@ -223,7 +223,8 @@
     methods: {
       // 获取数据列表
       getDataList () {
-        this.dataListLoading = true
+        this.dataListLoading = true;
+        this.addOrUpdateVisible=false;
         this.$http({
           url: this.$http.adornUrl('/job/sysjob/list'),
           method: 'get',

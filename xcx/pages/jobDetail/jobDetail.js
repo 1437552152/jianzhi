@@ -1,4 +1,9 @@
 // pages/jobDetail/jobDetail.js
+import {
+  urlApi
+} from '../../utils/request';
+
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -12,14 +17,16 @@ Page({
       longitude: 113.324520,
       width:25,
       height:25
-    }]
+    }],
+    id:'',
+    dataDetail:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+     this.setData({id:options.id})
   },
 
   /**
@@ -33,35 +40,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+       this.getData();
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  getData:function(){
+    const that=this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    urlApi(`app/index/getJobDetail/${this.data.id}`,'get',{}).then(res=>{
+      if(res.data.code==0){
+         let obj=res.data.detail;
+         var temp=  WxParse.wxParse('article', 'html', obj.jobIntroduce||'', that, 5);
+         obj.jobQycode=obj.jobQycode&&obj.jobQycode.split(',')[obj.jobQycode.split(',').length-1]||'';
+         that.setData({dataDetail:obj,'markers[0].latitude':obj.jobLat,'markers[0].longitude':obj.jobLot})
+         wx.hideLoading()
+        }else{
+        wx.showToast({
+          title:res.data.msg,
+          icon:'none'
+        })
+        wx.hideLoading()
+      }
+    
+    })
   },
 
   /**
@@ -71,17 +73,24 @@ Page({
 
   },
   markertap(e) {
-    console.log(e.detail)
+     const that=this;
     wx.getLocation({
       type: 'wgs84', 
       success: function (res) {
         wx.openLocation({//​使用微信内置地图查看位置。
-          latitude: 23.099994,//要去的纬度-地址
-          longitude: 113.324520,//要去的经度-地址
-          name: "O'MALL华侨城商业中心",
-          address: '华侨城商业中心'
+          latitude: Number(that.data.dataDetail.jobLat),//要去的纬度-地址
+          longitude:Number(that.data.dataDetail.jobLot),//要去的经度-地址
+          name: that.data.dataDetail.jobAddress,
+          address:that.data.dataDetail.jobAddress
         })
       }
     })
+  },
+  goComp:function(e){
+     wx.navigateTo({
+       url: `../comInfo/comInfo?id=${e.currentTarget.dataset.compid}`,
+     })
   }
+
+
 })

@@ -28,12 +28,12 @@
         align="center"
         label="公司名称">
       </el-table-column>
-      <el-table-column
+     <!--  <el-table-column
         prop="compIncroduce"
         header-align="center"
         align="center"
         label="公司介绍">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="compLot"
         header-align="center"
@@ -123,7 +123,8 @@
     methods: {
       // 获取数据列表
       getDataList () {
-        this.dataListLoading = true
+        this.dataListLoading = true;
+        this.addOrUpdateVisible=false;
         this.$http({
           url: this.$http.adornUrl('/comp/syscomp/list'),
           method: 'get',

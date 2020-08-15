@@ -39,6 +39,13 @@
         header-align="center"
         align="center"
         label="图片保存的服务器地址">
+         <template slot-scope="scope">
+            <viewer>
+                <img :src="scope.row.picSaveUrl" key="图片保存的服务器地址" style="width:100px;height:100px;">
+            </viewer>
+        </template>
+
+
       </el-table-column>
       <el-table-column
         prop="picLinkUrl"

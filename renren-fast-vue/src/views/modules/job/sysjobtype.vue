@@ -22,6 +22,30 @@
         align="center"
         width="50">
       </el-table-column>
+       <el-table-column
+        prop="picSaveUrl"
+        header-align="center"
+        align="center"
+        label="首页图标">
+         <template slot-scope="scope">
+            <viewer>
+                <img :src="scope.row.picSaveUrl" key="首页图标" style="width:100px;height:100px;">
+            </viewer>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        prop="picSaveUrl"
+        header-align="center"
+        align="center"
+        label="占位图">
+         <template slot-scope="scope">
+            <viewer>
+                <img :src="scope.row.picSaveUrl" key="占位图" style="width:100px;height:100px;">
+            </viewer>
+        </template>
+      </el-table-column>
+
       <el-table-column
         prop="typeName"
         header-align="center"

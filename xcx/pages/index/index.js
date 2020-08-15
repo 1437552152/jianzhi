@@ -10,20 +10,15 @@ Page({
   data: {
     swiper:[],
     jobType:[],
-    jobList:[]
+    jobList:[],
+    city:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      console.log('onLoad')
-      var that = this;
-      that.getLocation();
-      // 获取轮播图
-      this.getLunbo();
-      // 获取工作类型
-      this.getJobType();
+     
     },
 
     //获取经纬度方法
@@ -32,11 +27,12 @@ Page({
       wx.getLocation({
         type: 'wgs84',
         success: function (res) {
-          var latitude = res.latitude
-          var longitude = res.longitude
+          var latitude = res.latitude;
+          var longitude = res.longitude;
           that.getCity(latitude, longitude);
         }, fail: res => {
-          wx.setStorageSync('location','');
+          wx.setStorageSync('location','全国');
+          this.setData({city:'全国'})
           that.jobList();
         }
       })
@@ -69,20 +65,37 @@ Page({
   onReady: function () {
 
   },
+  searchValue:function(){
+  },
+  goChoose:function(){
+    wx.navigateTo({
+      url: '../city/city',
+    })
+  },
    jobList:function(){
     const that=this;
     let body={};
-    if(wx.getStorageSync('location')){
+    wx.showLoading({
+      title: '加载中',
+    })
+    if(wx.getStorageSync('location')&&wx.getStorageSync('location')!='全国'){
        body.city=wx.getStorageSync('location');
     }
+   
     urlApi('app/index/getJoblist','get',body).then(res=>{
       if(res.data.code==0){
-        that.setData({jobList:res.data.jobList})
+        res.data.jobList.length&&res.data.jobList.map((item,index)=>{
+          item.jobQycode=item.jobQycode.split(',')[item.jobQycode.split(',').length-1];
+          item.compWelfare=item.compWelfare.split(',');
+        })
+        that.setData({jobList:res.data.jobList,city:wx.getStorageSync('location')||''})
+        wx.hideLoading()
       }else{
         wx.showToast({
           title:res.data.msg,
           icon:'none'
         })
+        wx.hideLoading()
       }
     
     })
@@ -120,11 +133,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    if(wx.getStorageSync('location')){
+      that.jobList();
+    }else{
+      that.getLocation();
+    }
+    // 获取轮播图
+    this.getLunbo();
+    // 获取工作类型
+    this.getJobType();
   },
-  goDetail:function(){
+  goDetail:function(e){
     wx.navigateTo({
-      url: '/pages/jobDetail/jobDetail',
+      url: `/pages/jobDetail/jobDetail?id=${e.currentTarget.dataset.list.jobId}`,
     })
   },
   /**
@@ -159,6 +181,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+  goTypeList:function(e){
+     wx.navigateTo({
+       url: `../jobType/jobType?jobtypeId=${e.currentTarget.dataset.param.jobtypeId}&pic=${e.currentTarget.dataset.param.picSaveUrl}`,
+     })
 
   }
 })

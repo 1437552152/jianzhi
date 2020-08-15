@@ -14,7 +14,7 @@
         :action="PicUrl"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload">
+        >
         <img v-if="dataForm.picSaveUrl" :src="dataForm.picSaveUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
@@ -88,7 +88,7 @@ console.log(window.SITE_CONFIG.baseUrl)
 // 图片上传
       handleAvatarSuccess(res, file) {
         if(!res.code){
-           this.dataForm.picSaveUrl = res.url;
+           this.dataForm.picSaveUrl =`${window.SITE_CONFIG.upLoadUrl}${res.url}` ;
         }
         
       },

@@ -1,5 +1,5 @@
 var app = getApp();
-var host = 'http://r182s02546.51mypc.cn/renren-fast/';
+var host = 'http://101.132.114.177:8090/renren-fast/';
 
 var urlApi = (url, method, data={}) => {
   return new Promise((res, rej) => {

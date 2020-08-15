@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     :title="!dataForm.jobId ? '新增' : '修改'"
-    :close-on-click-modal="false"
+    @close='cancel'
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
     <el-form-item label="公司名称" prop="compId">
@@ -9,12 +9,17 @@
           <el-option :label="item.compName" :value="item.compId" v-for="(item,index) in dataList" :key="index"></el-option>
         </el-select>
     </el-form-item>
-    <el-form-item label="公司经度" prop="compLot">
-      <el-input v-model="dataForm.compLot" placeholder="公司经度"></el-input>
+    <el-form-item label="工作经度" prop="jobLot">
+      <el-input v-model="dataForm.jobLot" placeholder="工作经度"></el-input>
     </el-form-item>
-    <el-form-item label="公司纬度" prop="compLat">
-      <el-input v-model="dataForm.compLat" placeholder="公司纬度"></el-input>
+    <el-form-item label="工作纬度" prop="jobLat">
+      <el-input v-model="dataForm.jobLat" placeholder="工作纬度"></el-input>
     </el-form-item>
+
+    <el-form-item label="工作地址" prop="jobQycode">
+       <v-distpicker :province="dataForm.jobQycode.split(',').length===3?dataForm.jobQycode.split(',')[0]:''" :city="dataForm.jobQycode.split(',').length===3?dataForm.jobQycode.split(',')[1]:''" :area="dataForm.jobQycode.split(',').length===3?dataForm.jobQycode.split(',')[2]:''" @selected='selected'></v-distpicker>
+    </el-form-item>
+
     <el-form-item label="工作详细地址" prop="jobAddress">
       <el-input v-model="dataForm.jobAddress" placeholder="请输入工作地点"></el-input>
     </el-form-item>
@@ -75,44 +80,52 @@
       <el-input v-model="dataForm.jobPrezpNum" placeholder="请输入预招聘人数"></el-input>
     </el-form-item>
 
-    <el-form-item label="合作方式" prop="jobBmfs">
+   <!--  <el-form-item label="合作方式" prop="jobBmfs">
       <el-input v-model="dataForm.jobBmfs" placeholder="请输入合作方式" type="textarea"></el-input>
-    </el-form-item>
+    </el-form-item> -->
 
-    <el-form-item label="职位描述" prop="jobDesc">
+ <!--    <el-form-item label="职位描述" prop="jobDesc">
       <el-input v-model="dataForm.jobDesc" placeholder="职位描述" type="textarea"></el-input>
     </el-form-item>
+ -->
     <el-form-item label="职位必备技能" prop="jobRequireSkill">
       <el-input v-model="dataForm.jobRequireSkill" placeholder="请输入职位必备技能" type="textarea"></el-input>
     </el-form-item>
 
-    <el-form-item label="工作介绍" prop="jobIntroduce">
-      <el-input v-model="dataForm.jobIntroduce" placeholder="请输入工作介绍" type="textarea"></el-input>
-    </el-form-item>
 
     <el-form-item label="工作备注" prop="jobBz">
       <el-input v-model="dataForm.jobBz" placeholder="请输入工作备注" type="textarea"></el-input>
     </el-form-item>
-    </el-form>
 
-   
+ <div class="mod-demo-ueditor" v-if="flag">
+     <el-form-item label="工作内容" prop="jobIntroduce">
+      <script :id="ueId" class="ueditor-box" type="text/plain" style="width: 100%; height: 260px;">{{dataForm.jobIntroduce}}</script>
+  </el-form-item>
+ </div>
+</el-form>
 
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取消</el-button>
+      <el-button @click="cancel()">取消</el-button>
       <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
     </span>
   </el-dialog>
 </template>
 
 <script>
+import VDistpicker from 'v-distpicker'
 import moment from 'moment';
+ import ueditor from 'ueditor'
   export default {
+    components: { VDistpicker },
     data () {
       return {
         visible: false,
+           flag:false,
         dataForm: {
           jobId: 0,
           compId: '',
+          jobLot:'',
+          jobLat:'',
           jobAddress: '',
           jobIntroduce: '',
           jobtypeId: '',
@@ -129,9 +142,12 @@ import moment from 'moment';
           jobBmbackprice:0,
           jobStatue:1,
           jobSex:'男女不限',
-          jobPaytype:'月'
+          jobPaytype:'月',
+          jobQycode:''
         },
-
+          ue: null,
+          ueId: `J_ueditorBox_${new Date().getTime()}`,
+          ueContent: '',
         dataRule: {
           compId: [
             { required: true, message: '公司名称', trigger: 'blur' }
@@ -145,11 +161,11 @@ import moment from 'moment';
           jobtypeId: [
             { required: true, message: '职位种类主键不能为空', trigger: 'blur' }
           ],
-          jobDesc: [
+         /*  jobDesc: [
             { required: true, message: '职位描述不能为空', trigger: 'blur' }
-          ],
+          ], */
           jobRequireSkill: [
-            { required: true, message: '职位必备技能不能为空', trigger: 'blur' }
+            { required: false, message: '职位必备技能不能为空', trigger: 'blur' }
           ],
           jobTitle: [
             { required: true, message: '工作标题不能为空', trigger: 'blur' }
@@ -163,11 +179,11 @@ import moment from 'moment';
           jobEndTime: [
             { required: true, message: '工作结束时间不能为空', trigger: 'blur' }
           ],
-          jobBmfs: [
+        /*   jobBmfs: [
             { required: true, message: '工作报名方式不能为空', trigger: 'blur' }
-          ],
+          ], */
           jobBz: [
-            { required: true, message: '工作备注不能为空', trigger: 'blur' }
+            { required: false, message: '工作备注不能为空', trigger: 'blur' }
           ],
           jobPrezpNum: [
             { required: true, message: '请填写预招聘人数', trigger: 'blur' }
@@ -184,9 +200,15 @@ import moment from 'moment';
           jobPaytype: [
             { required: true, message: '工资结算方式必填', trigger: 'blur' }
           ],
-
-
-          
+           jobLot: [
+            { required: true, message: '工作经度必填', trigger: 'blur' }
+          ],
+           jobpLat: [
+            { required: true, message: '工作纬度必填', trigger: 'blur' }
+          ],
+            jobQycode: [
+            { required: true, message: '工作地址不能为空', trigger: 'blur' }
+          ]     
         },
          dataList:[],
          jobTypeList:[]
@@ -222,15 +244,33 @@ import moment from 'moment';
                 this.dataForm.jobBmbackprice = data.sysJob.jobBmbackprice;     
                 this.dataForm.jobStatue = data.sysJob.jobStatue; 
                 this.dataForm.jobSex = data.sysJob.jobSex===3?'男女不限':(data.sysJob.jobSex===2?'只招女生':'只招男生');   
-                this.dataForm.jobPaytype = data.sysJob.jobPaytype===3?'月':(data.sysJob.jobPaytype===2?'天':'时');             
+                this.dataForm.jobPaytype = data.sysJob.jobPaytype===3?'月':(data.sysJob.jobPaytype===2?'天':'时'); 
+                
+                 this.dataForm.jobLot = data.sysJob.jobLot;
+                 this.dataForm.jobLat = data.sysJob.jobLat;
+
+                  this.dataForm.jobQycode = data.sysJob.jobQycode
+                  this.flag=true;
+                this.visabled();
+              }else{
+                this.flag=true;
+                this.visabled();  
               }
             })
+          }else{
+             this.flag=true;
+             this.visabled();
           }
         })
       },
+        selected(data){
+        this.dataForm.jobQycode=`${data.province.value},${data.city.value},${data.area.value}`
+       },
       // 表单提交
       dataFormSubmit () {
+          this.getContent();
         this.$refs['dataForm'].validate((valid) => {
+          
           if (valid) {
             this.$http({
               url: this.$http.adornUrl(`/job/sysjob/${!this.dataForm.jobId ? 'save' : 'update'}`),
@@ -254,7 +294,10 @@ import moment from 'moment';
                 'jobBmbackprice':this.dataForm.jobBmbackprice,
                 'jobStatue':this.dataForm.jobStatue, 
                 'jobSex': this.dataForm.jobSex==='男女不限'?3:(this.dataForm.jobSex==='只招女生'?2:1), 
-                'jobPaytype': this.dataForm.jobPaytype==='月'?3:(this.dataForm.jobPaytype==='天'?2:1),           
+                'jobPaytype': this.dataForm.jobPaytype==='月'?3:(this.dataForm.jobPaytype==='天'?2:1), 
+                'jobLot':this.dataForm.jobLot,
+                'jobLat':this.dataForm.jobLat,
+                'jobQycode': this.dataForm.jobQycode   
               })
             }).then(({data}) => {
               if (data && data.code === 0) {
@@ -263,7 +306,9 @@ import moment from 'moment';
                   type: 'success',
                   duration: 1500,
                   onClose: () => {
-                    this.visible = false
+                     this.visible = false;
+                    this.ueContent='';
+                    this.dataForm.jobIntroduce='';
                     this.$emit('refreshDataList')
                   }
                 })
@@ -274,7 +319,13 @@ import moment from 'moment';
           }
         })
       },
-             // 获取数据列表
+       cancel(){
+          this.visible = false;
+          this.ueContent='';
+          this.dataForm.jobIntroduce='';
+          this.$emit('refreshDataList')
+      },
+      // 获取数据列表
       getDataList () {
         this.$http({
           url: this.$http.adornUrl('/comp/syscomp/list'),
@@ -306,6 +357,24 @@ import moment from 'moment';
           }
         })
       },
+         visabled(){
+        this.$nextTick(() => {
+            this.ue = ueditor.getEditor(this.ueId, {
+                    zIndex: 3000
+                  });
+        })
+      },
+       getContent () {
+        this.ue.ready(() => {
+          this.ueContent = this.ue.getContent();
+          this.dataForm.jobIntroduce=this.ue.getContent();
+        })
+      },
+      destroyed () {
+            this.flag=false;
+            this.ueContent='';
+           this.dataForm.jobIntroduce='';
+}
     },
      created () {
       this.jobTypeListRequ();

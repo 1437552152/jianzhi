@@ -123,3 +123,9 @@ font-size: 14px;
   padding: 3px 2px;
   padding-top:7px
 }
+
+.line{
+  margin-left: 30px;
+margin-bottom: 6px;
+margin-top: 6px;
+}

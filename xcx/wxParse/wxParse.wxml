@@ -18,7 +18,7 @@
 </template>
 
 <template name="wxParseImg">
-  <image class="{{item.classStr}} wxParse-{{item.tag}}" data-from="{{item.from}}" data-src="{{item.attr.src}}" data-idx="{{item.imgIndex}}" src="http://xcx01.yiyuncloud.com{{item.attr.src}}" mode="aspectFit" bindload="wxParseImgLoad" bindtap="wxParseImgTap" mode="widthFix" style="width:{{item.width}}px;"
+  <image class="{{item.classStr}} wxParse-{{item.tag}}" data-from="{{item.from}}" data-src="{{item.attr.src}}" data-idx="{{item.imgIndex}}" src="{{item.attr.src}}" mode="aspectFit" bindload="wxParseImgLoad" mode="widthFix" style="width:{{item.width}}px;height:{{item.height}}px"
   />
 </template>
 
@@ -27,7 +27,7 @@
     <block wx:for="{{item.textArray}}" wx:key="">
       <block class="{{item.text == '\\n' ? 'wxParse-hide':''}}" wx:if="{{item.node == 'text'}}">{{item.text}}</block>
       <block wx:elif="{{item.node == 'element'}}">
-        <image class="wxEmoji" src="http://xcx01.yiyuncloud.com{{item.baseSrc}}{{item.text}}" />
+        <image class="wxEmoji" src="{{item.baseSrc}}{{item.text}}" />
       </block>
     </block>
   </view>

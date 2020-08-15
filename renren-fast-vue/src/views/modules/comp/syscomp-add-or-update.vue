@@ -1,15 +1,13 @@
 <template>
   <el-dialog
     :title="dataForm.compId ? '修改' : '新增'"
-    :close-on-click-modal="false"
+     @close='cancel'
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
     <el-form-item label="公司名称" prop="compName">
       <el-input v-model="dataForm.compName" placeholder="公司名称"></el-input>
     </el-form-item>
-    <el-form-item label="公司介绍" prop="compIncroduce">
-      <el-input v-model="dataForm.compIncroduce" placeholder="公司介绍"></el-input>
-    </el-form-item>
+    
     <el-form-item label="公司经度" prop="compLot">
       <el-input v-model="dataForm.compLot" placeholder="公司经度"></el-input>
     </el-form-item>
@@ -17,6 +15,7 @@
       <el-input v-model="dataForm.compLat" placeholder="公司纬度"></el-input>
     </el-form-item>
    
+
     <el-form-item label="公司联系电话" prop="compPnone">
       <el-input v-model="dataForm.compPnone" placeholder="公司联系电话"></el-input>
     </el-form-item>
@@ -35,21 +34,30 @@
      <el-form-item label="公司详细地址" prop="compAddr">
       <el-input v-model="dataForm.compAddr" placeholder="公司详细地址"></el-input>
     </el-form-item>
+    <div class="mod-demo-ueditor" v-if="flag">
+     <el-form-item label="公司介绍" prop="compIncroduce">
+      <script :id="ueId" class="ueditor-box" type="text/plain" style="width: 100%; height: 260px;">{{dataForm.compIncroduce}}</script>
+  </el-form-item>
+  </div>
     </el-form>
+<!--  <p><el-button @click="getContent()">获得内容</el-button></p> -->
+
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取消</el-button>
+      <el-button @click="cancel()">取消</el-button>
       <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
     </span>
   </el-dialog>
 </template>
 
 <script>
-import VDistpicker from 'v-distpicker'
+import VDistpicker from 'v-distpicker';
+ import ueditor from 'ueditor'
   export default {
      components: { VDistpicker },
     data () {
       return {
         visible: false,
+        flag:false,
         dataForm: {
           compId: 0,
           compName: '',
@@ -62,12 +70,12 @@ import VDistpicker from 'v-distpicker'
           compQycode: '',
           id:0
         },
+          ue: null,
+          ueId: `J_ueditorBox_${new Date().getTime()}`,
+          ueContent: '',
         dataRule: {
           compName: [
             { required: true, message: '公司名称不能为空', trigger: 'blur' }
-          ],
-          compIncroduce: [
-            { required: true, message: '公司介绍不能为空', trigger: 'blur' }
           ],
           compLot: [
             { required: true, message: '公司经度不能为空', trigger: 'blur' } 
@@ -87,12 +95,22 @@ import VDistpicker from 'v-distpicker'
         }
       }
     },
+    mounted () {
+      
+    },
     methods: {
+      cancel(){
+          this.visible = false;
+          this.ueContent='';
+          this.dataForm.compIncroduce='';
+          this.$emit('refreshDataList')
+      },
       init (id) {
         this.dataForm.compId = id || 0
-        this.visible = true
+        this.visible = true;
         this.$nextTick(() => {
-          this.$refs['dataForm'].resetFields()
+        this.$refs['dataForm'].resetFields();
+       
           if (this.dataForm.compId) {
             this.$http({
               url: this.$http.adornUrl(`/comp/syscomp/info/${this.dataForm.compId}`),
@@ -101,15 +119,24 @@ import VDistpicker from 'v-distpicker'
             }).then(({data}) => {
               if (data && data.code === 0) {
                 this.dataForm.compName = data.sysComp.compName
-                this.dataForm.compIncroduce = data.sysComp.compIncroduce
+                this.dataForm.compIncroduce = data.sysComp.compIncroduce;
+                this.ueContent= data.sysComp.compIncroduce;
                 this.dataForm.compLot = data.sysComp.compLot
                 this.dataForm.compLat = data.sysComp.compLat
                 this.dataForm.compAddr = data.sysComp.compAddr
                 this.dataForm.compPnone = data.sysComp.compPnone
-                this.dataForm.compWelfare = data.sysComp.compWelfare.split(",")
-                this.dataForm.compQycode = data.sysComp.compQycode
+                this.dataForm.compWelfare =data.sysComp.compWelfare?data.sysComp.compWelfare.split(","):[]
+                this.dataForm.compQycode = data.sysComp.compQycode; 
+                this.flag=true;
+                this.visabled();
+              }else{
+                this.flag=true;
+                this.visabled();  
               }
             })
+          }else{
+             this.flag=true;
+             this.visabled();
           }
         })
       },
@@ -118,6 +145,7 @@ import VDistpicker from 'v-distpicker'
        },
       // 表单提交
       dataFormSubmit () {
+        this.getContent();
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({
@@ -141,7 +169,9 @@ import VDistpicker from 'v-distpicker'
                   type: 'success',
                   duration: 1500,
                   onClose: () => {
-                    this.visible = false
+                    this.visible = false;
+                    this.ueContent='';
+                    this.dataForm.compIncroduce='';
                     this.$emit('refreshDataList')
                   }
                 })
@@ -151,13 +181,38 @@ import VDistpicker from 'v-distpicker'
             })
           }
         })
-      }
+      },
+      visabled(){
+        this.$nextTick(() => {
+            this.ue = ueditor.getEditor(this.ueId, {
+                    zIndex: 3000
+                  });
+        })
+      },
+       getContent () {
+        this.ue.ready(() => {
+          this.ueContent = this.ue.getContent();
+          this.dataForm.compIncroduce=this.ue.getContent();
+        })
+      },
+      destroyed () {
+            this.flag=false;
+            this.ueContent='';
+           this.dataForm.compIncroduce='';
+}
     }
   }
 </script>
-<style scoped>
+<style lang="scss">
 .distpicker-address-wrapper select{
   height:50px;
   padding:3px;
 }
-</style>>
+  .mod-demo-ueditor {
+    position: relative;
+    z-index: 510;
+    > .el-alert {
+      margin-bottom: 10px;
+    }
+  }
+</style>

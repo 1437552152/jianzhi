@@ -1,0 +1,29 @@
+	  <import src="../../wxParse/wxParse.wxml" />
+	<view class="list">
+		<view class="desc" style="border-bottom:6px solid #efeff1;margin-bottom:20px">
+			<view class="contactUs">
+				<view class="infoMationOne">
+					<image src="../../static/img/huo.png" />
+				</view>
+				<view class="infoMationTwo">
+					<view>{{dataDetail.compName}}</view>
+					<view>联系电话：{{dataDetail.compPnone}}</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="list">
+		<view class="title">
+			<view class="left"><text></text>公司简介</view>
+		</view>
+		<view class="desc">
+	 	 <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+		</view>
+	</view>
+
+  	<view class="list" style="margin-bottom:60px">
+		<view class="desc">
+			<map id="map" longitude="{{dataDetail.compLot}}" latitude="{{dataDetail.compLat}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height:200px;"></map>
+		</view>
+	</view>
