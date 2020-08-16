@@ -7,12 +7,13 @@
   text-align: center;
 }
 .nav .item image{
-  width:80rpx;
-  height:80rpx;
+  width:100rpx;
+  height:100rpx;
   margin-bottom: 10rpx;
 }
 .nav .item .text{
-  font-size: 13px;
+  font-size: 12px;
+  color:#333;
 }
 .swiperStyle{
   margin-top:20px;
@@ -22,17 +23,30 @@
 }
 /* 列表 */
 .hotJianzhi{
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
   padding-top: 20px;
   padding-left: 10px;
-  font-size: 16px;  
+  font-size: 16px; 
+  font-weight:bold; 
 }
+.hotJianzhi image{
+  width:28px;
+  height:28px;
+  margin-left: 2px;
+  margin-right: 4px;
+  vertical-align:middle;
+}
+
 .jianzhiList .list{
-  border-bottom: 1px solid #eee;
-  padding: 15px 8px;
+  border: 1px solid #eee;
   display: flex;
   justify-content: space-between;
+  padding: 3% 2%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  margin: 2%;
+  border-radius: 6px;
+  box-shadow: 0 0 2px #e2e2e2;
+  
 }
 .jianzhiList .list:last-child{
   border-bottom:none;
@@ -40,10 +54,11 @@
 
 
 .jianzhiList .list .left{
-  width: 60%;
+  width: 70%;
 }
 .jianzhiList .list .right{
-  width: 40%;
+  width: 30%;
+  font-size: 15px;
 }
 .jianzhiList .list   .title{
   color:#000;
@@ -78,6 +93,11 @@
   margin-top: 20rpx;
 }
 
+.jianzhiList .list  .right .price:first-child{
+  margin-top: 26px;
+}
+
+
 .dingwei{
   height: 40px;
 line-height: 40px;
@@ -98,22 +118,46 @@ margin-right: 10px;
 }
 
 .dingwei input{
-  border: 1px solid #ccc;
   border-radius: 20rpx;
-  margin-top: 6px;
-  margin-left: 10px; 
-  padding: 4px; 
+margin-top: 6px;
+margin-left: 10px;
+padding: 5px;
+background: #f4f4f6;
 }
 .noData{
   text-align: center;
-  color: #333;
-  font-size: 12px;
+  color: #999;
+  font-size: 14px;
 }
 
 .noData image{
   text-align: center;
   margin-top: 40px;
   margin-bottom: 10px;
-  width:60px;
-  height:60px;
+  width: 160px;
+  height: 89px;
+}
+
+.jianzhiList{
+  padding-bottom: 40px; 
+}
+
+.notice image{
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-left: 6px;  
+}
+.notice{display: flex;
+  justify-content: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  }
+
+.swiperw{
+ height:40rpx;
+width: 100%;
+color: #999;
+font-size: 15px;
+margin-left: 4px;
 }

@@ -11,16 +11,22 @@ Page({
     swiper:[],
     jobType:[],
     jobList:[],
-    city:''
+    city:'',
+    NoticeList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     
-    },
+       this.getNotice();
+  },
 
+  goLunbo:function(e){
+       wx.navigateTo({
+         url: '../newDetail/newDetail?id='+e.currentTarget.dataset.item.picId,
+       })
+  },
     //获取经纬度方法
     getLocation: function () {
       var that = this
@@ -100,9 +106,23 @@ Page({
     
     })
    },
+   getNotice:function(){
+    const that=this;
+    urlApi('app/index/getPiclist?pzType=Notice','get',{}).then(res=>{
+      if(res.data.code==0){
+        that.setData({NoticeList:res.data.picList})
+      }else{
+        wx.showToast({
+          title:res.data.msg,
+          icon:'none'
+        })
+      }
+    
+    })
+   },
   getLunbo:function(){
     const that=this;
-    urlApi('app/index/getPiclist','get',{}).then(res=>{
+    urlApi('app/index/getPiclist?pzType=Lunbo','get',{}).then(res=>{
       if(res.data.code==0){
         that.setData({swiper:res.data.picList})
       }else{
@@ -185,7 +205,7 @@ Page({
   },
   goTypeList:function(e){
      wx.navigateTo({
-       url: `../jobType/jobType?jobtypeId=${e.currentTarget.dataset.param.jobtypeId}&pic=${e.currentTarget.dataset.param.picSaveUrl}`,
+       url: `../jobType/jobType?jobtypeId=${e.currentTarget.dataset.param.jobtypeId}&pic=${e.currentTarget.dataset.param.picBigSaveUrl}`,
      })
 
   }

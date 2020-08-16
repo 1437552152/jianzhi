@@ -28,6 +28,12 @@
         align="center"
         label="">
       </el-table-column> -->
+       <el-table-column
+        prop="pzType"
+        header-align="center"
+        align="center"
+        label="配置名称">
+      </el-table-column>
       <el-table-column
         prop="picTitle"
         header-align="center"
@@ -38,21 +44,21 @@
         prop="picSaveUrl"
         header-align="center"
         align="center"
-        label="图片保存的服务器地址">
+        label="图片">
          <template slot-scope="scope">
             <viewer>
-                <img :src="scope.row.picSaveUrl" key="图片保存的服务器地址" style="width:100px;height:100px;">
+                <img :src="scope.row.picSaveUrl" key="图片" style="width:200px">
             </viewer>
         </template>
 
 
       </el-table-column>
-      <el-table-column
+     <!--  <el-table-column
         prop="picLinkUrl"
         header-align="center"
         align="center"
         label="点击图片跳转地址">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="orderid"
         header-align="center"
@@ -65,12 +71,12 @@
         align="center"
         label="图片创建时间">
       </el-table-column>
-      <el-table-column
+     <!--  <el-table-column
         prop="descript"
         header-align="center"
         align="center"
         label="描述">
-      </el-table-column>
+      </el-table-column> -->
       
       <el-table-column
         fixed="right"
@@ -124,7 +130,8 @@
     methods: {
       // 获取数据列表
       getDataList () {
-        this.dataListLoading = true
+        this.dataListLoading = true;
+         this.addOrUpdateVisible=false;
         this.$http({
           url: this.$http.adornUrl('/sys/syspic/list'),
           method: 'get',
@@ -161,7 +168,7 @@
       },
       // 新增 / 修改
       addOrUpdateHandle (id) {
-        this.addOrUpdateVisible = true
+        this.addOrUpdateVisible = true;
         this.$nextTick(() => {
           this.$refs.addOrUpdate.init(id)
         })

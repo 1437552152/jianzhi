@@ -16,7 +16,8 @@ Page({
       latitude: 23.099994,
       longitude: 113.324520,
       width:25,
-      height:25
+      height:25,
+      flag:false
     }],
     id:'',
     dataDetail:null
@@ -28,7 +29,9 @@ Page({
   onLoad: function (options) {
      this.setData({id:options.id})
   },
-
+  goCollect:function(){
+    this.setData({flag:true})
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -39,7 +39,7 @@
     },
     mounted () {
       this.ue = ueditor.getEditor(this.ueId, {
-        // serverUrl: '', // 服务器统一请求接口路径
+         serverUrl:`${window.SITE_CONFIG.baseUrl}/comp/syscomp/list`,
         zIndex: 3000
       })
     },

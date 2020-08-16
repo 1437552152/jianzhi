@@ -1,9 +1,14 @@
 <template>
   <el-dialog
     :title="!dataForm.id ? '新增' : '修改'"
-    :close-on-click-modal="false"
+    @close='cancel'
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" :label-width="150" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
+   
+   
+    <el-form-item label="配置名称" prop="pzType">
+      <el-input v-model="dataForm.pzType" placeholder="配置名称"></el-input>
+    </el-form-item>
     <el-form-item label="标题" prop="picTitle">
       <el-input v-model="dataForm.picTitle" placeholder="标题"></el-input>
     </el-form-item>
@@ -19,34 +24,41 @@
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
     </el-form-item>
-    <el-form-item label="图片跳转地址" prop="picLinkUrl">
+   <!--  <el-form-item label="图片跳转地址" prop="picLinkUrl">
       <el-input v-model="dataForm.picLinkUrl" placeholder="点击图片跳转地址"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="序号" prop="orderid">
       <el-input v-model="dataForm.orderid" placeholder="排序序号"></el-input>
     </el-form-item>
     <!-- <el-form-item label="图片创建时间" prop="createTime">
       <el-input v-model="dataForm.createTime" placeholder="图片创建时间"></el-input>
     </el-form-item> -->
-    <el-form-item label="描述" prop="descript">
+ <div class="mod-demo-ueditor" v-if="flag">
+     <el-form-item label="描述" prop="descript">
+      <script :id="ueId" class="ueditor-box" type="text/plain" style="width: 100%; height: 260px;">{{dataForm.descript}}</script>
+  </el-form-item>
+ </div>
+   <!--  <el-form-item label="描述" prop="descript">
       <el-input v-model="dataForm.descript" placeholder="描述"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     <!-- <el-form-item label="备用字段" prop="byzd">
       <el-input v-model="dataForm.byzd" placeholder="备用字段"></el-input>
     </el-form-item> -->
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取消</el-button>
+      <el-button  @click="cancel()">取消</el-button>
       <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
     </span>
   </el-dialog>
 </template>
 
 <script>
+ import ueditor from 'ueditor'
   export default {
     data () {
       return {
         visible: false,
+         flag:false,
         PicUrl:`${window.SITE_CONFIG.baseUrl}/sys/syspic/fileUpload`,
         dataForm: {
           picId: 0,
@@ -54,18 +66,25 @@
           picSaveUrl: '',
           picLinkUrl: '',
           orderid: '',
-          descript: ''
+          descript: '',
+          pzType:''
         },
+         ue: null,
+          ueId: `J_ueditorBox_${new Date().getTime()}`,
+          ueContent: '',
         dataRule: {
+         pzType: [
+            { required: true, message: '配置名称不能为空', trigger: 'blur' }
+          ],
           picTitle: [
             { required: true, message: '标题不能为空', trigger: 'blur' }
           ],
           picSaveUrl: [
-            { required: true, message: '图片保存的服务器地址不能为空', trigger: 'blur' }
+            { required: false, message: '图片保存的服务器地址不能为空', trigger: 'blur' }
           ],
-          picLinkUrl: [
+       /*    picLinkUrl: [
             { required: true, message: '点击图片跳转地址不能为空', trigger: 'blur' }
-          ],
+          ], */
           orderid: [
             { required: true, message: '排序序号不能为空', trigger: 'blur' }
           ],
@@ -121,14 +140,25 @@ console.log(window.SITE_CONFIG.baseUrl)
                 this.dataForm.picSaveUrl = data.sysPic.picSaveUrl
                 this.dataForm.picLinkUrl = data.sysPic.picLinkUrl
                 this.dataForm.orderid = data.sysPic.orderid
-                this.dataForm.descript = data.sysPic.descript
+                this.dataForm.descript = data.sysPic.descript;
+                this.dataForm.pzType = data.sysPic.pzType;
+            
+                 this.flag=true;
+                this.visabled();
+              }else{
+                this.flag=true;
+                this.visabled();  
               }
             })
+          }else{
+             this.flag=true;
+             this.visabled();
           }
         })
       },
       // 表单提交
       dataFormSubmit () {
+           this.getContent();
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({
@@ -139,9 +169,9 @@ console.log(window.SITE_CONFIG.baseUrl)
                 'picTitle': this.dataForm.picTitle,
                 'picSaveUrl': this.dataForm.picSaveUrl,
                 'picLinkUrl': this.dataForm.picLinkUrl,
-                'orderid': this.dataForm.orderid,
-                // 'createTime': this.dataForm.createTime,
-                'descript': this.dataForm.descript
+                'orderid': this.dataForm.orderid,            
+                'descript': this.dataForm.descript,
+                'pzType': this.dataForm.pzType,
                 // 'byzd': this.dataForm.byzd
               })
             }).then(({data}) => {
@@ -151,7 +181,9 @@ console.log(window.SITE_CONFIG.baseUrl)
                   type: 'success',
                   duration: 1500,
                   onClose: () => {
-                    this.visible = false
+                    this.visible = false;
+                     this.ueContent='';
+                    this.dataForm.descript='';
                     this.$emit('refreshDataList')
                   }
                 })
@@ -161,7 +193,32 @@ console.log(window.SITE_CONFIG.baseUrl)
             })
           }
         })
-      }
+      },
+        cancel(){
+          this.visible = false;
+          this.ueContent='';
+          this.dataForm.descript='';
+          this.$emit('refreshDataList')
+      },
+         visabled(){
+        this.$nextTick(() => {
+            this.ue = ueditor.getEditor(this.ueId, {
+                    zIndex: 3000,
+                     serverUrl:`${window.SITE_CONFIG.baseUrl}/comp/syscomp/list`,
+                  });
+        })
+      },
+       getContent () {
+        this.ue.ready(() => {
+          this.ueContent = this.ue.getContent();
+          this.dataForm.descript=this.ue.getContent();
+        })
+      },
+      destroyed () {
+        this.flag=false;
+        this.ueContent='';
+        this.dataForm.descript='';
+    },
     }
   }
 </script>

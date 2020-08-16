@@ -122,9 +122,13 @@
 </view>
 
 <view class="goBM">
+    <view class="one" bindtap="goCollect">
+      <image src="{{!flag?'../../static/img/collect.png':'../../static/img/collectChecked.png'}}" style="width:24px;height:24px"></image>
+      <view>收藏</view>
+    </view>
     <view class="one">
-      <view>分享岗位</view>
-      <view>分享岗位可获得分享佣金</view>
+      <image src='../../static/img/share.png' style="width:24px;height:24px"></image>
+      <view>分享</view>
     </view>
     <view class="two">
        <view>我要报名</view>

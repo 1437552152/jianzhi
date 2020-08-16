@@ -60,6 +60,7 @@ display: inline-block;
   height: 1px;
   background-color: #eee;
   margin-top: 13px;
+  display: none;
   
 }
 .centerContent .list .desc{
@@ -112,13 +113,14 @@ font-size: 14px;
 }
 .goBM .one{
   flex: 1;
-  color: #ff660e;
+  color: #000;
   padding: 3px 2px;
-  padding-top:7px
+  padding-top:7px;
+  font-size:12px;
 }
 .goBM .two{
-  flex:1;
-  background-color: #ff8f23;
+  flex:4;
+  background-color: #ff660e;
   color: #fff;
   padding: 3px 2px;
   padding-top:7px

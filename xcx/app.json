@@ -5,19 +5,26 @@
     "pages/mine/mine",
     "pages/city/city",
     "pages/jobDetail/jobDetail",
-    "pages/jobType/jobType"
+    "pages/jobType/jobType",
+    "pages/newDetail/newDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ff660e",
-    "navigationBarTextStyle": "white"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "selectedColor": "#ff660e",
+    "selectedColor": "#5d0edc",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
+        "iconPath": "./static/img/footer_index.png",
+        "selectedIconPath": "./static/img/footer_index_hover.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "精选",
         "iconPath": "./static/img/footer_index.png",
         "selectedIconPath": "./static/img/footer_index_hover.png"
       },

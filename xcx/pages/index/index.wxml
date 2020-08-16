@@ -1,11 +1,19 @@
 <view>
 <!-- 头部定位 -->
+<view class="notice" wx-if="{{NoticeList.length}}">
+<image src="../../static/img/notice.png"></image>
+<swiper class="swiperw" vertical='true' autoplay="true" indicator-active-color="transparent" indicator-color='transparent' duration="1000" indicatorDots="false" interval="5000" >
+    <swiper-item class="swiperItem" wx:for="{{NoticeList}}" wx:key="item">
+        {{item.picTitle}}
+    </swiper-item>
+</swiper>
+</view>
 
 <view class="header">
    <view class="dingwei">
     <view style="flex:1" bindtap="goChoose"><image src="../../static/img/positionMap.png" style="width:16px;height:16px" />{{city}}</view>
     <view style="flex:4"><input class="input" placeholder="搜索" 
-    bindtap="searchValue" placeholder-style="font-size:12px;margin-left:6px"/></view>
+    bindtap="searchValue" placeholder-style="font-size:12px;margin-left:8px"/></view>
     </view>
 </view>
 
@@ -19,7 +27,7 @@
 </view>
 <!-- 轮播图 -->
 <swiper class="swiperStyle"  autoplay="true" indicator-active-color="#ff660e" indicator-color='#fff' duration="1000" indicatorDots="true" interval="5000" style="height:200rpx">
-    <swiper-item class="swiperItem" wx:for="{{swiper}}" wx:key="item">
+    <swiper-item class="swiperItem" wx:for="{{swiper}}" wx:key="item" bindtap="goLunbo" data-item="{{item}}">
         <navigator  url="{{item.picLinkUrl}}">
             <image class="slide-image"  src="{{item.picSaveUrl}}" style="width:100%;height:200rpx"></image>
         </navigator>
@@ -27,7 +35,7 @@
 </swiper>
 <!-- 列表 -->
 <view class="jianzhiList">
-    <view class="hotJianzhi">火爆兼职</view>
+    <view class="hotJianzhi"><image src="../../static/img/hot.png"></image>火爆兼职</view>
     <view class="list" bindtap="goDetail" data-list="{{item}}" wx:for="{{jobList}}" wx:key="item" >
        <view class="left">
            <view class="title">{{item.jobTitle}}</view>

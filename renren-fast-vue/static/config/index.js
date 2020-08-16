@@ -5,8 +5,8 @@
   window.SITE_CONFIG = {};
 
   // api接口请求地址
-  window.SITE_CONFIG['baseUrl'] = 'http://101.132.114.177:8090/renren-fast';
-
+/*   window.SITE_CONFIG['baseUrl'] = 'http://101.132.114.177:8090/renren-fast'; */
+window.SITE_CONFIG['baseUrl'] = 'http://r182s02546.51mypc.cn/renren-fast';
   window.SITE_CONFIG['upLoadUrl'] = 'http://101.132.114.177:8080';
 
   // cdn地址 = 域名 + 版本号

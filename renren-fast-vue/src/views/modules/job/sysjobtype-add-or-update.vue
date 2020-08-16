@@ -21,14 +21,14 @@
       </el-upload>
     </el-form-item>
 
-    <el-form-item label="占位图上传" prop="zhanSaveUrl">
+    <el-form-item label="占位图上传" prop="picBigSaveUrl">
       <el-upload
         class="avatar-uploader"
         :action="PicUrl"
         :show-file-list="false"
         :on-success="zhanSaveUrlhandleAvatarSuccess"
         >
-        <img v-if="dataForm.zhanSaveUrl" :src="dataForm.zhanSaveUrl" class="avatar">
+        <img v-if="dataForm.picBigSaveUrl" :src="dataForm.picBigSaveUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
     </el-form-item>
@@ -54,7 +54,7 @@ import Moment from 'moment'
           jobtypeId: 0,
           typeName: '',
           picSaveUrl: '',
-          zhanSaveUrl:''
+          picBigSaveUrl:''
         },
         dataRule: {
           typeName: [
@@ -63,7 +63,7 @@ import Moment from 'moment'
           picSaveUrl: [
             { required: true, message: '首页图片地址不能为空', trigger: 'blur' }
           ],
-            zhanSaveUrl: [
+            picBigSaveUrl: [
             { required: true, message: '占位图片地址不能为空', trigger: 'blur' }
           ],
         },
@@ -81,7 +81,7 @@ import Moment from 'moment'
       },
      zhanSaveUrlhandleAvatarSuccess(res, file) {
         if(!res.code){
-          this.dataForm.zhanSaveUrl =`${window.SITE_CONFIG.upLoadUrl}${res.url}` ;
+          this.dataForm.picBigSaveUrl =`${window.SITE_CONFIG.upLoadUrl}${res.url}` ;
         }   
       },
 
@@ -107,7 +107,7 @@ import Moment from 'moment'
               if (data && data.code === 0) {
                 this.dataForm.typeName = data.sysJobtype.typeName;
                 this.dataForm.picSaveUrl = data.sysJobtype.picSaveUrl;
-                 this.dataForm.zhanSaveUrl = data.sysJobtype.zhanSaveUrl;
+                 this.dataForm.picBigSaveUrl = data.sysJobtype.picBigSaveUrl;
 
                 
               }
@@ -126,7 +126,7 @@ import Moment from 'moment'
                 'jobtypeId': this.dataForm.jobtypeId || undefined,
                 'typeName': this.dataForm.typeName,
                 'picSaveUrl': this.dataForm.picSaveUrl,
-                'zhanSaveUrl':this.dataForm.zhanSaveUrl
+                'picBigSaveUrl':this.dataForm.picBigSaveUrl
               })
             }).then(({data}) => {
               if (data && data.code === 0) {
