@@ -1,0 +1,100 @@
+/* pages/feedback/feedback.wxss */
+/* pages/release/release.wxss */
+.top{padding: 30rpx;background: #F8F8F8}
+.textarea{
+  width: 630rpx;
+  font-size: 30rpx;color: #999999;
+  padding: 32rpx 30rpx;background: #FFFFFF;
+  min-height: 56rpx;
+  line-height: 40rpx;
+  overflow-y:visible; 
+}
+.placeholder {
+  font-size: 30rpx;
+  color: #999999;
+}
+/*底部样式*/
+.bottom{background: #FFFFFF;padding: 40rpx 30rpx;}
+.image{
+  width:31%;
+  /* height: 200rpx; */
+  padding: 4rpx;
+}
+.moment_img{
+  width: 98px;
+  height: 98px;
+}
+.image_content{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px
+}
+
+.releaseView{
+  width: calc(100% - 140rpx);
+  height: 88rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+  border-radius:20rpx;
+  text-align: center;
+  line-height: 88rpx;
+  margin: 229rpx 70rpx 100rpx 70rpx;  
+}
+.bg1{background-color: #c6c6c6;}
+.bg2{background-color:#07c061;}
+.flex-gird{
+  display: flex;
+  justify-content: space-between;
+  color: #666666;
+  font-size: 13px;
+  padding: 20rpx 20rpx 20rpx 39rpx;
+  border-bottom: 1px solid #eee;  
+}
+.flex-gird image{
+  width: 20rpx;
+  height: 26rpx; 
+  margin-left: 10rpx;
+vertical-align: middle; 
+}
+
+.imageList{
+    width: 32%;
+    height: 90px;
+    float: left;
+    position: relative;
+    margin-right: 2%;
+    margin-top:20rpx
+}
+.phoneTop  .imageList:nth-child(3n){
+  margin-right: 0;
+}
+
+.positionIcon{
+  position: absolute;
+  right: 0;
+  top: 0px;
+  width: 20px;
+   height: 20px;
+}
+.phoneTop{
+  margin-top: 30rpx;
+  margin-bottom: 40rpx;
+  padding-left: 40rpx;
+padding-right: 40rpx;
+box-sizing: border-box;
+
+}
+.clearfix{
+  clear: both;
+}
+
+
+.textarea{
+  font-size: 26rpx;
+}
+.releaseView{
+bottom: 0;
+position: relative;
+}

@@ -1,0 +1,159 @@
+/* pages/my/my.wxss */
+@import "../index/index.wxss";
+page{
+  background-color: #f7f5f5;
+}
+.my{
+  background-color: #f8f8f8;
+  position: relative;
+}
+.my .my_bg{
+  background: #fff;
+  height: 250rpx;
+}
+.index_menu navigator image{
+  width: 60rpx;
+  height: 50rpx
+}
+.index_menu .menu_text{
+  color: #333;
+  font-size: 24rpx
+}
+.my_order{
+ width:95%;
+margin-left:auto;
+margin-right:auto;
+margin-top:-60rpx;
+border-radius:16rpx;
+border:1px solid #fff;
+background:#fff;
+z-index:999;
+position:relative;
+}
+.my_order .order{
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 30rpx;
+  color: #2B2B2B;
+  font-size: 32rpx;
+  border-bottom: 1px solid #E5E5E5;
+}
+.my_bg image{
+  width: 100%;
+  height: 100%
+}
+.my .part{
+  width: 94%;
+  margin: 20rpx auto;
+  border-radius:16rpx;
+border:1px solid #fff;
+}
+.personalinfo{
+ display:flex;
+justify-content:space-between;
+padding-left:60rpx;
+padding-right:60rpx;
+align-items:center;
+position:absolute;
+top:70rpx;
+left:0;
+right:0;
+}
+.left_part{
+  display: flex;
+  justify-content: space-between;
+}
+.one image{
+  width: 100rpx;
+  height: 100rpx;  
+  vertical-align: middle;
+  border-radius: 50%;
+} 
+
+.orderImg{
+  width: 70rpx;
+  height: 60rpx;
+}
+
+
+.two{
+  margin-left: 27rpx;
+}
+.two .name{
+color: #ffffff;
+font-size: 32rpx;
+}
+.two .num{
+  color: #ffffff;
+  font-size: 26rpx;
+  margin-top: 23rpx;
+}
+.two .num text{
+  font-size: 40rpx;
+  margin-right:20rpx;
+}
+.three{
+  margin-left: 16rpx;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  text-align: center;
+  line-height: 48rpx;
+  height: 48rpx;
+  /* width: 100rpx; */
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  padding: 0rpx 30rpx;
+}
+.right_part image{
+  width: 14rpx;
+  height: 26rpx;
+}
+.index_menu{
+  justify-content: space-around;
+}
+.goJianli image{
+  width: 100%;
+  height: 80px;
+  
+}
+.goJianli{
+  margin-left: 20rpx;
+margin-right: 20rpx;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+
+.baomingStatus{margin: 20px 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding:20px 10px;
+  
+}
+
+.baomingStatus .list {
+  flex:1;
+ text-align: center;
+ position: relative;
+}
+
+.baomingStatus .list .num{
+  color:#000;
+  font-weight: bold;
+}
+.baomingStatus .list .desc{
+  color: #999;
+  font-size: 14px;
+  margin-top: 4px;  
+}
+
+.baomingStatus .list .line{
+  width: 1px;
+height:30px;
+background-color: #f7f5f5;
+position: absolute;
+right: 0;
+top: 10px;
+}

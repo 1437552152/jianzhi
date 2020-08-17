@@ -1,0 +1,24 @@
+/* pages/personalinfo/personalinfo.wxss */
+.personalinfo image{
+  width: 84rpx;
+  height: 84rpx;
+}
+.i-cell-bd{
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.headAvau{width:50px;height:50px;border-radius: 50%;}
+
+
+.userInfoPri{display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  line-height: 44px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 14px;
+  color: #333;
+  }
+  .personalinfo{margin-top: 20px;}

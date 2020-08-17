@@ -1,0 +1,5 @@
+<view style="padding:0 8px">
+    <view wx:for="{{picList}}" class="newDir" bindtap="goDetail" data-item="{{item}}">
+        <image src="{{item.picSaveUrl}}"></image>
+    </view>
+</view>

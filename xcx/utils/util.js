@@ -36,44 +36,50 @@ const jsEvent = (e)=>{
   const { type } = e.currentTarget.dataset;
   let userInfo=wx.getStorageSync("userInfo");
   var that = this;
-  wx.getSetting({
-    success: function (respon) {
-      if (respon.authSetting['scope.userInfo'] && userInfo) {
-        if (type == 2) {
-          wx.switchTab({
-            url: e.currentTarget.dataset.url
-          })    
-        } else {
-          wx.navigateTo({
-            url: e.currentTarget.dataset.url
-          })
-        }
-      } else {
-        if (type == 2) {
-          wx.navigateTo({
-            url:`/pages/boots/boots?path=${e.currentTarget.dataset.url}&type=2`
-          })  
-
-        }else{
-          wx.navigateTo({
-            url: `/pages/boots/boots?path=${e.currentTarget.dataset.url}&type=1`,
-          })
-        } 
-      }
-    },
-    fail: function () {
-      if (type == 2) {
-        wx.navigateTo({
-          url:`/pages/boots/boots?path=${e.currentTarget.dataset.url}&type=2`
-        })  
-
-      }else{
-        wx.navigateTo({
-          url: `/pages/boots/boots?path=${e.currentTarget.dataset.url}&type=1`,
-        })
-      } 
-    }
+  wx.navigateTo({
+    url: e.currentTarget.dataset.url
   })
+
+
+
+  // wx.getSetting({
+  //   success: function (respon) {
+  //     if (respon.authSetting['scope.userInfo'] && userInfo) {
+  //       if (type == 2) {
+  //         wx.switchTab({
+  //           url: e.currentTarget.dataset.url
+  //         })    
+  //       } else {
+  //         wx.navigateTo({
+  //           url: e.currentTarget.dataset.url
+  //         })
+  //       }
+  //     } else {
+  //       if (type == 2) {
+  //         wx.navigateTo({
+  //           url:`/pages/boots/boots?path=${e.currentTarget.dataset.url}&type=2`
+  //         })  
+
+  //       }else{
+  //         wx.navigateTo({
+  //           url: `/pages/boots/boots?path=${e.currentTarget.dataset.url}&type=1`,
+  //         })
+  //       } 
+  //     }
+  //   },
+  //   fail: function () {
+  //     if (type == 2) {
+  //       wx.navigateTo({
+  //         url:`/pages/boots/boots?path=${e.currentTarget.dataset.url}&type=2`
+  //       })  
+
+  //     }else{
+  //       wx.navigateTo({
+  //         url: `/pages/boots/boots?path=${e.currentTarget.dataset.url}&type=1`,
+  //       })
+  //     } 
+  //   }
+  // })
 } 
 
 

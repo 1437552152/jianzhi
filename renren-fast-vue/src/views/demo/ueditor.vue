@@ -39,7 +39,6 @@
     },
     mounted () {
       this.ue = ueditor.getEditor(this.ueId, {
-         serverUrl:`${window.SITE_CONFIG.baseUrl}/comp/syscomp/list`,
         zIndex: 3000
       })
     },

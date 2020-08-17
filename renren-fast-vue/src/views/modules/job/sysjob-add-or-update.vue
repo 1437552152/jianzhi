@@ -360,8 +360,7 @@ import moment from 'moment';
          visabled(){
         this.$nextTick(() => {
             this.ue = ueditor.getEditor(this.ueId, {
-                    zIndex: 3000,
-                    serverUrl:`${window.SITE_CONFIG.baseUrl}/comp/syscomp/list`,
+                    zIndex: 3000
                   });
         })
       },

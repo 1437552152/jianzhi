@@ -1,0 +1,18 @@
+<!--pages/feedback/feedback.wxml-->
+<view class='feedback'>
+<view class='top'>
+  <textarea class='textarea' bindinput="input" placeholder="请输入您的意见或建议" name="textarea"
+   placeholder-class="placeholder" maxlength="{{maxlength}}" 
+   style="height:140px"
+    value="{{content}}" focus="{{focus}}"/>
+</view>
+<!-- bottom--> 
+<view class="bottom">
+  <block wx:if="{{content==''}}">
+    <view  class="releaseView bg1">提交反馈</view>
+  </block>
+  <block wx:else>
+    <view  class="releaseView bg2" bindtap="send">提交反馈</view>
+  </block>
+</view>
+</view>

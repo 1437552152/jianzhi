@@ -1,12 +1,17 @@
 {
   "pages": [
+    "pages/my/my",
     "pages/index/index",
+    "pages/feedback/feedback",
     "pages/comInfo/comInfo",
-    "pages/mine/mine",
     "pages/city/city",
     "pages/jobDetail/jobDetail",
     "pages/jobType/jobType",
-    "pages/newDetail/newDetail"
+    "pages/newDetail/newDetail",
+    "pages/AboutUs/AboutUs",
+    "pages/helpList/helpList",
+    "pages/helpDetail/helpDetail",
+    "pages/personalinfo/personalinfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,7 +34,7 @@
         "selectedIconPath": "./static/img/footer_index_hover.png"
       },
       {
-        "pagePath": "pages/mine/mine",
+        "pagePath": "pages/my/my",
         "text": "我的",
         "iconPath": "./static/img/footer_my.png",
         "selectedIconPath": "./static/img/footer_my_hover.png"
