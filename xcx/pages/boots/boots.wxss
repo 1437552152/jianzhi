@@ -1,0 +1,47 @@
+/* pages/boots/boots.wxss */
+button::after{ 
+	border: none; 
+}
+
+button {
+    margin-top: 100px;
+    width: 200px;
+    border-radius: 30px;
+    background: #000000;
+    color: white;
+    padding: 0rpx 10rpx;
+}
+.refuse{
+  /* margin-top: 10px !important; */
+  background: #aaa;
+}
+
+.caozuo{text-align:center;
+font-size:30rpx;
+margin-bottom:20rpx;
+color:#000000;
+}
+.caozuo2{text-align:center;
+font-size:28rpx;
+margin-bottom:20rpx;
+color:#000000;
+}
+.miaoshu{margin-top:50rpx;
+font-size:23rpx;
+text-align:center;
+color:#727171;
+}
+.haha-center{text-align:center;}
+
+.taoli{font-size:40rpx;
+margin-bottom:80rpx;
+color:#333;
+margin-top:22px;
+}
+.taoli2{font-size:16rpx;
+margin-bottom:10rpx;}
+.styleAuth{display: flex;justify-content: space-between;margin-left: 10%;margin-right: 10%;}
+.styleAuth button{
+  width: 100px!important;
+  padding: 5px 16px;  
+}

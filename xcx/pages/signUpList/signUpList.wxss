@@ -1,0 +1,45 @@
+/* pages/signUpList/signUpList.wxss */
+.line{
+  height: 1px;
+width: 100%;
+background-color: #e2e2e2;
+margin: 10px 0;
+}
+.descHandle{
+  text-align: center;
+font-size: 15px;
+color: #999;
+margin: 20px 20px;
+}
+.descHandle .title{
+  margin-bottom: 10px;
+font-size: 17px;
+}
+
+.recordPwd{
+  margin: 10px;
+}
+.recordPwd .title{
+  margin-bottom: 16px;
+}
+.status,.time{
+  font-weight: 500;
+}
+.infoJian{
+  display: flex;
+  justify-content: space-between;
+  color:#999;
+  font-size:15px;
+}
+.infoJian .left{
+  flex: 3;
+}
+.infoJian .right{
+  flex: 1;
+  text-align: right;
+}
+.infoJian .right image{
+  width: 14px;
+  height: 20px;
+  margin-top: 20px;  
+}

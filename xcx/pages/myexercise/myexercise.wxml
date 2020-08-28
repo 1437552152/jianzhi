@@ -1,0 +1,60 @@
+<!--pages/mytest/mytest.wxml-->
+<view class='mytest'>
+	<!-- tab切换 -->
+	<i-tabs current="{{ current }}" color="#000" bindchange="handleChange">
+		<i-tab key="1" title="全部"></i-tab>
+		<i-tab key="2" title="已报名"></i-tab>
+		<i-tab key="3" title="待支付"></i-tab>
+		<i-tab key="4" title="已完成"></i-tab>
+	</i-tabs>
+
+	<view class="list-wapper">
+		<view class='part' wx:key="index">
+			<view class='module' bindtap="goSignFun">
+				<view class='name'>
+					<view class="left">
+						<i-tag class="i-tags" name="标签一" color="green" type="border">
+							待录取
+						</i-tag><text>你有哪些坚持很久的事</text>
+					</view>
+					<view class="right">0.0元/次</view>
+				</view>
+				<view class='num'>工作地点不限</view>
+			</view>
+				<view class='module'>
+				<view class='name'>
+					<view class="left">
+						<i-tag class="i-tags" name="标签一" color="green" type="border">
+							待录取
+						</i-tag><text>你有哪些坚持很久的事</text>
+					</view>
+					<view class="right">0.0元/次</view>
+				</view>
+				<view class='num'>工作地点不限</view>
+			</view>
+				<view class='module'>
+				<view class='name'>
+					<view class="left">
+						<i-tag class="i-tags" name="标签一" color="green" type="border">
+							待录取
+						</i-tag><text>你有哪些坚持很久的事</text>
+					</view>
+					<view class="right">0.0元/次</view>
+				</view>
+				<view class='num'>工作地点不限</view>
+			</view>
+				<view class='module'>
+				<view class='name'>
+					<view class="left">
+						<i-tag class="i-tags" name="标签一" color="green" type="border">
+							待录取
+						</i-tag><text>你有哪些坚持很久的事</text>
+					</view>
+					<view class="right">0.0元/次</view>
+				</view>
+				<view class='num'>工作地点不限</view>
+			</view>
+		</view>
+		<view class="bottomDesc">我是有底线的哦~</view>
+	</view>
+</view>

@@ -1,0 +1,61 @@
+<view>
+	<i-steps current="{{current}}">
+		<i-step icon="label">
+			<view slot="title">
+				报名
+			</view>
+		</i-step>
+		<i-step icon="right">
+			<view slot="title">
+				录取
+			</view>
+		</i-step>
+		<i-step icon="redpacket">
+			<view slot="title">
+				已支付
+			</view>
+		</i-step>
+	</i-steps>
+	<view class="descHandle">
+		<view class="title">待录取</view>
+		<view class="desc">你也可以主动联系商家，若商家不处理，15天后将默认不录取</view>
+	</view>
+	<view class="line"></view>
+
+	<view class="recordPwd">
+		<view class="title">流程记录</view>
+		<i-steps direction="vertical" current="{{current}}">
+			<i-step>
+				<view slot="content">
+					<view class="status">开始报名</view>
+					<view class="time">2020-08-23 12:23:23</view>
+				</view>
+			</i-step>
+			<i-step>
+				<view slot="content">
+					<view class="status">被审核</view>
+					<view class="time">2020-08-23 12:23:23</view>
+				</view>
+			</i-step>
+			<i-step>
+				<view slot="content">
+					<view class="status">已支付</view>
+					<view class="time">2020-08-23 12:23:23</view>
+				</view>
+			</i-step>
+		</i-steps>
+
+	</view>
+	<view class="line"></view>
+	<view class="recordPwd">
+		<view class="title">兼职信息</view>
+    <view class="infoJian">
+       <view class="left">
+         <view class="ArtTitle">你有哪些坚持很久的事</view>
+         <view class="union">0.0元/次</view>
+         <view class="noAddress">不限工作地点</view>
+       </view>
+       <view class="right"><image src="../../static/img/right.png"></image></view>
+    </view>
+	</view>
+</view>

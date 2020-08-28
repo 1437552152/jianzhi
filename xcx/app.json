@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/my/my",
     "pages/index/index",
+    "pages/signUpList/signUpList",
+    "pages/myexercise/myexercise",
+    "pages/my/my",
     "pages/feedback/feedback",
     "pages/comInfo/comInfo",
     "pages/city/city",
@@ -11,7 +13,8 @@
     "pages/AboutUs/AboutUs",
     "pages/helpList/helpList",
     "pages/helpDetail/helpDetail",
-    "pages/personalinfo/personalinfo"
+    "pages/personalinfo/personalinfo",
+    "pages/boots/boots"
   ],
   "window": {
     "backgroundTextStyle": "light",

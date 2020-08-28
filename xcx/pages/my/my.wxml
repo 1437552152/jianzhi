@@ -33,7 +33,7 @@
 	</view>
 
 	<view class="baomingStatus">
-	    <view class="list">
+	    <view class="list" bindtap="goBaoList">
 			     <view class="num">1</view>
 					 <view class="desc">全部</view>
 					 <view class="line"></view>
