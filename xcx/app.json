@@ -1,9 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/wages/wages",
+    "pages/Withdrawal/Withdrawal",
+    "pages/MyTeam/MyTeam",
+    "pages/MyResume/MyResume",
+    "pages/my/my",
     "pages/signUpList/signUpList",
     "pages/myexercise/myexercise",
-    "pages/my/my",
     "pages/feedback/feedback",
     "pages/comInfo/comInfo",
     "pages/city/city",
@@ -14,7 +18,10 @@
     "pages/helpList/helpList",
     "pages/helpDetail/helpDetail",
     "pages/personalinfo/personalinfo",
-    "pages/boots/boots"
+    "pages/boots/boots",
+    "pages/connect/connect",
+    "pages/Collection/Collection",
+    "pages/WithdrawalDetail/WithdrawalDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,12 +34,6 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "./static/img/footer_index.png",
-        "selectedIconPath": "./static/img/footer_index_hover.png"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "text": "精选",
         "iconPath": "./static/img/footer_index.png",
         "selectedIconPath": "./static/img/footer_index_hover.png"
       },

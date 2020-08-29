@@ -1,0 +1,113 @@
+
+<form bindsubmit="formSubmit">
+  <view class='common_title'>
+    <view class="title_left">
+      <image src="../../static/img/common.png"></image>
+      <view class="txt">基本信息必填</view>
+    </view>
+  </view>
+	<view class="form-item">
+		<view class="form-flex wapper-30 name">
+			<view class="form-title"><text>*</text>姓名</view>
+			<input type="text" value="{{userDetail.user_login}}" name="user_login" placeholder="请输入姓名" maxlength="20"></input>
+		</view>
+	</view>
+
+  <view class="form-item">
+		<view class="form-flex wapper-30 name">
+			<view class="form-title"><text>*</text>性别</view>
+			<input type="text" value="男" name="user_login"  maxlength="20" disabled></input>
+		</view>
+	</view>
+
+	<view class="form-item">
+		<view class="form-flex wapper-30 tel">
+			<view class="form-title"><text>*</text>手机号</view>
+			<input type="tel" value="{{userDetail.mobile}}" name="mobile" placeholder="请输入手机号" maxlength="11"></input>
+		</view>
+	</view>
+
+<view class='common_title'>
+      <view class="title_left">
+        <image src="../../static/img/common.png"></image>
+        <view class="txt">选填信息</view>
+      </view>
+</view>
+  <view class="form-item">
+    <view class="form-flex wapper-30 id-card">
+      <view class="form-title">微信</view>
+      <input type="idcard" value="{{userDetail.id_number}}" name="id_number" placeholder="请输入微信号" maxlength="18"></input>
+    </view>
+  </view>
+
+  <view class="form-item">
+    <view class="form-flex wapper-30 id-card">
+      <view class="form-title">QQ</view>
+      <input type="idcard" value="{{userDetail.id_number}}" name="id_number" placeholder="请输入QQ号" maxlength="18"></input>
+    </view>
+  </view>
+
+  <view class='common_title'>
+        <view class="title_left">
+          <image src="../../static/img/common.png"></image>
+          <view class="txt">教育经历</view>
+        </view>
+  </view>
+
+ <view class="form-item">
+    <view class="form-flex wapper-30 name">
+      <view class="form-title">学校</view>
+      <input type="text" value="{{userDetail.company_name}}" name="company_name" maxlength="200" placeholder="请输入学校名称"></input>
+    </view>
+  </view>
+
+ <view class="form-item">
+    <view class="form-flex wapper-30 name">
+      <view class="form-title">学历</view>
+      <input type="text" value="{{userDetail.company_name}}" name="company_name" maxlength="200" placeholder="请输入学历"></input>
+    </view>
+  </view>
+
+ <view class="form-item">
+    <view class="form-flex wapper-30 name">
+      <view class="form-title">专业</view>
+      <input type="text" value="{{userDetail.company_name}}" name="company_name" maxlength="200" placeholder="请输入您的专业"></input>
+    </view>
+  </view>
+
+ <view class="form-item">
+    <view class="form-flex wapper-30 name">
+      <view class="form-title">入学年份</view>
+      <input type="text" value="{{userDetail.company_name}}" name="company_name" maxlength="200" placeholder="请输入您的入学年份"></input>
+    </view>
+  </view>
+
+<view class='common_title'>
+      <view class="title_left">
+        <image src="../../static/img/common.png"></image>
+        <view class="txt">个人经历</view>
+      </view>
+</view>
+	<view class="form-item-detailed-address">
+		<view class="form-title">自我描述</view>
+	    	<textarea name="address" value="{{userDetail.address}}"/>
+		</view>
+
+    <view class='common_title'>
+          <view class="title_left">
+            <image src="../../static/img/common.png"></image>
+            <view class="txt">个人风采</view>
+          </view>
+    </view>
+
+    <view class="takephoto" bindtap="uploadPositiveClick">
+      <image wx:if="{{photoPath}}" src='{{photoPath}}'></image>
+      <image wx:else src='../../static/img/shegong.png'></image>
+    </view>
+
+    <view class="form-post">
+      <view class="wapper-30">
+        <button form-type="submit" class="ok">确认</button>
+      </view>
+    </view>
+</form>

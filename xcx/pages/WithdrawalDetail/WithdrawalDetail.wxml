@@ -1,0 +1,21 @@
+<!--pages/mytest/mytest.wxml-->
+<view class='mytest'>
+	<!-- tab切换 -->
+	<i-tabs current="{{ current }}" color="#19be6b" bindchange="handleChange">
+		<i-tab key="1" title="全部"></i-tab>
+		<i-tab key="2" title="审核中"></i-tab>
+    <i-tab key="3" title="审核通过"></i-tab>
+    <i-tab key="4" title="驳回"></i-tab>
+	</i-tabs>
+
+	<view class="list-wapper">
+		<view class='part' wx:key="index">
+    <i-cell-group i-class="style">
+        <i-cell title="2020-03-10 12:12:12"  value="￥30"></i-cell>
+        <i-cell title="2020-03-10 12:12:12"  value="￥20"></i-cell>
+        <i-cell title="2020-03-10 12:12:12" value="￥10"></i-cell>
+    </i-cell-group>
+		</view>
+		<view class="bottomDesc">我是有底线的哦~</view>
+	</view>
+</view>

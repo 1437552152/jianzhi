@@ -7,7 +7,7 @@
   line-height: 1.4;
   font-size: 14px;
   overflow: hidden;
-  font-weight:bold;
+  /* font-weight:bold; */
 }
 
 .i-cell::after {
@@ -57,7 +57,7 @@
 .i-cell-ft {
   position: relative;
   text-align: right;
-  color: #495060
+  color: red
 }
 
 .i-cell-access .i-cell-ft {
@@ -76,4 +76,10 @@
   border-color: #dddee1;
   border-style: solid;
   transform: translateY(-50%) matrix(.71, .71, -.71, .71, 0, 0)
+}
+.i-cell-image{
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  margin-right: 6px;
 }

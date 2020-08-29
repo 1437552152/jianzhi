@@ -1,0 +1,32 @@
+<!--pages/mytest/mytest.wxml-->
+<view class='mytest'>
+	<view class="list-wapper">
+		<view class='part' wx:key="index">
+          <view class='tabcontents'>
+            <view class='left_part'>
+              <view class='done'>工资</view>
+              <view class='time'>2020-12-23</view>
+            </view>
+            <view class='right'>+220</view>
+          </view>
+
+        <view class='tabcontents'>
+            <view class='left_part'>
+              <view class='done'>好友分享</view>
+              <view class='time'>2020-12-23</view>
+            </view>
+            <view class='right'>+220</view>
+          </view>
+
+           <view class='tabcontents'>
+            <view class='left_part'>
+              <view class='done'>报名返佣</view>
+              <view class='time'>2020-12-23</view>
+            </view>
+            <view class='right'>+220</view>
+          </view>
+   
+		</view>
+		<view class="bottomDesc">我是有底线的哦~</view>
+	</view>
+</view>

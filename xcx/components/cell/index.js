@@ -31,6 +31,9 @@ Component({
         value: {
             type: String
         },
+        imageUrl: {
+            type: String
+        },
         // 只有点击 footer 区域才触发 tab 事件
         onlyTapFooter: {
             type: Boolean

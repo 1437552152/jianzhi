@@ -1,0 +1,19 @@
+<!--pages/mytest/mytest.wxml-->
+<view class='mytest'>
+	<!-- tab切换 -->
+	<i-tabs current="{{ current }}" color="#19be6b" bindchange="handleChange">
+		<i-tab key="1" title="一级团队(0)"></i-tab>
+		<i-tab key="2" title="二级团队(9)"></i-tab>
+	</i-tabs>
+
+	<view class="list-wapper">
+		<view class='part' wx:key="index">
+    <i-cell-group i-class="style">
+        <i-cell title="红叶夫人" imageUrl="../../static/img/sex_0.png" value="￥30"></i-cell>
+        <i-cell title="测试" imageUrl="../../static/img/sex_0.png" value="￥20"></i-cell>
+        <i-cell title="红叶先生" imageUrl="../../static/img/sex_0.png" value="￥10"></i-cell>
+    </i-cell-group>
+		</view>
+		<view class="bottomDesc">我是有底线的哦~</view>
+	</view>
+</view>

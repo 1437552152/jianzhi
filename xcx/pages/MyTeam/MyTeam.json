@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "i-tabs": "/components/tabs/index",
+    "i-tab": "/components/tab/index",
+    "i-tag":"/components/tag/index",
+    "i-card": "/components/card/index",
+    "i-cell-group": "/components/cell-group/index",
+    "i-cell": "/components/cell/index"
+ },
+  "navigationBarTitleText": "我的团队佣金"
+}

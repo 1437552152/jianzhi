@@ -1,0 +1,12 @@
+<view class="service-box">
+  <view class="service-view1">公共服务</view>
+
+  <view class="service-view2" data-phone="18133626045" catchtap="dictPhoneClick">
+    <view class="service-view3">客服1</view>
+    <view class="service-view3">18133626045<image src="../../static/img/part6.png"></image></view>
+  </view>
+   <view class="service-view2" data-phone="18133626045" catchtap="dictPhoneClick">
+    <view class="service-view3">客服2</view>
+    <view class="service-view3">18133626045<image src="../../static/img/part6.png"></image></view>
+  </view>
+</view>

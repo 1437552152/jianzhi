@@ -52,6 +52,7 @@
            <view class="price">推广奖励:{{item.jobFxbackprice}}</view>
        </view>
     </view>
+    <view class="bottomDesc" wx-if="{{jobList.length}}" >我是有底线的哦~</view>
     <view wx-if="{{jobList.length==0}}" class="noData">
     <image src="../../static/img/youxiang.png" />
     <view>该区域暂无兼职</view>

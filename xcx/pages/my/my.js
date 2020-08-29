@@ -23,9 +23,9 @@ Page({
   onLoad: function (options) {
 
   },
-  goBaoList:function(){
+  goBaoList:function(e){
     wx.navigateTo({
-      url: '../myexercise/myexercise',
+      url: '../myexercise/myexercise?id='+e.currentTarget.dataset.id,
     })
   },
   /**
@@ -34,7 +34,16 @@ Page({
   onReady: function () {
 
   },
-
+  goJianli:function(){
+     wx.navigateTo({
+       url: '../MyResume/MyResume',
+     })
+  },
+  goWithdrawal:function(){
+    wx.navigateTo({
+      url: '../Withdrawal/Withdrawal',
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

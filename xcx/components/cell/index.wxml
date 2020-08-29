@@ -3,7 +3,7 @@
         <slot name="icon"></slot>
     </view>
     <view class="i-cell-bd">
-        <view wx:if="{{ title }}" class="i-cell-text">{{ title }}</view>
+        <view wx:if="{{ title }}" class="i-cell-text"><image wx:if="{{imageUrl}}" src="{{imageUrl}}" class="i-cell-image"></image>{{ title }}</view>
         <view wx:if="{{ label }}" class="i-cell-desc">{{ label }}</view>
         <slot></slot>
     </view>

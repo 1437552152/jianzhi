@@ -1,7 +1,7 @@
 <!--pages/mytest/mytest.wxml-->
 <view class='mytest'>
 	<!-- tab切换 -->
-	<i-tabs current="{{ current }}" color="#000" bindchange="handleChange">
+	<i-tabs current="{{ current }}" color="#19be6b" bindchange="handleChange">
 		<i-tab key="1" title="全部"></i-tab>
 		<i-tab key="2" title="已报名"></i-tab>
 		<i-tab key="3" title="待支付"></i-tab>

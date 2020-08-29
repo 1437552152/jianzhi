@@ -1,10 +1,5 @@
 <view>
 <!-- 头部定位 -->
-
-<view class="header">
-  <image src="{{pic}}"   style="width:100%;max-height:240rpx" mode="widthFix"></image>
-</view>
-
 <!-- 列表 -->
 <view class="jianzhiList">
     <view class="list" bindtap="goDetail" data-list="{{item}}" wx:for="{{jobList}}" wx:key="item" >
@@ -26,7 +21,7 @@
      <view class="bottomDesc" wx-if="{{jobList.length}}" >我是有底线的哦~</view>
       <view wx-if="{{jobList.length==0}}" class="noData">
     <image src="../../static/img/youxiang.png" />
-    <view>该区域暂无兼职</view>
+    <view>暂无收藏</view>
     </view>
 </view>
 

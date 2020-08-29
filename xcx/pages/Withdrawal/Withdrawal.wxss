@@ -1,0 +1,139 @@
+.top{
+  margin-top: 40px;
+  text-align: center;
+}
+.top .WithTitle{
+  font-size: 14px;
+}
+
+.top .WithMoney{
+  font-size:26px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.top .WithOper{
+  background-color: #02cb87;
+  border-radius:6px;
+  color: #fff;
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.part{
+  width: 94%;
+  margin: 20rpx auto;
+  border-radius:16rpx;
+border:1px solid #fff;
+}
+.personalinfo{
+ display:flex;
+justify-content:space-between;
+padding-left:60rpx;
+padding-right:60rpx;
+align-items:center;
+position:absolute;
+top:70rpx;
+left:0;
+right:0;
+}
+.left_part{
+  display: flex;
+  justify-content: space-between;
+}
+.one image{
+  width: 100rpx;
+  height: 100rpx;  
+  vertical-align: middle;
+  border-radius: 50%;
+} 
+
+.orderImg{
+  width: 70rpx;
+  height: 60rpx;
+}
+
+
+.two{
+  margin-left: 27rpx;
+}
+.two .name{
+color: #ffffff;
+font-size: 32rpx;
+}
+.two .num{
+  color: #ffffff;
+  font-size: 26rpx;
+  margin-top: 23rpx;
+}
+.two .num text{
+  font-size: 40rpx;
+  margin-right:20rpx;
+}
+.three{
+  margin-left: 16rpx;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  text-align: center;
+  line-height: 48rpx;
+  height: 48rpx;
+  /* width: 100rpx; */
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  padding: 0rpx 30rpx;
+}
+.right_part image{
+  width: 14rpx;
+  height: 26rpx;
+}
+.index_menu{
+  justify-content: space-around;
+}
+.goJianli image{
+  width: 100%;
+  height: 80px;
+  
+}
+.goJianli{
+  margin-left: 20rpx;
+margin-right: 20rpx;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+
+.baomingStatus{margin: 20px 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding:20px 10px;
+  
+}
+
+.baomingStatus .list {
+  flex:1;
+ text-align: center;
+ position: relative;
+}
+
+.baomingStatus .list .num{
+  color:#000;
+  font-weight: bold;
+}
+.baomingStatus .list .desc{
+  color: #999;
+  font-size: 14px;
+  margin-top: 4px;  
+}
+
+.baomingStatus .list .line{
+  width: 1px;
+height:30px;
+background-color: #f7f5f5;
+position: absolute;
+right: 0;
+top: 10px;
+}

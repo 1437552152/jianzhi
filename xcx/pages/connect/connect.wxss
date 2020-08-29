@@ -1,0 +1,45 @@
+/* pages/my-service/my-service.wxss */
+Page{
+  background: #f8f8f8;
+}
+.service-box{
+  width: 650rpx;
+  padding: 20rpx;
+  border-radius: 16rpx;
+  background: #fff;
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+}
+.service-view1{
+  width: 620rpx;
+  margin-left: 15rpx;
+  padding-bottom: 20rpx;
+  border-bottom: #53B2AA solid 1rpx;
+  font-size: 28rpx;
+  color: #53B2AA;
+}
+.service-view2{
+  width: 620rpx;
+  margin-left: 15rpx;
+  padding: 30rpx 0;
+  border-bottom: #e7e7e7 solid 1rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service-box .service-view2:last-child{
+  border-bottom-style: none;
+  padding-bottom: 0;
+}
+.service-view3{
+  color: #333;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+.service-view3 image{
+  width: 35rpx;
+  height: 35rpx;
+  margin-left: 15rpx;
+}
