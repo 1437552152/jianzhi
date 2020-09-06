@@ -31,7 +31,7 @@ Page({
         success: function (a) {
           wx.getUserInfo({
             success: function (e) {
-            
+            debugger;
               let params={};
               params['signature'] = e.signature;
               params['raw_data'] = e.rawData;

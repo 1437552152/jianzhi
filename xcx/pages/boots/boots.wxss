@@ -4,7 +4,7 @@ button::after{
 }
 
 button {
-    margin-top: 100px;
+    margin-top:40px;
     width: 200px;
     border-radius: 30px;
     background: #000000;
@@ -43,5 +43,8 @@ margin-bottom:10rpx;}
 .styleAuth{display: flex;justify-content: space-between;margin-left: 10%;margin-right: 10%;}
 .styleAuth button{
   width: 100px!important;
-  padding: 5px 16px;  
+  padding: 0;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;  
 }
