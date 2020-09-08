@@ -122,16 +122,16 @@
 </view>
 
 <view class="goBM">
-    <view class="one" bindtap="goCollect">
+    <view class="one" bindtap="onJsEvent"  data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
       <image src="{{!flag?'../../static/img/collect.png':'../../static/img/collectChecked.png'}}" style="width:24px;height:24px"></image>
       <view>收藏</view>
     </view>
-    <view class="one">
+    <view class="one" bindtap="onJsEvent"  data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
       <image src='../../static/img/share.png' style="width:24px;height:24px"></image>
       <view>分享</view>
     </view>
-    <view class="two">
+    <view class="two" bindtap="onJsEvent" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
        <view>我要报名</view>
-      <view>({{dataDetail.alreadySignedNum}}人已报名)</view>
+      <view>({{dataDetail.alreadySignedNum||0}}人已报名)</view>
     </view>
 </view>

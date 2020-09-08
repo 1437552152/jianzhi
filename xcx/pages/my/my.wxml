@@ -20,14 +20,14 @@
 			</view>
 		</navigator>
 	</view>
-	<view class='personalinfo' wx:else>
+	<!-- <view class='personalinfo' wx:else>
 		<view class='left_part'>
 			<view class='one' bindtap='onJsEvent' data-url="/pages/my/my" data-type="2">
 				<image src="../../static/img/head2.png" style="width:60px;height:60px"></image>
 				<text style="color:#fff;margin-left:12px;">点击登录</text>
 			</view>
 		</view>
-	</view>
+	</view> -->
 	<view bindtap="goJianli" class="goJianli">
 	  <image src="../../static/img/jianli.png"></image>
 	</view>

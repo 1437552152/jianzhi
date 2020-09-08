@@ -7,7 +7,7 @@ var urlApi = (url, method, data={}) => {
     wx.request({
       url: host + url,
       header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/json"
       },
       data: data,
       method: method,

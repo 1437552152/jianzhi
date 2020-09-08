@@ -34,7 +34,7 @@ color:#727171;
 .haha-center{text-align:center;}
 
 .taoli{font-size:40rpx;
-margin-bottom:80rpx;
+margin-bottom:40rpx;
 color:#333;
 margin-top:22px;
 }

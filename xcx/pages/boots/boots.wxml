@@ -1,10 +1,10 @@
 <!--pages/boots/boots.wxml-->
 <view style='margin-top:20%;'>
-  <view class="haha-center"><image src="../../static/img/goJianzhi.png"  style="width:200rpx;height:200rpx"/>
+  <view class="haha-center"><image src="../../static/img/goJianzhi.png"  style="width:240rpx;height:240rpx"/>
     <view class="taoli">微信授权登录</view>
   </view>
   <view class="caozuo">申请获得以下授权</view>
-  <view class="caozuo2">·获取您的微信昵称、头像信息</view>
+  <view class="caozuo2">·获取您的微信昵称、头像、地区以及性别信息</view>
   <view class='styleAuth'>
     <button class='refuse' bindtap='refuse'>拒绝</button>
     <button  style='background-color:#75b4b0' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">

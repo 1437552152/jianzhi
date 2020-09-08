@@ -49,7 +49,7 @@
        </view>
        <view class="right">
           <view class="price">{{item.jobPrice}}元/{{item.jobPaytype===1?'时':item.jobPaytype===2?'天':'月'}}</view>
-           <view class="price">推广奖励:{{item.jobFxbackprice}}</view>
+           <view class="price">推广奖励:{{item.jobFxbackprice}}元</view>
        </view>
     </view>
     <view class="bottomDesc" wx-if="{{jobList.length}}" >我是有底线的哦~</view>

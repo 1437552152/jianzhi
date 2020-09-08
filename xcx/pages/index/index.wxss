@@ -54,10 +54,10 @@
 
 
 .jianzhiList .list .left{
-  width: 70%;
+  width: 65%;
 }
 .jianzhiList .list .right{
-  width: 30%;
+  width: 35%;
   font-size: 15px;
 }
 .jianzhiList .list   .title{

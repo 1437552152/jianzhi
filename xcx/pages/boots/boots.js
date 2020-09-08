@@ -10,7 +10,8 @@ Page({
    */
   data: {
     path: '',
-    type:1
+    type:1,
+    id:''
   },
 
   /**
@@ -19,33 +20,33 @@ Page({
   onLoad: function (options) {
     this.setData({
       path: options.path,
-      type:options.type||1
+      type:options.type||1,
+      id:options.id||''
     })
   },
 
   onGotUserInfo(e) {
-   
     var that = this
     if (e.detail.errMsg ==='getUserInfo:ok'){
       wx.login({
         success: function (a) {
           wx.getUserInfo({
             success: function (e) {
-            debugger;
+              let {gender,city,avatarUrl,nickName}= JSON.parse(e.rawData);
               let params={};
-              params['signature'] = e.signature;
-              params['raw_data'] = e.rawData;
-              params['iv'] = e.iv;
-              params['encrypted_data'] = e.encryptedData;
-              params['code'] = a.code;
-              urlApi("/user/Login/wechatLogin","post",params).then((res)=>{
-                if(res.data.code){
-                  res.data.data.coin=res.data.data.coin.split('.')[0];
-                  wx.setStorageSync("userInfo", res.data.data);
-                  wx.setStorageSync("tokenn",res.data.data.token);
-                  if(that.data.type==1||!that.data.type){
+              params['sex'] =gender;
+              params['country'] =city;
+              params['openid'] ='';
+              params['avatarurl'] =avatarUrl;
+              params['nickname'] =nickName;
+              params['jscode'] = a.code;
+              urlApi("app/wxlogin","post",params).then((res)=>{
+                if(res.data.code==0){
+                  // wx.setStorageSync("userInfo", res.data.data);
+                  // wx.setStorageSync("tokenn",res.data.data.token);
+                  if(that.data.type==1){
                     wx.navigateTo({
-                      url: that.data.path,
+                      url:`${that.data.id?that.data.path+'?id='+that.data.id:that.data.path}`,
                     })
                   }else{
                    wx.switchTab({
@@ -63,6 +64,59 @@ Page({
           })
         }
       });
+    }else{
+      
+      wx.showModal({
+        title: '警告',
+        content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
+        success:function(res){
+          if (res.confirm){
+            wx.openSetting({
+              success: (res) => {
+                if (res.authSetting["scope.userInfo"]){如果用户重新同意了授权登录             
+                  wx.login({
+                    success: function (a) {
+                      wx.getUserInfo({
+                        success: function (e) {
+                          let {gender,city,avatarUrl,nickName}= JSON.parse(e.rawData);
+                          let params={};
+                          params['sex'] =gender;
+                          params['country'] =city;
+                          params['openid'] ='';
+                          params['avatarurl'] =avatarUrl;
+                          params['nickname'] =nickName;
+                          params['jscode'] = a.code;
+                          urlApi("app/wxlogin","post",params).then((res)=>{
+                            if(res.data.code){
+                              // wx.setStorageSync("userInfo", res.data.data);
+                              // wx.setStorageSync("tokenn",res.data.data.token);
+                              if(that.data.type==1){
+                                wx.navigateTo({
+                                  url:`${that.data.id?that.data.path+'?id='+that.data.id:that.data.path}`,
+                                })
+                              }else{
+                               wx.switchTab({
+                                 url: that.data.path
+                               }) 
+                              }
+                            }else{
+                              wx.showToast({
+                                title: res.data.msg,
+                                icon:'none'
+                              })
+                            }            
+                          })
+                        }
+                      })
+                    }
+                  });
+                }
+              },fail:function(res){
+               
+              }
+            }) 
+          }}
+        })
     }
   },
   refuse: function() {

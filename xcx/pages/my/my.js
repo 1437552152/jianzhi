@@ -13,15 +13,28 @@ Page({
   data: {
     flag: false,
     userInfo: null,
-      userDetail: '',//用户详情
-    tokenn: ''
+    userDetail: '',//用户详情
+    tokenn: '',
+    isShow:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let openid=wx.getStorageSync('openid');
+    if(!openid){  
+     let e= {
+      currentTarget:{
+        dataset:{
+          type:2,
+          url:"/pages/my/my",
+          id:''
+        }
+      }
+     }
+      jsEvent(e);
+    } 
   },
   goBaoList:function(e){
     wx.navigateTo({
@@ -52,7 +65,7 @@ Page({
     this.setData({
       tokenn: tokenn
     })
-// 清除地址信息缓存
+    // 清除地址信息缓存
     wx.removeStorageSync("addressInfo");
     let userInfo = wx.getStorageSync("userInfo");
     console.log(userInfo)
@@ -111,7 +124,4 @@ Page({
   onShareAppMessage: function () {
 
   },
-  onJsEvent: function (e) {
-    jsEvent(e);
-  }
 })

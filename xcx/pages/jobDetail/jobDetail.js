@@ -2,7 +2,9 @@
 import {
   urlApi
 } from '../../utils/request';
-
+var {
+  jsEvent
+} = require("../../utils/util.js");
 var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
@@ -29,9 +31,9 @@ Page({
   onLoad: function (options) {
      this.setData({id:options.id})
   },
-  goCollect:function(){
-    this.setData({flag:true})
-  },
+  // goCollect:function(){
+  //   this.setData({flag:true})
+  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -93,7 +95,11 @@ Page({
      wx.navigateTo({
        url: `../comInfo/comInfo?id=${e.currentTarget.dataset.compid}`,
      })
+  },
+  onJsEvent: function (e) {
+   let openid=wx.getStorageSync('openid');
+    if(!openid){
+      jsEvent(e);
+    } 
   }
-
-
 })

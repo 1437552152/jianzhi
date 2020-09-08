@@ -1,7 +1,7 @@
 {
-  "pages": [
-    "pages/boots/boots",
+  "pages": [ 
     "pages/index/index",
+    "pages/boots/boots",
     "pages/wages/wages",
     "pages/Withdrawal/Withdrawal",
     "pages/MyTeam/MyTeam",
@@ -19,7 +19,6 @@
     "pages/helpList/helpList",
     "pages/helpDetail/helpDetail",
     "pages/personalinfo/personalinfo",
-   
     "pages/connect/connect",
     "pages/Collection/Collection",
     "pages/WithdrawalDetail/WithdrawalDetail"
