@@ -27,6 +27,22 @@
 		</view>
 	</view>
 
+	<view class="form-item">
+		<view class="form-flex wapper-30 tel">
+			<view class="form-title"><text>*</text>出生年月</view>
+			<input type="tel" value="{{userDetail.mobile}}" name="mobile" placeholder="请输入出生年月" maxlength="11"></input>
+		</view>
+	</view>
+
+  
+	<view class="form-item">
+		<view class="form-flex wapper-30 tel">
+			<view class="form-title"><text>*</text>籍贯</view>
+			<input type="tel" value="{{userDetail.mobile}}" name="mobile" placeholder="请输入手机号" maxlength="11"></input>
+		</view>
+	</view>
+
+
 <view class='common_title'>
       <view class="title_left">
         <image src="../../static/img/common.png"></image>
@@ -92,7 +108,7 @@
 		<view class="form-title">自我描述</view>
 	    	<textarea name="address" value="{{userDetail.address}}"/>
 		</view>
-
+<!-- 
     <view class='common_title'>
           <view class="title_left">
             <image src="../../static/img/common.png"></image>
@@ -103,7 +119,7 @@
     <view class="takephoto" bindtap="uploadPositiveClick">
       <image wx:if="{{photoPath}}" src='{{photoPath}}'></image>
       <image wx:else src='../../static/img/shegong.png'></image>
-    </view>
+    </view> -->
 
     <view class="form-post">
       <view class="wapper-30">

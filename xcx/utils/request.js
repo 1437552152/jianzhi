@@ -1,9 +1,12 @@
 var app = getApp();
 // var host = 'http://101.132.114.177:8090/renren-fast/';
  var host = 'http://r182s02546.51mypc.cn/renren-fast/';
-
+ let userInfo=wx.getStorageSync('userInfo');
 var urlApi = (url, method, data={}) => {
   return new Promise((res, rej) => {
+    if(userInfo&&userInfo.openid){
+      data.openid=userInfo.openid
+    }
     wx.request({
       url: host + url,
       header: {

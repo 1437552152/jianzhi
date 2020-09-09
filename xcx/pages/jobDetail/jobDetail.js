@@ -97,9 +97,11 @@ Page({
      })
   },
   onJsEvent: function (e) {
-   let openid=wx.getStorageSync('openid');
-    if(!openid){
+   let userInfo=wx.getStorageSync('userInfo');
+    if(userInfo&&userInfo.openid){
+     
+    }else{
       jsEvent(e);
-    } 
+    }
   }
 })

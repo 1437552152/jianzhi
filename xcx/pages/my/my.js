@@ -22,19 +22,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let openid=wx.getStorageSync('openid');
-    if(!openid){  
-     let e= {
-      currentTarget:{
-        dataset:{
-          type:2,
-          url:"/pages/my/my",
-          id:''
-        }
-      }
-     }
-      jsEvent(e);
-    } 
+    // let openid=wx.getStorageSync('openid');
+    // if(!openid){  
+    //  let e= {
+    //   currentTarget:{
+    //     dataset:{
+    //       type:2,
+    //       url:"/pages/my/my",
+    //       id:''
+    //     }
+    //   }
+    //  }
+    //   jsEvent(e);
+    // } 
   },
   goBaoList:function(e){
     wx.navigateTo({
