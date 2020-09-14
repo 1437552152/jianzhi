@@ -7,28 +7,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checked:false,
-    status: true,
-    show:true,
-    user_type:'',
-    regionText: '安徽省合肥市蜀山区',
-    region: ['安徽省', '合肥市', '蜀山区'],
-    isChecked: 1, //是否选中：1未选中 2已选中
-    photoPath:'',
-    photoValue:'',
-    userDetail:''
+    userDetail:'',
+    birthday:'',
+    stadyTime:'',
+    myDiploma:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      user_type: options.userType
-    })
     this.queryUserDetail();
   },
-
+  bindDateChange: function(e) {
+    this.setData({
+      birthday: e.detail.value
+    })
+  },
+  bindStadyChange: function(e) {
+    this.setData({
+      stadyTime: e.detail.value
+    })
+  },
+  myDiplomaHandle:function(){
+    let that=this;
+    let arr=['初中','高中','大专','本科','硕士','博士及以上']
+    wx.showActionSheet({
+      itemList: arr,
+      success(res){
+         that.setData({myDiploma:arr[res.tapIndex]})
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -48,120 +58,32 @@ Page({
   queryUserDetail: function () {
     var that = this;
     var data = {};
-    urlApi('user/Profile/index', "post", data).then((res) => {
+    urlApi('app/mycv/info', "get", data).then((res) => {
       console.log(res);
-      if (res.data.code == 1) {
-        //如果当前用户角色等于选中的角色，则显示资质图片，反之，不显示
-        var photoPath = "";
-        if (res.data.data.user_type == that.data.user_type){
-          photoPath = res.data.data.id_photo;
-        }
-        var photoValue = "";
-        if (res.data.data.more.id_photo) {
-          photoValue = res.data.data.more.id_photo;
-        }
-        var region = ['安徽省', '合肥市', '蜀山区'];
-        var regionText = '安徽省合肥市蜀山区';
-        if (res.data.data.province){
-          region[0] = res.data.data.province;
-          region[1] = res.data.data.city;
-          region[2] = res.data.data.district;
-          regionText = res.data.data.province + res.data.data.city + res.data.data.district;
-        }
+      if (res.data.code == 0) {
         that.setData({
-          userDetail: res.data.data,
-          photoPath: photoPath,
-          region: region,
-          regionText: regionText,
-          photoValue: photoValue
+          userDetail: res.data.myCv,
+          birthday:res.data.myCv.myCvEntity&&res.data.myCv.myCvEntity.birthday?res.data.myCv.myCvEntity.birthday:'2020-09-01',
+          stadyTime:res.data.myCv.myCvEntity&&res.data.myCv.myCvEntity.stadyTime?res.data.myCv.myCvEntity.stadyTime:'2020-09-01',
+          myDiploma:res.data.myCv.myCvEntity&&res.data.myCv.myCvEntity.myDiploma?res.data.myCv.myCvEntity.myDiploma:'',
         })
       }
-    })
-  },
-
-  //上传资质照片
-  uploadPositiveClick: function (e) {
-    var that = this;
-    wx.chooseImage({
-      count: 1,
-      success: (res) => {
-        var filep = res.tempFilePaths[0];
-        console.log("filep=========", filep);
-        wx.uploadFile({
-          url: host +"portal/article/circle_upload",
-          filePath: filep,
-          header: {},
-          name: 'file',
-          formData: {
-            'fileId': that.data.positiveId,
-            'token': wx.getStorageSync("tokenn")
-          },
-          success: (val) => {
-            let data = JSON.parse(val.data);
-            console.log("data===========", data);
-            if (data.code == 1) {
-              that.setData({
-                photoPath: data.data.path,
-                photoValue: data.data.value
-              })
-            }
-          },
-          fail: function (err) {
-            console.log(err)
-          }
-        });
-      }
-    })
-  },
-
-  //改变地址
-  bindRegionChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    var region = e.detail.value;
-    var regionText = region.join(",");
-    this.setData({
-      region: e.detail.value,
-      regionText: regionText.replace(/,/g, "")
-    })
-  },
-
-  //是否勾选协议
-  radioChange: function (e) {
-    this.setData({
-      isChecked: 2
-    })
-  },
-
-  //查看商家协议
-  seeMerchantAgreementClick: function () {
-    var user_type = this.data.user_type;
-    wx.navigateTo({
-      url: "/pages/store-agreement/store-agreement?user_type=" + user_type
     })
   },
   
   //表单提交
   formSubmit:function(e){
-   console.log(e);
    var that = this;
     var data = e.detail.value;
-    var company_name = data.company_name;
-    if (!company_name){
-      wx.showToast({
-        title: '请填写组织名称',
-        icon: "none"
-      })
-      return false;
-    }
-    var user_login = data.user_login;
-    if (!user_login) {
+    var username = data.username;
+    if (!username){
       wx.showToast({
         title: '请填写姓名',
         icon: "none"
       })
       return false;
     }
-
+   
     var mobile = data.mobile;
     if (!mobile) {
       wx.showToast({
@@ -179,97 +101,46 @@ Page({
       return false;
     }
 
-    var id_number = data.id_number;
-    if (!id_number) {
+    var birthday = this.data.birthday;
+    if (!birthday) {
       wx.showToast({
-        title: '请填写身份证号',
+        title: '请填写出生年月',
         icon: "none"
       })
       return false;
     }
 
-    var address = data.address;
-    if (!address) {
+    var nativeplace = data.nativeplace;
+    if (!nativeplace) {
       wx.showToast({
-        title: '请填写详细地址',
+        title: '请填写籍贯',
         icon: "none"
       })
       return false;
     }
 
-    var photoValue = that.data.photoValue;
-    if (!photoValue){
-      wx.showToast({
-        title: '请上传资质',
-        icon: "none"
-      })
-      return false;
-    }
-
-    var isChecked = that.data.isChecked;
-    if (isChecked == 1){
-      wx.showToast({
-        title: '请勾选相关协议',
-        icon: "none"
-      })
-      return false;
-    }
-    var region = that.data.region;
-    data.province = region[0];
-    data.city = region[1];
-    data.district = region[2];
-    data.user_type = that.data.user_type;
-    data.id_photo = photoValue;
-    data.page_type = 1;
-    console.log(data);
-    urlApi("user/Profile/editPost", "post", data).then((res) => {
-      console.log(res);
-      if (res.data.code == 1) {
-        wx.redirectTo({
-          url: '/pages/underreview/underreview'
+    let {userDetail}=this.data;
+    userDetail.myCvEntity={...userDetail.myCvEntity,...data,...{stadyTime:this.data.stadyTime},...{myDiploma:this.data.myDiploma}};
+    userDetail.birthday=this.data.birthday;
+    userDetail.mobile=data.mobile;
+    userDetail.username=data.username;
+    userDetail.nativeplace=data.nativeplace;
+    console.log(userDetail);
+    urlApi("app/mycv/saveandUpdate", "post", userDetail).then((res) => {
+      if (res.data.code == 0) {
+        wx.showToast({
+          title: '保存成功',
+          icon: "none"
         })
-        // var pages = getCurrentPages();
-        // var prePage = pages[pages.length - 2];
-        // prePage.onShow();
-        // wx.navigateBack({
-        //   delta: 1,
-        // })
+        wx.switchTab({
+          url: '../my/my',
+        })         
+      }else{
+        wx.showToast({
+          title: '保存失败',
+          icon: "none"
+        })
       }
     });
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

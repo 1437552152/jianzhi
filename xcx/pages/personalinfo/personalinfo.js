@@ -8,15 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    img:"../../icon/head1.png",
-    userDetail:''
+    userInfo:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      // this.queryUserDetail();
+     let userInfo=wx.getStorageSync('userInfo');
+     this.setData({userInfo})
   },
 
   /**

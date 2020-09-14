@@ -2,11 +2,11 @@
 <view class='personalinfo'>
    <view class="userInfoPri">
     <view>头像</view>
-     <image src='../../static/img/head2.png' class="headAvau"></image>
+     <image src="{{userInfo.avatarUrl}}" class="headAvau"></image>
    </view>  
    <view  class="userInfoPri">
     <view>昵称</view>
-    <view>红叶先生</view>
+    <view>{{userInfo.nickName}}</view>
    
    </view>
 </view>

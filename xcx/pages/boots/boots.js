@@ -34,7 +34,7 @@ Page({
             success: function (e) {
               let {gender,city,avatarUrl,nickName}= JSON.parse(e.rawData);
               let params={};
-              params['sex'] =gender?'男':'女';
+              params['sex'] =gender===1?'男':'女';
               params['country'] =city;
               params['openid'] ='';
               params['avatarurl'] =avatarUrl;
@@ -79,7 +79,7 @@ Page({
                         success: function (e) {
                           let {gender,city,avatarUrl,nickName}= JSON.parse(e.rawData);
                           let params={};
-                          params['sex'] =gender;
+                          params['sex'] =gender===1?'男':'女';
                           params['country'] =city;
                           params['openid'] ='';
                           params['avatarurl'] =avatarUrl;
@@ -87,8 +87,7 @@ Page({
                           params['jscode'] = a.code;
                           urlApi("app/wxlogin","post",params).then((res)=>{
                             if(res.data.code){
-                              // wx.setStorageSync("userInfo", res.data.data);
-                              // wx.setStorageSync("tokenn",res.data.data.token);
+                              wx.setStorageSync("userInfo", res.data.resultmap);
                               if(that.data.type==1){
                                 wx.navigateTo({
                                   url:`${that.data.id?that.data.path+'?id='+that.data.id:that.data.path}`,

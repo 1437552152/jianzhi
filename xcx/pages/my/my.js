@@ -22,35 +22,46 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // let openid=wx.getStorageSync('openid');
-    // if(!openid){  
-    //  let e= {
-    //   currentTarget:{
-    //     dataset:{
-    //       type:2,
-    //       url:"/pages/my/my",
-    //       id:''
-    //     }
-    //   }
-    //  }
-    //   jsEvent(e);
-    // } 
+    
   },
-  goBaoList:function(e){
-    wx.navigateTo({
-      url: '../myexercise/myexercise?id='+e.currentTarget.dataset.id,
-    })
+  goBaoList:function(el){
+    debugger;
+   let userInfo=wx.getStorageSync('userInfo');
+    if(!userInfo){  
+     let e= {
+      currentTarget:{
+        dataset:{
+          type:1,
+          url:el.currentTarget.dataset.url,
+          id:el.currentTarget.dataset.id
+        }
+      }
+     }
+      jsEvent(e);
+    }else{
+      wx.navigateTo({
+        url:`${el.currentTarget.dataset.url}?id=${el.currentTarget.dataset.id}` ,
+      })
+    }
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-  goJianli:function(){
-     wx.navigateTo({
-       url: '../MyResume/MyResume',
-     })
+  goJianli:function(el){
+    let userInfo=wx.getStorageSync('userInfo');
+    if(!userInfo){  
+     let e= {
+      currentTarget:{
+        dataset:{
+          type:1,
+          url:el.currentTarget.dataset.url,
+          id:''
+        }
+      }
+     }
+      jsEvent(e);
+    }else{
+      wx.navigateTo({
+        url:`${el.currentTarget.dataset.url}` ,
+      })
+    }
   },
   goWithdrawal:function(){
     wx.navigateTo({

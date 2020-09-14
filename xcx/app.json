@@ -1,12 +1,12 @@
 {
   "pages": [ 
+    "pages/my/my",
+    "pages/MyResume/MyResume",
     "pages/index/index",
     "pages/boots/boots",
     "pages/wages/wages",
     "pages/Withdrawal/Withdrawal",
     "pages/MyTeam/MyTeam",
-    "pages/MyResume/MyResume",
-    "pages/my/my",
     "pages/signUpList/signUpList",
     "pages/myexercise/myexercise",
     "pages/feedback/feedback",

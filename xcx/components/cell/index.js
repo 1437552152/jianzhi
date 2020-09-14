@@ -78,10 +78,14 @@ Component({
                 warn('linkType 属性可选值为 navigateTo，redirectTo，switchTab，reLaunch', this.data.linkType);
                 return;
             }
-
+            let userInfo=wx.getStorageSync('userInfo');
+             if(!userInfo){
             let params={currentTarget:{dataset:{url:url,type:typeFlag}}}
             jsEvent(params);
-            // wx[this.data.linkType].call(wx, {url});
+             }else{
+              wx[this.data.linkType].call(wx, {url});
+             }
+           
         },
         handleTap () {
             if (!this.data.onlyTapFooter) {
