@@ -11,22 +11,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-    flag: false,
     userInfo: null,
-    userDetail: '',//用户详情
-    tokenn: '',
-    isShow:false
+    UserResume:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+     this.setData({userInfo:wx.getStorageSync('userInfo')});
+  },
+  onJsEvent:function(el){
+    let e= {
+      currentTarget:{
+        dataset:{
+          type:el.currentTarget.dataset.type,
+          url:el.currentTarget.dataset.url
+        }
+      }
+     }
+      jsEvent(e);
+
   },
   goBaoList:function(el){
-    debugger;
-   let userInfo=wx.getStorageSync('userInfo');
+    const {userInfo} =this.data;
     if(!userInfo){  
      let e= {
       currentTarget:{
@@ -45,7 +53,7 @@ Page({
     }
   },
   goJianli:function(el){
-    let userInfo=wx.getStorageSync('userInfo');
+    const {userInfo} =this.data;
     if(!userInfo){  
      let e= {
       currentTarget:{
@@ -72,67 +80,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let tokenn = wx.getStorageSync("tokenn");
-    this.setData({
-      tokenn: tokenn
-    })
-    // 清除地址信息缓存
-    wx.removeStorageSync("addressInfo");
-    let userInfo = wx.getStorageSync("userInfo");
-    console.log(userInfo)
-    if (!userInfo) {
-      this.setData({ flag: false })
-    } else {
-      this.setData({ userInfo: userInfo,flag: true})
-    }
-    this.queryUserDetail();
+      const {userInfo}=this.data;
+      if(userInfo){
+        this.getResume();
+      }
   },
-
-  //查询用户详情
-  queryUserDetail: function () {
+  getResume:function(){
     var that = this;
     var data = {};
-    urlApi('user/Profile/index', "post", data).then((res) => {
+    urlApi('app/mycv/info', "get", data).then((res) => {
       console.log(res);
-      if (res.data.code == 1) {
-        res.data.data.coin=res.data.data.coin.split('.')[0];
-        that.setData({
-          userDetail: res.data.data
-        })
-      } 
+      if (res.data.code == 0) {
+          wx.setStorageSync('UserResume', res.data.myCv);
+          that.setData({
+            UserResume:res.data.myCv
+          })
+      }
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+  }
 })

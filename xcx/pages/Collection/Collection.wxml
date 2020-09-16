@@ -2,12 +2,12 @@
 <!-- 头部定位 -->
 <!-- 列表 -->
 <view class="jianzhiList">
-    <view class="list" bindtap="goDetail" data-list="{{item}}" wx:for="{{jobList}}" wx:key="item" >
+    <view class="list" bindtap="goDetail" data-list="{{item}}" wx:for="{{scList}}" wx:key="item" >
        <view class="left">
            <view class="title">{{item.jobTitle}}</view>
            <view class="jiesuanWay">
-              <view class="cell">{{item.jobQycode}}</view>
-              <!-- <view class="cell">{{item.typeName}}</view> -->
+              <!-- <view class="cell">{{item.jobQycode}}</view> -->
+              <view class="cell">{{item.typeName}}</view>
            </view>
            <view class="butie" wx:if="{{item.compWelfare.length}}">
               <view class="type" wx:for="{{item.compWelfare}}">{{item}}</view>      
@@ -18,8 +18,8 @@
            <view class="price">推广奖励:{{item.jobFxbackprice}}元</view>
        </view>
     </view>
-     <view class="bottomDesc" wx-if="{{jobList.length}}" >我是有底线的哦~</view>
-      <view wx-if="{{jobList.length==0}}" class="noData">
+     <view class="bottomDesc" wx-if="{{scList.length}}" >我是有底线的哦~</view>
+      <view wx-if="{{scList.length==0}}" class="noData">
     <image src="../../static/img/youxiang.png" />
     <view>暂无收藏</view>
     </view>

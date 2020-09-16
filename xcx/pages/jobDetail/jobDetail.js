@@ -17,19 +17,22 @@ Page({
       id: 0,
       latitude: 23.099994,
       longitude: 113.324520,
-      width:25,
-      height:25,
-      flag:false
+      width: 25,
+      height: 25,
+      flag: false,
+      sfSc:0
     }],
-    id:'',
-    dataDetail:null
+    id: '',
+    dataDetail: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     this.setData({id:options.id})
+    this.setData({
+      id: options.id
+    })
   },
   // goCollect:function(){
   //   this.setData({flag:true})
@@ -45,62 +48,86 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-       this.getData();
+    this.getData();
   },
 
-  getData:function(){
-    const that=this;
-    wx.showLoading({
-      title: '加载中',
-    })
-    urlApi(`app/index/getJobDetail/${this.data.id}`,'get',{}).then(res=>{
-      if(res.data.code==0){
-         let obj=res.data.detail;
-         var temp=  WxParse.wxParse('article', 'html', obj.jobIntroduce||'', that, 5);
-         obj.jobQycode=obj.jobQycode&&obj.jobQycode.split(',')[obj.jobQycode.split(',').length-1]||'';
-         that.setData({dataDetail:obj,'markers[0].latitude':obj.jobLat,'markers[0].longitude':obj.jobLot})
-         wx.hideLoading()
-        }else{
-        wx.showToast({
-          title:res.data.msg,
-          icon:'none'
+  getData: function () {
+    const that = this;
+    urlApi(`app/index/getJobDetail`, 'POST', {jobId:this.data.id}).then(res => {
+      if (res.data.code == 0) {
+        let obj = res.data.detail;
+        var temp = WxParse.wxParse('article', 'html', obj.jobIntroduce || '', that, 5);
+        obj.jobQycode = obj.jobQycode && obj.jobQycode.split(',')[obj.jobQycode.split(',').length - 1] || '';
+        that.setData({
+          dataDetail: obj,
+          sfSc:obj.sfSc,
+          'markers[0].latitude': obj.jobLat,
+          'markers[0].longitude': obj.jobLot
         })
-        wx.hideLoading()
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        })
       }
-    
+
     })
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
+    return {
+      title: wx.getStorageSync('userInfo').nickName + '邀请你去报名啦!',
+      path: `/pages/jobDetail/jobDetail?id=${this.data.id}&firendsId=${wx.getStorageSync('userInfo').openid}`
+    }
 
   },
   markertap(e) {
-     const that=this;
+    const that = this;
     wx.getLocation({
-      type: 'wgs84', 
+      type: 'wgs84',
       success: function (res) {
-        wx.openLocation({//​使用微信内置地图查看位置。
-          latitude: Number(that.data.dataDetail.jobLat),//要去的纬度-地址
-          longitude:Number(that.data.dataDetail.jobLot),//要去的经度-地址
+        wx.openLocation({ //​使用微信内置地图查看位置。
+          latitude: Number(that.data.dataDetail.jobLat), //要去的纬度-地址
+          longitude: Number(that.data.dataDetail.jobLot), //要去的经度-地址
           name: that.data.dataDetail.jobAddress,
-          address:that.data.dataDetail.jobAddress
+          address: that.data.dataDetail.jobAddress
         })
       }
     })
   },
-  goComp:function(e){
-     wx.navigateTo({
-       url: `../comInfo/comInfo?id=${e.currentTarget.dataset.compid}`,
-     })
+  goComp: function (e) {
+    wx.navigateTo({
+      url: `../comInfo/comInfo?id=${e.currentTarget.dataset.compid}`,
+    })
   },
   onJsEvent: function (e) {
-   let userInfo=wx.getStorageSync('userInfo');
-    if(userInfo&&userInfo.openid){
-     
-    }else{
+    let userInfo = wx.getStorageSync('userInfo');
+    const that=this;
+    if (userInfo && userInfo.openid) {
+      if (e.currentTarget.dataset.status == 1) {
+       const {sfSc} =this.data;
+        //  收藏
+        let body = {};
+        body['jobId'] =  this.data.id;
+        urlApi(sfSc?`app/mysc/qxcollectJob`:`app/mysc/collectJob`, 'POST',body).then(res => {
+          if (res.data.code == 0) {
+            wx.showToast({
+              title:res.data.msg,
+              icon: 'none'
+            })  
+            that.getData(); 
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+          }
+        })
+      }
+    } else {
       jsEvent(e);
     }
   }

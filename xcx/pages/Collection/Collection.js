@@ -8,43 +8,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-    jobType:[],
-    jobList:[],
-    jobtypeId:''
+    scList:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.setData({jobtypeId:options.jobtypeId});
-      this.jobList();
+      this.scList();
   }, 
 
-   jobList:function(){
+  scList:function(){
     const that=this;
     let body={};
-    wx.showLoading({
-      title: '加载中',
-    })
-    if(wx.getStorageSync('location')&&wx.getStorageSync('location')!='全国'){
-       body.city=wx.getStorageSync('location');
-    }
-    body.jobtypeId=this.data.jobtypeId;
-    urlApi('app/index/getJoblist','get',body).then(res=>{
+    urlApi(`app/mysc/sclist?openid=${wx.getStorageSync('userInfo').openid}`,'POST',body).then(res=>{
       if(res.data.code==0){
-        res.data.jobList.length&&res.data.jobList.map((item,index)=>{
-          item.jobQycode=item.jobQycode.split(',')[item.jobQycode.split(',').length-1];
-          item.compWelfare=item.compWelfare.split(',');
-        })
-        that.setData({jobList:res.data.jobList,city:wx.getStorageSync('location')||''})
-        wx.hideLoading()
+         that.setData({scList:res.data.sclist})
       }else{
         wx.showToast({
           title:res.data.msg,
           icon:'none'
         })
-        wx.hideLoading()
       }
     
     })
