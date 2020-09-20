@@ -98,3 +98,13 @@ box-sizing: border-box;
 bottom: 0;
 position: relative;
 }
+
+.email{
+  background-color: #fff;
+  padding: 6px;
+  margin-top: 10px;
+  display: flex;
+  font-size: 14px;
+color: #999;
+
+}

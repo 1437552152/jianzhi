@@ -3,9 +3,9 @@
 	<!-- tab切换 -->
 	<i-tabs current="{{ current }}" color="#19be6b" bindchange="handleChange">
 		<i-tab key="1" title="全部"></i-tab>
-		<i-tab key="2" title="已报名"></i-tab>
-		<i-tab key="3" title="待支付"></i-tab>
-		<i-tab key="4" title="已完成"></i-tab>
+		<i-tab key="2" title="已录用"></i-tab>
+		<i-tab key="3" title="已到岗"></i-tab>
+		<i-tab key="4" title="已结算"></i-tab>
 	</i-tabs>
 
 	<view class="list-wapper">

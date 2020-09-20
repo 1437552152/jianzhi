@@ -11,10 +11,9 @@
 			<view class='two'>
 				<view class='name'>{{userInfo.nickName}}</view>
 				<view class='num' bindtap="goWithdrawal">
-					<text>余额:0.00元</text>立即提现<i-icon type="enter" color="#ffffff" /></view>
-			</view>
-				<view class='num' bindtap="goWithdrawal">
-					<text>推广奖励:0.00元</text><text>累计收益:0.00元</text>
+					<text>余额:0.00元</text>立即提现
+					<i-icon type="enter" color="#ffffff" />
+				</view>
 			</view>
 		</view>
 	</view>
@@ -27,59 +26,67 @@
 		</view>
 	</view>
 	<view bindtap="goJianli" class="goJianli" data-url="/pages/MyResume/MyResume">
-	  <image src="../../static/img/jianli.png"></image>
+		<image src="../../static/img/jianli.png"></image>
 	</view>
 
 	<view class="baomingStatus">
-	    <view class="list" bindtap="goBaoList" data-id="1" data-url="/pages/myexercise/myexercise">
-			     <view class="num">1</view>
-					 <view class="desc">全部</view>
-					 <view class="line"></view>
-			</view>
+		<view class="list" bindtap="goBaoList" data-id="1" data-url="/pages/myexercise/myexercise">
+			<view class="num">1</view>
+			<view class="desc">全部</view>
+			<view class="line"></view>
+		</view>
 
-			 <view class="list" bindtap="goBaoList" data-id="2"  data-url="/pages/myexercise/myexercise">
-			     <view class="num">1</view>
-					 <view class="desc">已报名</view>
-					 <view class="line"></view>
-			</view>
+		<view class="list" bindtap="goBaoList" data-id="2" data-url="/pages/myexercise/myexercise">
+			<view class="num">1</view>
+			<view class="desc">已录用</view>
+			<view class="line"></view>
+		</view>
 
-			 <view class="list" bindtap="goBaoList" data-id="3" data-url="/pages/myexercise/myexercise">
-			     <view class="num">1</view>
-					 <view class="desc">待支付</view>
-					 <view class="line"></view>
-			</view>
+		<view class="list" bindtap="goBaoList" data-id="3" data-url="/pages/myexercise/myexercise">
+			<view class="num">1</view>
+			<view class="desc">已到岗</view>
+			<view class="line"></view>
+		</view>
 
-			 <view class="list" bindtap="goBaoList" data-id="4" data-url="/pages/myexercise/myexercise">
-			     <view class="num">1</view>
-					 <view class="desc">已完成</view>
-			</view>		
+		<view class="list" bindtap="goBaoList" data-id="4" data-url="/pages/myexercise/myexercise">
+			<view class="num">1</view>
+			<view class="desc">已结算</view>
+		</view>
 	</view>
-  
+
 	<view class='part'>
 		<i-cell-group>
 			<i-cell title="我的好友" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
+				<i-icon slot="icon" myIcon="../../static/img/friends.png" size="28" style="margin-right:20rpx" />
+			</i-cell>
+
+			<i-cell title="推广奖励" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
+				<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
+			</i-cell>
+
+			<i-cell title="累计收益" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part1.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
-    	<i-cell title="我的收藏" is-link url="/pages/Collection/Collection"  typeFlag="1">
+			<i-cell title="我的收藏" is-link url="/pages/Collection/Collection" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part4.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
-			<i-cell title="帮助中心" is-link url="/pages/helpList/helpList"  typeFlag="1">
+			<i-cell title="帮助中心" is-link url="/pages/helpList/helpList" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part2.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
 			<!-- <i-cell title="关于我们" is-link url="/pages/AboutUs/AboutUs"  typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part3.png" size="28" style="margin-right:20rpx" />
 			</i-cell> -->
-		
-			<i-cell title="联系客服" is-link url="/pages/connect/connect"  typeFlag="1">
+
+			<i-cell title="联系客服" is-link url="/pages/connect/connect" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part6.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
-			<i-cell title="意见反馈" is-link url="/pages/feedback/feedback"  typeFlag="1">
+			<i-cell title="意见反馈" is-link url="/pages/feedback/feedback" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part7.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
-		
+
 		</i-cell-group>
 	</view>
 </view>

@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: yfye
+ * @Date: 2020-07-13 20:42:05
+ * @LastEditTime: 2020-09-19 13:40:01
+ * @LastEditors: yfye
+-->
 <template>
   <transition name="fade">
     <router-view></router-view>
@@ -9,6 +16,11 @@
   }
 </script>
 <style>
+ .el-table .cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .distpicker-address-wrapper select{
   padding:4px!important;
 }

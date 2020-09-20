@@ -1,5 +1,9 @@
 <!--pages/feedback/feedback.wxml-->
 <view class='feedback'>
+  <view>
+     <view class="email">你的邮箱: <input class="input" name="useremail" style="margin-top:-4px"
+    bindinput="userEmail"/></view>
+  </view>
 <view class='top'>
   <textarea class='textarea' bindinput="input" placeholder="请输入您的意见或建议" name="textarea"
    placeholder-class="placeholder" maxlength="{{maxlength}}" 

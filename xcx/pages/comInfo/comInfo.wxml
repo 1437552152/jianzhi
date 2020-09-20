@@ -21,9 +21,3 @@
 	 	 <template is="wxParse" data="{{wxParseData:article.nodes}}" />
 		</view>
 	</view>
-
-  	<view class="list" style="margin-bottom:60px">
-		<view class="desc">
-			<map id="map" longitude="{{dataDetail.compLot}}" latitude="{{dataDetail.compLat}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height:200px;"></map>
-		</view>
-	</view>

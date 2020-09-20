@@ -22,34 +22,30 @@
         align="center"
         width="50">
       </el-table-column>
-      <el-table-column
-        prop="adviceTitle"
-        header-align="center"
-        align="center"
-        label="意见标题">
-      </el-table-column>
+     
       <el-table-column
         prop="contactEmail"
         header-align="center"
         align="center"
         label="邮箱">
       </el-table-column>
-      <el-table-column
+     <!--  <el-table-column
         prop="adviceType"
         header-align="center"
         align="center"
-        label="反馈意见类型">
+        label="反馈人姓名">
           <template slot-scope="scope">
             {{returnData(scope.row.adviceType)}}
-        </template>
-      </el-table-column>
+        </template> 
+      </el-table-column>  -->
       <el-table-column
         prop="adviceContent"
         header-align="center"
+        :show-overflow-tooltip="true"
         align="center"
         label="反馈内容">
       </el-table-column>
-      <el-table-column
+    <!--   <el-table-column
         prop="adviceRead"
         header-align="center"
         align="center"
@@ -57,6 +53,12 @@
          <template slot-scope="scope">
           {{scope.adviceRead?'已读':'未读'}}
         </template>
+      </el-table-column> -->
+       <el-table-column
+        prop="adviceCreateTime"
+        header-align="center"
+        align="center"
+        label="反馈时间">
       </el-table-column>
       <el-table-column
         fixed="right"

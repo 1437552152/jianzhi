@@ -10,7 +10,8 @@ Page({
   data: {
     content: '',//文本内容
     maxlength: 1000,
-    focus: true
+    focus: true,
+    contactEmail:''
   },
   //键盘输入事件
   input: function (e) {
@@ -18,70 +19,35 @@ Page({
       content: e.detail.value
     })
   },
+  userEmail:function (e) {
+    this.setData({
+      contactEmail: e.detail.value
+    })
+  },
 
   send: function() {
     let obj = {}
-    obj.msg = this.data.content
-    urlApi("/user/Profile/guestbook_post","post", obj).then((res)=>{
+    obj.adviceContent = this.data.content;
+    obj.contactEmail = this.data.contactEmail;
+
+    var emreg=/^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+     if(emreg.test(this.data.contactEmail)==false){
+       wx.showToast({
+         title: '您输入的邮箱格式不正确',
+         icon:'none'
+       })
+       return;
+     }
+     obj.adviceType = 0;
+    // obj.adviceType = wx.getStorageSync('userInfo').username||wx.getStorageSync('userInfo').nickName||'';
+    urlApi("app/index/save","post", obj).then((res)=>{
       wx.showToast({
-        title: res.data.msg,
+        title:"提交成功",
         icon:'none'
-      })         
+      });
+      wx.switchTab({
+        url: '/pages/my/my',
+      })      
     })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })
