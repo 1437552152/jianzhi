@@ -47,7 +47,7 @@
         label="图片">
          <template slot-scope="scope">
             <viewer>
-                <img :src="scope.row.picSaveUrl" key="图片" style="width:200px">
+                <img :src="scope.row.picSaveUrl" key="图片" style="width:200px;max-height:100px">
             </viewer>
         </template>
 

@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: yfye
+ * @Date: 2020-07-13 20:42:05
+ * @LastEditTime: 2020-09-21 20:50:58
+ * @LastEditors: yfye
+ */
 'use strict'
 // Template version: 1.2.5
 // see http://vuejs-templates.github.io/webpack for documentation.
@@ -66,7 +73,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/jianzhi/dist/',
+    assetsPublicPath: '/dist/',
 
     /**
      * Source Maps

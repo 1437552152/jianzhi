@@ -287,8 +287,6 @@
         }
     };
 
-
-
     /* 上传图片 */
     function UploadImage(target) {
         this.$wrap = target.constructor == String ? $('#' + target) : $(target);
@@ -1053,6 +1051,7 @@
                 img.style.marginTop = '-' + parseInt((img.height - h) / 2) + 'px';
             }
         },
+        
         getImageData: function(){
             var _this = this,
                 key = $G('searchTxt').value,

@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: yfye
+ * @Date: 2020-07-13 20:42:05
+ * @LastEditTime: 2020-09-21 23:16:45
+ * @LastEditors: yfye
+ */
 /**
  * 动态加载初始资源
  */
@@ -13,8 +20,9 @@
       window.SITE_CONFIG.cdnUrl + '/static/plugins/echarts-3.8.5/echarts.common.min.js',
       // 插件 - ueditor
       window.SITE_CONFIG.cdnUrl + '/static/plugins/ueditor-1.4.3.3/ueditor.config.js',
-      window.SITE_CONFIG.cdnUrl + '/static/plugins/ueditor-1.4.3.3/ueditor.all.min.js',
+      window.SITE_CONFIG.cdnUrl + '/static/plugins/ueditor-1.4.3.3/ueditor.all.js',
       window.SITE_CONFIG.cdnUrl + '/static/plugins/ueditor-1.4.3.3/lang/zh-cn/zh-cn.js',
+      window.SITE_CONFIG.cdnUrl + '/static/plugins/ueditor-1.4.3.3/jquery-2.2.3.min.js',
       // 业务
       window.SITE_CONFIG.cdnUrl + '/static/js/manifest.js',
       window.SITE_CONFIG.cdnUrl + '/static/js/vendor.js',
