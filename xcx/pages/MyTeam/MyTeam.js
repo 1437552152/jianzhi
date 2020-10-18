@@ -9,12 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    current: 1,
-    list_done: [],
-    list_undone: [],
     testList: [], //当前集合
     type: 1, //状态1.未完成 2已完成
-    page: 1 //当前分页
+    current:1
   },
 
 
@@ -35,14 +32,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      noMore: false,
-      loading: false,
-      testAllList: [],
-      testList: [],
-      page: 1
-    })
-    // this.queryTestList();
+   this.queryTestList();
   },
 
   // tab切换
@@ -51,13 +41,8 @@ Page({
   }) {
     var current = detail.key;
     this.setData({
-      current: current,
       type: current,
-      noMore: false,
-      loading: false,
-      testAllList: [],
-      testList: [],
-      page: 1
+      current:current
     });
     this.queryTestList();
   },
@@ -66,55 +51,18 @@ Page({
   queryTestList: function () {
     var that = this;
     var data = {};
-    var page = that.data.page;
-    data.type = that.data.type;
-    data.page = page;
-    console.log(data);
-    urlApi("/user/Profile/my_psychological", "post", data).then((res) => {
-      console.log(res);
-      if (page == 1) {
-        testAllList = [];
-      }
-      if (res.data.code == 1) {
-
-        if (res.data.data.articles.length > 0) {
-          for (var i = 0; i < res.data.data.articles.length; i++) {
-            testAllList.push(res.data.data.articles[i]);
-          }
-          if (res.data.data.articles.length * page >= res.data.data.page_total && page > 1) {
-            wx.showToast({
-              title: '没有更多数据了',
-              icon: "none"
-            })
-            that.setData({ //没有更多了显示
-              noMore: true,
-              loading: true,
-            })
-          }
-        } else {
-          // wx.showToast({
-          //   title: '没有更多数据了',
-          //   icon: "none"
-          // })
-          that.setData({ //没有更多了显示
-            noMore: true,
-            loading: true,
-          })
-        }
-
-        // that.setData({
-        //   list_done: res.data.data.done_psychological,
-        //   list_undone: res.data.data.undone_psychological,
-        // })
-      } else {
+    const {type} = this.data;
+    urlApi(type===1?"/app/myrelation/list":'/app/myrelation/nextlist', "get", data).then((res) => {
+      if(res.data.code===0){
+        that.setData({
+          testList:res.data.page.list
+         })
+      }else{
         wx.showToast({
           title: res.data.msg,
-          icon: "none"
+          icon: 'none'
         })
       }
-      that.setData({
-        testList: testAllList
-      })
     })
   },
 

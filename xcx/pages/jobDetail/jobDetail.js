@@ -33,6 +33,9 @@ Page({
     this.setData({
       id: options.id
     })
+    if(options.parentid){
+      wx.setStorageSync('parentid', options.parentid)
+    }
   },
   // goCollect:function(){
   //   this.setData({flag:true})
@@ -80,7 +83,7 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: wx.getStorageSync('userInfo').nickName + '邀请你去报名啦!',
-      path: `/pages/jobDetail/jobDetail?id=${this.data.id}&firendsId=${wx.getStorageSync('userInfo').openid}`
+      path: `/pages/jobDetail/jobDetail?id=${this.data.id}&parentid=${wx.getStorageSync('userInfo').userId}`
     }
 
   },
@@ -130,5 +133,26 @@ Page({
     } else {
       jsEvent(e);
     }
+  },
+  onJsEvent1:function(){
+    let body = {};
+    const that=this;
+    body['jobId'] =  this.data.id;
+    urlApi(`my/myjob/baoming`, 'POST',body).then(res => {
+      if (res.data.code == 0) {
+        wx.showToast({
+          title:res.data.msg,
+          icon: 'none'
+        })  
+        that.getData(); 
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        })
+      }
+    })
+
+    
   }
 })
