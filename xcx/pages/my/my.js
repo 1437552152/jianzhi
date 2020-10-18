@@ -12,7 +12,8 @@ Page({
    */
   data: {
     userInfo: null,
-    UserResume:null
+    UserResume:null,
+    baomingInfo:{}
   },
 
   /**
@@ -84,7 +85,23 @@ Page({
       const {userInfo}=this.data;
       if(userInfo){
         this.getResume();
+        // 去请求用户录用情况
+        this.getBaoming();
       }
+  },
+  getBaoming:function(){
+    var that = this;
+    var data = {};
+    urlApi('my/myjob/myjobnum', "get", data).then((res) => {
+      console.log(res);
+      if (res.data.code == 0) {
+          that.setData({
+            baomingInfo:res.data.jonnum
+          })
+      }
+    })
+
+
   },
   getResume:function(){
     var that = this;

@@ -31,25 +31,25 @@
 
 	<view class="baomingStatus">
 		<view class="list" bindtap="goBaoList" data-id="1" data-url="/pages/myexercise/myexercise">
-			<view class="num">1</view>
+			<view class="num">{{baomingInfo.alljobnum||0}}</view>
 			<view class="desc">全部</view>
 			<view class="line"></view>
 		</view>
 
 		<view class="list" bindtap="goBaoList" data-id="2" data-url="/pages/myexercise/myexercise">
-			<view class="num">1</view>
+			<view class="num">{{baomingInfo.luyongnum||0}}</view>
 			<view class="desc">已录用</view>
 			<view class="line"></view>
 		</view>
 
 		<view class="list" bindtap="goBaoList" data-id="3" data-url="/pages/myexercise/myexercise">
-			<view class="num">1</view>
+			<view class="num">{{baomingInfo.daogangnum||0}}</view>
 			<view class="desc">已到岗</view>
 			<view class="line"></view>
 		</view>
 
 		<view class="list" bindtap="goBaoList" data-id="4" data-url="/pages/myexercise/myexercise">
-			<view class="num">1</view>
+			<view class="num">{{baomingInfo.jiesuannum||0}}</view>
 			<view class="desc">已结算</view>
 		</view>
 	</view>
