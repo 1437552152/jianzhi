@@ -142,8 +142,7 @@
     </view>
 
     <view wx-if="{{dataDetail.luyongType==1}}" class="two" bindtap="onJsEvent" data-status="4" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
-       <view></view>
-		  <view>取消报名</view>
+		  <view style="margin-top:10px">取消报名</view>
     </view>
 
     <view wx-if="{{dataDetail.luyongType&&dataDetail.luyongType>1}}" class="two thiree"  data-status="4" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
