@@ -21,7 +21,8 @@
     "pages/personalinfo/personalinfo",
     "pages/connect/connect",
     "pages/Collection/Collection",
-    "pages/WithdrawalDetail/WithdrawalDetail"
+    "pages/WithdrawalDetail/WithdrawalDetail",
+    "pages/friendsData/friendsData"
   ],
   "window": {
     "backgroundTextStyle": "light",

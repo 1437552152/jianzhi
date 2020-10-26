@@ -16,6 +16,7 @@
 				</view>
 			</view>
 		</view>
+		<view class="jiangli"><text>上月推广奖励:345元</text> <text>累计收益:345元</text></view>
 	</view>
 	<view class='personalinfo' wx:else>
 		<view class='left_part'>
@@ -60,13 +61,13 @@
 				<i-icon slot="icon" myIcon="../../static/img/friends.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
-			<i-cell title="推广奖励" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
+			<!-- <i-cell title="推广奖励" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
 			<i-cell title="累计收益" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part1.png" size="28" style="margin-right:20rpx" />
-			</i-cell>
+			</i-cell> -->
 
 			<i-cell title="我的收藏" is-link url="/pages/Collection/Collection" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part4.png" size="28" style="margin-right:20rpx" />

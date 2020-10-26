@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: yfye
+ * @Date: 2020-07-13 20:42:05
+ * @LastEditTime: 2020-10-25 23:49:48
+ * @LastEditors: yfye
+ */
 import Vue from 'vue'
 import App from '@/App'
 import router from '@/router'                 // api: https://github.com/vuejs/vue-router
@@ -11,7 +18,8 @@ import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/a
 import { isAuth } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 import Viewer from 'v-viewer'
-import 'viewerjs/dist/viewer.css'
+import 'viewerjs/dist/viewer.css';
+
 Vue.use(Viewer);
 Viewer.setDefaults({
   Options: { "inline": true, "button": true, "navbar": true, "title": true, "toolbar": true, "tooltip": true, "movable": true, "zoomable": true, "rotatable": true, "scalable": true, "transition": true, "fullscreen": true, "keyboard": true, "url": "data-source" }

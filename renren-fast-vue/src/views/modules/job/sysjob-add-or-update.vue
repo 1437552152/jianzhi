@@ -48,9 +48,14 @@
         <el-input-number v-model="dataForm.jobBmbackprice"  :min="0"  label="请输入报名佣金"></el-input-number>
     </el-form-item>
 
-    <el-form-item label="分享佣金" prop="jobFxbackprice">
-        <el-input-number v-model="dataForm.jobFxbackprice"  :min="0"  label="请输入分享佣金"></el-input-number>
+    <el-form-item label="一级分享佣金" prop="jobFxbackprice">
+        <el-input-number v-model="dataForm.jobFxbackprice"  :min="0"  label="请输入一级分享佣金"></el-input-number>
     </el-form-item>
+
+    <el-form-item label="二级分享佣金" prop="jobFxejbackprice">
+        <el-input-number v-model="dataForm.jobFxejbackprice"  :min="0"  label="请输入二级分享佣金"></el-input-number>
+    </el-form-item>
+
 
     <el-form-item label="性别限制" prop="jobSex">
       <el-radio-group v-model="dataForm.jobSex">
@@ -139,6 +144,7 @@ import moment from 'moment';
           jobBz: '',
           jobPrezpNum:0,
           jobFxbackprice:0,
+          jobFxejbackprice:0,
           jobBmbackprice:0,
           jobStatue:1,
           jobSex:'男女不限',
@@ -189,8 +195,9 @@ import moment from 'moment';
             { required: true, message: '请填写预招聘人数', trigger: 'blur' }
           ],
          jobFxbackprice: [
-            { required: true, message: '分享佣金不能为空', trigger: 'blur' }
+            { required: true, message: '一级分享佣金不能为空', trigger: 'blur' }
           ],
+          jobFxejbackprice:[{ required: true, message: '二级分享佣金不能为空', trigger: 'blur' }],
           jobBmbackprice: [
             { required: true, message: '报名佣金不能为空', trigger: 'blur' }
           ],
@@ -241,6 +248,7 @@ import moment from 'moment';
                 this.dataForm.jobBz = data.sysJob.jobBz;
                 this.dataForm.jobPrezpNum = data.sysJob.jobPrezpNum;
                 this.dataForm.jobFxbackprice = data.sysJob.jobFxbackprice;
+                this.dataForm.jobFxejbackprice = data.sysJob.jobFxejbackprice;
                 this.dataForm.jobBmbackprice = data.sysJob.jobBmbackprice;     
                 this.dataForm.jobStatue = data.sysJob.jobStatue; 
                 this.dataForm.jobSex = data.sysJob.jobSex===3?'男女不限':(data.sysJob.jobSex===2?'只招女生':'只招男生');   
@@ -291,6 +299,7 @@ import moment from 'moment';
                 'jobBz': this.dataForm.jobBz,
                 'jobPrezpNum':this.dataForm.jobPrezpNum,
                 'jobFxbackprice':this.dataForm.jobFxbackprice,
+                'jobFxejbackprice':this.dataForm.jobFxejbackprice,
                 'jobBmbackprice':this.dataForm.jobBmbackprice,
                 'jobStatue':this.dataForm.jobStatue, 
                 'jobSex': this.dataForm.jobSex==='男女不限'?3:(this.dataForm.jobSex==='只招女生'?2:1), 

@@ -12,7 +12,8 @@ Page({
     jobType:[],
     jobList:[],
     city:'',
-    NoticeList:[]
+    NoticeList:[],
+    jobTitle:''
   },
 
   /**
@@ -71,7 +72,11 @@ Page({
   onReady: function () {
 
   },
-  searchValue:function(){
+  searchValue:function(e){
+    this.setData({
+      jobTitle:e.detail.value
+    });
+    this.jobList();
   },
   goChoose:function(){
     wx.navigateTo({
@@ -81,12 +86,10 @@ Page({
    jobList:function(){
     const that=this;
     let body={};
-    wx.showLoading({
-      title: '加载中',
-    })
     if(wx.getStorageSync('location')&&wx.getStorageSync('location')!='全国'){
        body.city=wx.getStorageSync('location');
     }
+    body.jobTitle=this.data.jobTitle;
    
     urlApi('app/index/getJoblist','get',body).then(res=>{
       if(res.data.code==0){
@@ -101,7 +104,6 @@ Page({
           title:res.data.msg,
           icon:'none'
         })
-        wx.hideLoading()
       }
     
     })

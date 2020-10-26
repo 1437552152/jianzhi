@@ -13,7 +13,7 @@
    <view class="dingwei">
     <view style="flex:1" bindtap="goChoose"><image src="../../static/img/positionMap.png" style="width:16px;height:16px" />{{city}}</view>
     <view style="flex:4"><input class="input" placeholder="搜索" 
-    bindtap="searchValue" placeholder-style="font-size:12px;margin-left:8px"/></view>
+    bindinput="searchValue" placeholder-style="font-size:12px;margin-left:8px"/></view>
     </view>
 </view>
 

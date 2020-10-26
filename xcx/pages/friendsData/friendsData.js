@@ -12,6 +12,7 @@ Page({
     current: 1,
     testList: [], //当前集合
     luyongType: 1, // 1、已报名 2、已录用 3、已到岗 4、已结算、
+    friendId:1
   },
 
 
@@ -19,7 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.setData({current:options.id})
+      this.setData({current:options.id||1,friendId:options.friendId})
   },
 
   /**
@@ -59,6 +60,7 @@ Page({
     var that = this;
     var data = {};
     data.luyongType = that.data.luyongType==1?'':that.data.luyongType;
+    data.openid=that.data.friendId;
     urlApi("my/myjob/myjobList", "post", data).then((res) => {
       if (res.data.code ==0) {
         that.setData({

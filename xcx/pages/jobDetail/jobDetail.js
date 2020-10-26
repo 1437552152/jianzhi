@@ -61,6 +61,9 @@ Page({
         let obj = res.data.detail;
         var temp = WxParse.wxParse('article', 'html', obj.jobIntroduce || '', that, 5);
         obj.jobQycode = obj.jobQycode && obj.jobQycode.split(',')[obj.jobQycode.split(',').length - 1] || '';
+         if(obj.luyongType){
+           obj.luyongType=Number(obj.luyongType)
+         }
         that.setData({
           dataDetail: obj,
           sfSc:obj.sfSc,
@@ -129,30 +132,43 @@ Page({
             })
           }
         })
-      }
+      }else if(e.currentTarget.dataset.status == 3){
+        let body = {};
+        body['jobId'] =  this.data.id;
+        urlApi(`my/myjob/baoming`, 'POST',body).then(res => {
+          if (res.data.code == 0) {
+            wx.showToast({
+              title:res.data.msg,
+              icon: 'none'
+            })  
+            that.getData(); 
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+          }
+        })
+    }else if(e.currentTarget.dataset.status == 4){
+      let body = {};
+      body['jobId'] =  this.data.id;
+      urlApi(`my/myjob/cancelBaoming`, 'POST',body).then(res => {
+        if (res.data.code == 0) {
+          wx.showToast({
+            title:res.data.msg,
+            icon: 'none'
+          })  
+          that.getData(); 
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }
     } else {
       jsEvent(e);
     }
-  },
-  onJsEvent1:function(){
-    let body = {};
-    const that=this;
-    body['jobId'] =  this.data.id;
-    urlApi(`my/myjob/baoming`, 'POST',body).then(res => {
-      if (res.data.code == 0) {
-        wx.showToast({
-          title:res.data.msg,
-          icon: 'none'
-        })  
-        that.getData(); 
-      } else {
-        wx.showToast({
-          title: res.data.msg,
-          icon: 'none'
-        })
-      }
-    })
-
-    
   }
 })

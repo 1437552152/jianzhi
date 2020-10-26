@@ -9,7 +9,7 @@
 	<view class="list-wapper">
 		<view class='part' wx:key="index">
     <i-cell-group i-class="style">
-        <i-cell title="{{item.username||item.nickName}}" wx:for="{{testList}}" wx:key="item" imageUrl="{{item.avatarUrl}}" value="{{item.sex}}"></i-cell>
+        <i-cell title="{{item.username||item.nickName}}"  is-link url="/pages/friendsData/friendsData?friendId={{item.openid}}"   wx:for="{{testList}}" wx:key="item" imageUrl="{{item.avatarUrl}}" value="{{item.sex}}"></i-cell>
     </i-cell-group>
 		</view>
 		<view class="bottomDesc">我是有底线的哦~</view>

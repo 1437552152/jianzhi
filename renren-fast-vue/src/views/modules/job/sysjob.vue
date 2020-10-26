@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.jobTitle" placeholder="请输入职位标题" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -22,6 +22,13 @@
         align="center"
         fixed
         width="50">
+      </el-table-column>
+        <el-table-column
+        prop="jobTitle"
+        header-align="center"
+         width="200"
+        align="center"
+        label="职位标题">
       </el-table-column>
       <el-table-column
         prop="compName"
@@ -58,13 +65,6 @@
          width="200"
         align="center"
         label="职位必备技能">
-      </el-table-column>
-      <el-table-column
-        prop="jobTitle"
-        header-align="center"
-         width="200"
-        align="center"
-        label="工作标题">
       </el-table-column>
       <el-table-column
         prop="jobPrice"
@@ -141,14 +141,13 @@
       </template>
       </el-table-column>
 
-
-     <el-table-column
+   <!--   <el-table-column
         prop="jobFxbackprice"
         header-align="center"
          width="200"
         align="center"
         label="分享佣金/元">
-      </el-table-column>
+      </el-table-column> -->
 
        <el-table-column
         prop="jobBmbackprice"
@@ -203,7 +202,7 @@
     data () {
       return {
         dataForm: {
-          key: ''
+          jobTitle: ''
         },
         dataList: [],
         pageIndex: 1,
@@ -231,7 +230,7 @@
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'key': this.dataForm.key
+            'jobTitle': this.dataForm.jobTitle
           })
         }).then(({data}) => {
           if (data && data.code === 0) {

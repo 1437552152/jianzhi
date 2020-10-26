@@ -52,7 +52,7 @@ Page({
     var that = this;
     var data = {};
     const {type} = this.data;
-    urlApi(type===1?"/app/myrelation/list":'/app/myrelation/nextlist', "get", data).then((res) => {
+    urlApi(type==1?"/app/myrelation/list":'/app/myrelation/nextlist', "get", data).then((res) => {
       if(res.data.code===0){
         that.setData({
           testList:res.data.page.list

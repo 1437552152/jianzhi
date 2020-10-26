@@ -123,6 +123,8 @@ margin-top: 6px;
 margin-left: 10px;
 padding: 5px;
 background: #f4f4f6;
+font-size: 14px;
+font-weight: 500;
 }
 .noData{
   text-align: center;
