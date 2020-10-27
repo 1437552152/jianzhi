@@ -5,9 +5,9 @@
 </view>
 	<view class='part'>
 		<i-cell-group>
-			<!-- <i-cell title="工资明细" is-link url="/pages/wages/wages" typeFlag="1">
+			<i-cell title="工资明细" is-link url="/pages/myexercise/myexercise" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
-			</i-cell> -->
+			</i-cell>
 
     	<i-cell title="提现明细" is-link url="/pages/wages/wages" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/tixian.png" size="28" style="margin-right:20rpx" />

@@ -3,7 +3,7 @@
     <div class="site-content__wrapper">
       <div class="site-content">
         <div class="brand-info">
-          <h2 class="brand-info__text">兼职招聘管理平台</h2>
+          <h2 class="brand-info__text">合肥工作邦管理平台</h2>
           <p class="brand-info__intro"></p>
         </div>
         <div class="login-main">

@@ -1,7 +1,7 @@
 {
   "name": "jianzhi",
   "version": "1.2.2",
-  "description": "兼职管理平台",
+  "description": "合肥工作邦管理平台",
   "author": "daxiong.yang <daxiong.yang@qq.com>",
   "private": true,
   "scripts": {

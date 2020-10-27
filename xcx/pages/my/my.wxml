@@ -73,6 +73,10 @@
 				<i-icon slot="icon" myIcon="../../static/img/part4.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
+				<i-cell title="我的工资条" is-link url="/pages/Collection/Collection" typeFlag="1">
+				<i-icon slot="icon" myIcon="../../static/img/part4.png" size="28" style="margin-right:20rpx" />
+			</i-cell>
+
 			<i-cell title="帮助中心" is-link url="/pages/helpList/helpList" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part2.png" size="28" style="margin-right:20rpx" />
 			</i-cell>

@@ -32,6 +32,29 @@
         </el-input>
       </el-form-item>
 
+        <el-form-item label="是否上传工资条"  prop="type">
+        <el-radio-group v-model="dataForm.type">
+          <el-radio label="1">是</el-radio>
+          <el-radio label="2">否</el-radio>
+        </el-radio-group>
+      </el-form-item>
+
+      <el-form-item label="工资条上传" prop="picSaveUrl" v-if="dataForm.type==1">
+        <el-upload
+          class="avatar-uploader"
+          :action="PicUrl"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+        >
+          <img
+            v-if="dataForm.picSaveUrl"
+            :src="dataForm.picSaveUrl"
+            class="avatar"
+          />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </el-form-item>
+
       <el-form-item label="备注" prop="remark">
         <el-input type="textarea" v-model="dataForm.remark" placeholder="备注"></el-input>
       </el-form-item>
@@ -48,13 +71,16 @@ export default {
   data() {
     return {
       visible: false,
+       PicUrl: `${window.SITE_CONFIG.baseUrl}/sys/syspic/fileUpload`,
       dataForm: {
         id: 0,
         beanName: "",
         params: "",
         cronExpression: "",
         remark: "",
-        status: 0
+        status: 0,
+          picSaveUrl: "",
+            type:"1"
       },
       dataRule: {
         beanName: [
@@ -62,11 +88,38 @@ export default {
         ],
         cronExpression: [
           { required: true, message: "cron表达式不能为空", trigger: "blur" }
-        ]
+        ],
+         type: [
+          { required: true, message: "请选择是否上传工资条", trigger: "change" }
+        ],
+        picSaveUrl: [
+          {
+            required: true,
+            message: "工资条不能为空",
+            trigger: "blur"
+          }
+        ],
       }
     };
   },
   methods: {
+     handleAvatarSuccess(res, file) {
+      if (!res.code) {
+        this.dataForm.picSaveUrl = `${window.SITE_CONFIG.upLoadUrl}${res.url}`;
+      }
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
     init(id) {
       this.dataForm.id = id || 0;
       this.visible = true;

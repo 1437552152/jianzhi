@@ -96,7 +96,7 @@ function fnCurrentRouteType (route, globalRoutes = []) {
     if (route.path === globalRoutes[i].path) {
       return 'global'
     } else if (globalRoutes[i].children && globalRoutes[i].children.length >= 1) {
-      temp = temp.concat(globalRoutes[i].children)
+      temp = temp.concat(globalRoutes[i].children);
     }
   }
   return temp.length >= 1 ? fnCurrentRouteType(route, temp) : 'main'
