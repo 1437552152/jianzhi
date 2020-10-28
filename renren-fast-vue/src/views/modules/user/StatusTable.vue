@@ -2,7 +2,10 @@
   <div class="mod-schedule">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.beanName" placeholder="请输入姓名,职位名称" clearable></el-input>
+        <el-input v-model="dataForm.jobTitle" placeholder="请输入职位标题" clearable></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-input v-model="dataForm.nickName" placeholder="请输入用户昵称" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -29,6 +32,11 @@
           <el-tag v-if="scope.row.luyongType == 6" size="small">未到岗</el-tag>
         </template>
       </el-table-column>
+       <el-table-column prop="cancelResion" header-align="center" align="center" label="备注" v-if="luyongType==5||luyongType==6">
+        <template slot-scope="scope">
+           {{scope.row.cancelResion}}
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" header-align="center" align="center" width="250" label="操作">
         <template slot-scope="scope">
           <el-button type="text" @click="addOrUpdateHandle(scope.row)">用户详情</el-button>
@@ -51,11 +59,9 @@
     <el-dialog title="是否审核通过" @close="cancel" :visible.sync="visible">
       <el-form
       :model="checkForm"
-      :rules="dataRule"
       :label-width="150"
       ref="checkForm"
       @keyup.enter.native="dataFormSubmit()"
-      label-width="80px"
     >
       <el-form-item label="是否通过" prop="luyongType">
         <el-radio-group v-model="checkForm.luyongType">
@@ -63,8 +69,8 @@
             <el-radio label="2">否</el-radio>
           </el-radio-group>
       </el-form-item>
-       <el-form-item label="原因" prop="respon">
-          <el-input type="textarea" v-model="checkForm.respon"></el-input>
+       <el-form-item label="原因" prop="cancelResion" v-if="checkForm.luyongType==2">
+          <el-input type="textarea" v-model="checkForm.cancelResion"></el-input>
       </el-form-item>   
     </el-form>
 
@@ -87,7 +93,8 @@ export default {
   data() {
     return {
       dataForm: {
-        beanName: ""
+        jobTitle: "",
+         nickName:''       
       },
       dataList: [],
       pageIndex: 1,
@@ -100,7 +107,7 @@ export default {
       visible: false,
       params:{},
       checkForm:{
-        respon:"",
+        cancelResion:"",
         luyongType:'1'
       }
     };
@@ -121,7 +128,8 @@ export default {
         params: this.$http.adornParams({
           page: this.pageIndex,
           limit: this.pageSize,
-          beanName: this.dataForm.beanName,
+          jobTitle: this.dataForm.jobTitle,
+          nickName: this.dataForm.nickName, 
           luyongType: this.luyongType
         })
       }).then(({ data }) => {
@@ -159,7 +167,7 @@ export default {
     },
     cancel() {
       this.visible = false;
-      this.checkForm.respon ="";
+      this.checkForm.cancelResion ="";
       this.checkForm.luyongType = "1";
       this.getDataList();
     },
@@ -181,7 +189,7 @@ export default {
             data: this.$http.adornData({
               luyongType:type,
               myJobId:this.params.myJobId,
-              respon:this.checkForm.respon
+              cancelResion:this.checkForm.cancelResion
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {
@@ -215,10 +223,8 @@ export default {
       });
     },
     goJiesuan(params){
-       this.$router.push({ path: `/user/jiesuan?myJobId=${params.myJobId}` })
+       this.$router.push({ path: `/user/jiesuan?jobId=${params.jobId}&openid=${params.openid}` })
     }
-
-
   },
   created() {
     this.getDataList();
