@@ -17,50 +17,55 @@
       @selection-change="selectionChangeHandle"
       style="width: 100%;">
         <el-table-column
-        prop="picTitle"
+        prop="jobTitle"
         header-align="center"
         align="center"
         label="职位标题">
       </el-table-column>
 
-    
-
        <el-table-column
-        prop="picTitle"
+        prop="jobBmbackprice"
         header-align="center"
         align="center"
-        label="报名佣金">
+        label="报名佣金(元)">
       </el-table-column>
 
  <el-table-column
-        prop="picTitle"
+        prop="jobFxbackprice"
         header-align="center"
         align="center"
-        label="一级分享佣金">
+        label="一级分享佣金(元)">
       </el-table-column>
     <el-table-column
-        prop="picTitle"
+        prop="jobFxejbackprice"
         header-align="center"
         align="center"
-        label="二级分享佣金">
+        label="二级分享佣金(元)">
       </el-table-column>
 
-    <el-table-column
-        prop="picTitle"
+     <el-table-column
+        prop="payForTime"
         header-align="center"
         align="center"
-        label="当月工资">
+        label="工作时间结算">
+      </el-table-column>
+
+     <el-table-column
+        prop="monthPay"
+        header-align="center"
+        align="center"
+        label="当月工资(元)">
       </el-table-column>
 
        <el-table-column
-        prop="pzType"
+        prop="payTime"
         header-align="center"
         align="center"
         label="结算时间">
       </el-table-column>
 
        <el-table-column
-        prop="pzType"
+        prop="payStubsBz"
         header-align="center"
         align="center"
         label="备注">
@@ -92,7 +97,8 @@
 </template>
 
 <script>
-  import JiesuanAdd from './JiesuanAdd'
+  import JiesuanAdd from './JiesuanAdd';
+  import moment from 'moment';
   export default {
     data () {
       return {
@@ -112,24 +118,29 @@
       JiesuanAdd
     },
     activated () {
-      this.getDataList()
+      this.getDataList();
     },
     methods: {
       // 获取数据列表
-      getDataList () {
+      getDataList () {    
         this.dataListLoading = true;
          this.addOrUpdateVisible=false;
         this.$http({
-          url: this.$http.adornUrl('/sys/syspic/list'),
+          url: this.$http.adornUrl('/my/mypaystubs/list'),
           method: 'get',
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'picTitle': this.dataForm.picTitle
+            'picTitle': this.dataForm.picTitle,
+            'jobId':this.$route.query.jobId,
+            'userId':this.$route.query.userId
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = data.page.list
+           /*  data.page.list.lenth&&data.page.list.map((item)=>{
+              item.payForTime=moment(item.payForTime).format("MM")
+            }) */
+            this.dataList = data.page.list;
             this.totalPage = data.page.totalCount
           } else {
             this.dataList = []

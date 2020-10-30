@@ -17,7 +17,6 @@
     </view>
 </view>
 
-
 <!-- 菜单 -->
 <view class="nav">
    <view class="item" wx:for="{{jobType}}" wx:key="item" data-param="{{item}}" bindtap="goTypeList">
@@ -60,3 +59,5 @@
 </view>
 
 </view>
+
+<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>

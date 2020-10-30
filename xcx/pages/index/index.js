@@ -210,5 +210,19 @@ Page({
        url: `../jobType/jobType?jobtypeId=${e.currentTarget.dataset.param.jobtypeId}&pic=${e.currentTarget.dataset.param.picBigSaveUrl}`,
      })
 
-  }
+  },
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e.detail.errMsg == "getPhoneNumber:ok");
+    if (e.detail.errMsg == "getPhoneNumber:ok") {
+      debugger;
+      urlApi(`app/index/getNum`, 'POST', { encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,}).then(res => {
+
+debugger;
+
+
+      })
+    }
+  },
 })

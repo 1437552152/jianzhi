@@ -36,13 +36,18 @@ Page({
     if(options.parentid){
       wx.setStorageSync('parentid', options.parentid)
     }
+    let userInfo = wx.getStorageSync('userInfo');
+    const that=this;
+    if (userInfo && userInfo.openid) {
+      wx.requestSubscribeMessage({
+        tmplIds: ["6NsEmMLtpoWXY8FZWhWRM9taqqh8BDu3zUTSBIwZEAA","ilAItMzvtsG4lzaaULpGGpJvsMZeks5TQVWkMZwTQYA"],
+        success: (res) => {
+          debugger;
+
+    }})
+  }
   },
-  // goCollect:function(){
-  //   this.setData({flag:true})
-  // },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  
   onReady: function () {
 
   },
@@ -52,6 +57,9 @@ Page({
    */
   onShow: function () {
     this.getData();
+   
+   
+
   },
 
   getData: function () {

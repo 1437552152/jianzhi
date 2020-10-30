@@ -223,7 +223,7 @@ export default {
       });
     },
     goJiesuan(params){
-       this.$router.push({ path: `/user/jiesuan?jobId=${params.jobId}&openid=${params.openid}` })
+       this.$router.push({ path: `/user/jiesuan?jobId=${params.jobId}&userId=${params.userId}`})
     }
   },
   created() {

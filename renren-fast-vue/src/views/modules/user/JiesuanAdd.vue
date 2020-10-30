@@ -7,28 +7,28 @@
       @keyup.enter.native="dataFormSubmit()"
       label-width="120px"
     >
-      <el-form-item label="所结工资时间" prop="beanName">
-        <el-date-picker v-model="dataForm.time" type="month" placeholder="时间"></el-date-picker>
+      <el-form-item label="所结工资时间" prop="payForTime">
+        <el-date-picker v-model="dataForm.payForTime" type="month" placeholder="时间"></el-date-picker>
       </el-form-item>
 
-      <el-form-item label="当月工资" prop="beanName">
-        <el-input v-model="dataForm.beanName" placeholder="请输入当月工资">
-          <template slot="append">应发:1120元</template>
+      <el-form-item label="当月工资" prop="monthPay">
+        <el-input v-model="dataForm.monthPay" placeholder="请输入当月工资">
+          <template slot="append">应发:{{params.jobPrice}}元</template>
         </el-input>
       </el-form-item>
-      <el-form-item label="一级分享佣金" prop="params">
-        <el-input v-model="dataForm.params" placeholder="请输入一级分享佣金">
-          <template slot="append">应发:23元</template>
+      <el-form-item label="一级分享佣金" prop="jobFxbackprice">
+        <el-input v-model="dataForm.jobFxbackprice" placeholder="请输入一级分享佣金">
+          <template slot="append">应发:{{params.jobFxbackprice}}元</template>
         </el-input>
       </el-form-item>
-      <el-form-item label="二级分享佣金" prop="cronExpression">
-        <el-input v-model="dataForm.cronExpression" placeholder="请输入二级分享佣金">
-          <template slot="append">应发:45元</template>
+      <el-form-item label="二级分享佣金" prop="jobFxejbackprice">
+        <el-input v-model="dataForm.jobFxejbackprice" placeholder="请输入二级分享佣金">
+          <template slot="append">应发:{{params.jobFxejbackprice}}元</template>
         </el-input>
       </el-form-item>
-      <el-form-item label="报名佣金" prop="cronExpression">
-        <el-input v-model="dataForm.cronExpression" placeholder="请输入报名佣金">
-          <template slot="append">应发:675元</template>
+      <el-form-item label="报名佣金" prop="jobBmbackprice">
+        <el-input v-model="dataForm.jobBmbackprice" placeholder="请输入报名佣金">
+          <template slot="append">应发:{{params.jobBmbackprice}}元</template>
         </el-input>
       </el-form-item>
 
@@ -39,7 +39,7 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="工资条上传" prop="picSaveUrl" v-if="dataForm.type==1">
+      <el-form-item label="工资条上传" prop="paySlip" v-if="dataForm.type==1">
         <el-upload
           class="avatar-uploader"
           :action="PicUrl"
@@ -47,16 +47,16 @@
           :on-success="handleAvatarSuccess"
         >
           <img
-            v-if="dataForm.picSaveUrl"
-            :src="dataForm.picSaveUrl"
+            v-if="dataForm.paySlip"
+            :src="dataForm.paySlip"
             class="avatar"
           />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
 
-      <el-form-item label="备注" prop="remark">
-        <el-input type="textarea" v-model="dataForm.remark" placeholder="备注"></el-input>
+      <el-form-item label="备注" prop="payStubsBz">
+        <el-input type="textarea" v-model="dataForm.payStubsBz" placeholder="备注"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -67,37 +67,45 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   data() {
     return {
       visible: false,
        PicUrl: `${window.SITE_CONFIG.baseUrl}/sys/syspic/fileUpload`,
+       params:{},
       dataForm: {
-        id: 0,
-        beanName: "",
-        params: "",
-        cronExpression: "",
-        remark: "",
-        status: 0,
-          picSaveUrl: "",
-            type:"1"
+        jobBmbackprice: "", //报名佣金
+        jobFxbackprice: "", //一级佣金
+        jobFxejbackprice: "",//二级佣金
+        jobTitle: "", //工作名称
+        monthPay: "",//结算工资
+        paySlip: "", //工资条图片地址
+        payStubsBz:"", //工资记录备注
+        payForTime:'',  //所结时间
+        type:"2"
       },
       dataRule: {
-        beanName: [
-          { required: true, message: "用户名不能为空", trigger: "blur" }
+        jobBmbackprice: [
+          { required: true, message: "报名佣金不能为空", trigger: "blur" }
         ],
-        cronExpression: [
-          { required: true, message: "cron表达式不能为空", trigger: "blur" }
+        jobFxbackprice: [
+          { required: true, message: "一级佣金不能为空", trigger: "blur" }
         ],
-         type: [
+         jobFxejbackprice: [
+          { required: true, message: "二级佣金不能为空", trigger: "blur" }
+        ],
+         monthPay: [
+          { required: true, message: "工资不能为空", trigger: "blur" }
+        ],
+         monthPay: [
+          { required: true, message: "工资不能为空", trigger: "blur" }
+        ],
+       payForTime: [
+          { required: true, message: "所结时间不能为空", trigger: "blur" }
+        ],
+        paySlip: [
           { required: true, message: "请选择是否上传工资条", trigger: "change" }
-        ],
-        picSaveUrl: [
-          {
-            required: true,
-            message: "工资条不能为空",
-            trigger: "blur"
-          }
         ],
       }
     };
@@ -105,7 +113,7 @@ export default {
   methods: {
      handleAvatarSuccess(res, file) {
       if (!res.code) {
-        this.dataForm.picSaveUrl = `${window.SITE_CONFIG.upLoadUrl}${res.url}`;
+        this.dataForm.paySlip = `${window.SITE_CONFIG.upLoadUrl}${res.url}`;
       }
     },
     beforeAvatarUpload(file) {
@@ -120,69 +128,65 @@ export default {
       }
       return isJPG && isLt2M;
     },
-    init(id) {
-      this.dataForm.id = id || 0;
+    init() {
       this.visible = true;
       this.$nextTick(() => {
         this.$refs["dataForm"].resetFields();
-        if (this.dataForm.id) {
           this.$http({
-            url: this.$http.adornUrl(`/sys/schedule/info/${this.dataForm.id}`),
-            method: "get",
-            params: this.$http.adornParams()
+            url: this.$http.adornUrl(`/job/sysjob/info/${this.$route.query.jobId}`),
+            method: "get"
           }).then(({ data }) => {
             if (data && data.code === 0) {
-              this.dataForm.beanName = data.schedule.beanName;
-              this.dataForm.params = data.schedule.params;
-              this.dataForm.cronExpression = data.schedule.cronExpression;
-              this.dataForm.remark = data.schedule.remark;
-              this.dataForm.status = data.schedule.status;
+              this.params=data.sysJob;
+             this.dataForm.jobTitle = data.sysJob.jobTitle;
             }
           });
-        }
       });
     },
-    // 表单提交
+   // 表单提交
     dataFormSubmit() {
+      const that=this;
       this.$confirm(`一旦结算将不可更改，确定结算该月的工资吗?`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        debugger;
-      });
-
-      this.$refs["dataForm"].validate(valid => {
+      that.$refs["dataForm"].validate(valid => {
         if (valid) {
-          this.$http({
-            url: this.$http.adornUrl(
-              `/sys/schedule/${!this.dataForm.id ? "save" : "update"}`
+          that.$http({
+            url: that.$http.adornUrl(
+              `/my/mypaystubs/save`
             ),
             method: "post",
-            data: this.$http.adornData({
-              jobId: this.dataForm.id || undefined,
-              beanName: this.dataForm.beanName,
-              params: this.dataForm.params,
-              cronExpression: this.dataForm.cronExpression,
-              remark: this.dataForm.remark,
-              status: !this.dataForm.id ? undefined : this.dataForm.status
+            data: that.$http.adornData({
+               'jobId':that.$route.query.jobId,
+               'userId':that.$route.query.userId,
+               'jobBmbackprice':that.dataForm.jobBmbackprice,   //报名佣金
+                "jobFxbackprice":that.dataForm.jobFxbackprice,   //一级佣金
+                "jobFxejbackprice":that.dataForm.jobFxejbackprice,   //二级佣金
+                "jobTitle":that.dataForm.jobTitle,    //工作名称
+                "monthPay":that.dataForm.monthPay,   //结算的日期
+                "paySlip": that.dataForm.paySlip,    //工资条图片地址
+                "payStubsBz":that.dataForm.payStubsBz,  //工资记录备注
+                'payForTime':moment(that.dataForm.payForTime).format("YYYY-MM")
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {
-              this.$message({
+              that.$message({
                 message: "操作成功",
                 type: "success",
                 duration: 1500,
                 onClose: () => {
-                  this.visible = false;
-                  this.$emit("refreshDataList");
+                  that.visible = false;
+                  that.$emit("refreshDataList");
                 }
               });
             } else {
-              this.$message.error(data.msg);
+              that.$message.error(data.msg);
             }
           });
         }
+      });
       });
     }
   }
