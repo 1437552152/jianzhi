@@ -1,4 +1,4 @@
-<view>
+<view wx:if="{{!flag}}">
 <!-- 头部定位 -->
 <view class="notice" wx-if="{{NoticeList.length}}">
 <image src="../../static/img/notice.png"></image>
@@ -34,7 +34,7 @@
 </swiper>
 <!-- 列表 -->
 <view class="jianzhiList">
-    <view class="hotJianzhi"><image src="../../static/img/hot.png"></image>火爆兼职</view>
+    <view class="hotJianzhi"><image src="../../static/img/hot.png"></image>火爆精选</view>
     <view class="list" bindtap="goDetail" data-list="{{item}}" wx:for="{{jobList}}" wx:key="item" >
        <view class="left">
            <view class="title">{{item.jobTitle}}</view>
@@ -54,10 +54,11 @@
     <view class="bottomDesc" wx-if="{{jobList.length}}" >我是有底线的哦~</view>
     <view wx-if="{{jobList.length==0}}" class="noData">
     <image src="../../static/img/youxiang.png" />
-    <view>该区域暂无兼职</view>
+    <view>该区域暂无数据</view>
     </view>
 </view>
 
 </view>
+<view wx:else>
 
-<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
+</view>

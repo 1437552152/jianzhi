@@ -1,17 +1,40 @@
-<view class="top">
-    <view class="WithTitle">余额(元)</view>
-    <view class="WithMoney">0.00</view>
-    <view class="WithOper" bindtap="goWithdrawal">提现</view>
-</view>
-	<view class='part'>
-		<i-cell-group>
-			<i-cell title="工资明细" is-link url="/pages/myexercise/myexercise" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
-			</i-cell>
-
-    	<i-cell title="提现明细" is-link url="/pages/wages/wages" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/tixian.png" size="28" style="margin-right:20rpx" />
-			</i-cell>
-
-		</i-cell-group>
+<form bindsubmit="formSubmit">
+	<view class="headtopBg"></view>
+	<view style="margin-top:-30px">
+		<view class="card">
+			<view class="item">
+				<view>可提现金额</view>
+				<view>￥{{yongjinInfo.yuPay}}</view>
+			</view>
+			<view class="item">
+				<view>提现金额</view>
+				<view>
+					<input type="number" name="money" minlength="1" maxlength="10000" placeholder="请输入要提取的金额"></input>
+				</view>
+			</view>
+		</view>
 	</view>
+	<view class="tixianBeizhu">最低提现金额1.00元</view>
+	<view class="card">
+		<view class="item">
+			<view>提现方式</view>
+		</view>
+		<view class="item">
+			<view>
+				<image src="../../static/img/checked.png" style="width:20px;height:20px;vertical-align: middle;margin-right: 5px;"></image>微信支付
+			</view>
+		</view>
+	</view>
+
+
+<view class="top">
+	<button class="WithOper" form-type="submit">提现</button>
+</view>
+</form>
+<view class='part'>
+	<i-cell-group>
+		<i-cell title="提现明细" is-link url="/pages/wages/wages" typeFlag="1">
+			<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
+		</i-cell>
+	</i-cell-group>
+</view>

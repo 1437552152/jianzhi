@@ -13,16 +13,26 @@ Page({
     jobList:[],
     city:'',
     NoticeList:[],
-    jobTitle:''
+    jobTitle:'',
+    flag:0,
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
        this.getNotice();
+       this.getStatus();
   },
-
+  getStatus:function(){
+    const that=this;
+    urlApi('app/index/xgzt', "get", {}).then((res) => {
+      if (res.data.code == 0) {
+          that.setData({
+            flag:res.data.re
+          })
+      }
+    })
+  },
   goLunbo:function(e){
        wx.navigateTo({
          url: '../newDetail/newDetail?id='+e.currentTarget.dataset.item.picId,
@@ -210,19 +220,5 @@ Page({
        url: `../jobType/jobType?jobtypeId=${e.currentTarget.dataset.param.jobtypeId}&pic=${e.currentTarget.dataset.param.picBigSaveUrl}`,
      })
 
-  },
-  getPhoneNumber: function (e) {
-    var that = this;
-    console.log(e.detail.errMsg == "getPhoneNumber:ok");
-    if (e.detail.errMsg == "getPhoneNumber:ok") {
-      debugger;
-      urlApi(`app/index/getNum`, 'POST', { encryptedData: e.detail.encryptedData,
-        iv: e.detail.iv,}).then(res => {
-
-debugger;
-
-
-      })
-    }
-  },
+  }
 })

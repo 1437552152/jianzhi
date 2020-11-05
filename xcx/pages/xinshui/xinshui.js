@@ -1,47 +1,30 @@
-import {
+var {
   urlApi
-} from '../../utils/request';
+} = require("../../utils/request.js");
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    picList:[]
+    testList:[]
   },
-  goDetail:function(e){
-    wx.navigateTo({
-      url: `../helpDetail/helpDetail?id=${e.currentTarget.dataset.item.picId}`,
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.getData();
+
   },
-  getData:function(){
-    const that=this;
-    wx.showLoading({
-      title: '加载中',
-    })
-    urlApi(`app/index/getPiclist?pzType=HelpList`,'get',{}).then(res=>{
-      if(res.data.code==0){
-         let obj=res.data.picList;
-         that.setData({picList:obj});
-         wx.setNavigationBarTitle({
-           title:'新手指南',
-         })
-         wx.hideLoading()
-        }else{
-        wx.showToast({
-          title:res.data.msg,
-          icon:'none'
-        })
-        wx.hideLoading()
-      }
-    
-    })
-  },
+ //预览图片，放大预览
+ preview:function(event) {
+  console.log(event.currentTarget.dataset.src)
+  let currentUrl = event.currentTarget.dataset.src
+  wx.previewImage({
+    current: currentUrl, // 当前显示图片的http链接
+    urls:[currentUrl] // 需要预览的图片http链接列表
+  })
+},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -56,8 +39,26 @@ Page({
     wx.hideShareMenu({
       menus: ['shareAppMessage', 'shareTimeline']
     })
+    this.queryTestList();
   },
-
+  //查询测试集合
+  queryTestList: function () {
+    var that = this;
+    var data = {};
+    data.luyongType = 4;
+    urlApi("my/myjob/myjobList", "post", data).then((res) => {
+      if (res.data.code ==0) {
+        that.setData({
+          testList:res.data.list
+         })
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: "none"
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

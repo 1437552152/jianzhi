@@ -10,8 +10,6 @@
 
 	<view class="list-wapper">
 		<view class='part' wx:key="index">
-
-
 			<view class='module' bindtap="goSignFun" wx:for="{{testList}}" wx:key="item" data-param="{{item}}" >
 				<view class='name'>
 					<view class="left">
@@ -29,6 +27,15 @@
 					<view class="right">{{item.jobPrice}}元/{{item.jobPaytype===1?'时':item.jobPaytype===2?'天':'月'}}</view>
 				</view>
 				<view class='num'>工作地点:{{item.jobQycode}}</view>
+				<view wx:if="{{item.cancelResion}}" class="cancelResion">驳回原因:{{item.cancelResion}}</view>
+				<view wx:if="{{current==4}}" class="jiesuan">
+				   <view class='num'>实发工资:{{item.monthPay}}元</view>
+			     <view class='num'>报名佣金:{{item.jobBmbackprice}}元</view>
+					 <view class='num'>所结工资时间:{{item.payForTime}}</view>
+				</view>
+				<view wx:if="{{current==4&&item.payStubsBz}}" class="jiesuan">
+				   <view class='num'>备注:{{item.payStubsBz}}</view>	
+				</view>
 			</view>
 		</view>
 		<view class="bottomDesc">我是有底线的哦~</view>

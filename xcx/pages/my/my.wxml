@@ -1,5 +1,4 @@
-<!--pages/my/my.wxml-->
-<view class='my'>
+<view class='my' wx:if="{{!flag}}">
 	<view class='my_bg'>
 		<image src='../../static/img/orderbg.png'></image>
 	</view>
@@ -11,12 +10,12 @@
 			<view class='two'>
 				<view class='name'>{{userInfo.nickName}}</view>
 				<view class='num' bindtap="goWithdrawal">
-					<text>余额:0.00元</text>立即提现
+					<text>余额:{{yongjinInfo.yuPay}}元</text>立即提现
 					<i-icon type="enter" color="#ffffff" />
 				</view>
 			</view>
 		</view>
-		<view class="jiangli"><text>上月推广奖励:345元</text> <text>累计收益:345元</text></view>
+		<view class="jiangli"><text>上月推广奖励:{{yongjinInfo.lastMonthPay}}元</text> <text>累计收益:{{yongjinInfo.allPay}}元</text></view>
 	</view>
 	<view class='personalinfo' wx:else>
 		<view class='left_part'>
@@ -61,29 +60,17 @@
 				<i-icon slot="icon" myIcon="../../static/img/friends.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
-			<!-- <i-cell title="推广奖励" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
-			</i-cell>
-
-			<i-cell title="累计收益" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/part1.png" size="28" style="margin-right:20rpx" />
-			</i-cell> -->
-
 			<i-cell title="我的收藏" is-link url="/pages/Collection/Collection" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part4.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
-				<i-cell title="我的工资条" is-link url="/pages/Collection/Collection" typeFlag="1">
+			<i-cell title="我的工资条" is-link url="/pages/xinshui/xinshui" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part4.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
 			<i-cell title="帮助中心" is-link url="/pages/helpList/helpList" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part2.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
-
-			<!-- <i-cell title="关于我们" is-link url="/pages/AboutUs/AboutUs"  typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/part3.png" size="28" style="margin-right:20rpx" />
-			</i-cell> -->
 
 			<i-cell title="联系客服" is-link url="/pages/connect/connect" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part6.png" size="28" style="margin-right:20rpx" />
@@ -95,3 +82,7 @@
 		</i-cell-group>
 	</view>
 </view>
+   <view wx:else class="noData">
+         <image src="../../static/img/youxiang.png" />
+         <view>暂无数据</view>
+      </view>

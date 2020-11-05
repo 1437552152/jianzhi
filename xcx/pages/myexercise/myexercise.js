@@ -2,7 +2,6 @@
 var {
   urlApi
 } = require("../../utils/request.js");
-var testAllList = []; //所有集合
 Page({
 
   /**
@@ -39,6 +38,9 @@ Page({
       testList: [],
     })
      this.queryTestList();
+     wx.hideShareMenu({
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   },
 
   // tab切换

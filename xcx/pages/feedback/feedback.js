@@ -24,6 +24,11 @@ Page({
       contactEmail: e.detail.value
     })
   },
+  onShow:function(){
+    wx.hideShareMenu({
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+  },
 
   send: function() {
     let obj = {}

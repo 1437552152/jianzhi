@@ -13,14 +13,26 @@ Page({
   data: {
     userInfo: null,
     UserResume:null,
-    baomingInfo:{}
+    baomingInfo:{},
+    yongjinInfo:{},
+    flag:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    this.getStatus();
+  },
+  getStatus:function(){
+    const that=this;
+    urlApi('app/index/xgzt', "get", {}).then((res) => {
+      if (res.data.code == 0) {
+          that.setData({
+            flag:res.data.re
+          })
+      }
+    })
   },
   onJsEvent:function(el){
     let e= {
@@ -87,6 +99,8 @@ Page({
         this.getResume();
         // 去请求用户录用情况
         this.getBaoming();
+        //得到佣金情况
+        this.getYongjin();
       }
   },
   getBaoming:function(){
@@ -112,6 +126,18 @@ Page({
           wx.setStorageSync('UserResume', res.data.myCv);
           that.setData({
             UserResume:res.data.myCv
+          })
+      }
+    })
+  },
+  getYongjin:function(){
+    var that = this;
+    var data = {};
+    urlApi('app/myshouyi/getMyShouYi', "get", data).then((res) => {
+      console.log(res);
+      if (res.data.code == 0) {
+          that.setData({
+            yongjinInfo:res.data.map
           })
       }
     })

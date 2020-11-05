@@ -14,12 +14,12 @@
 }
 
 .top .WithOper{
-  background-color: #02cb87;
+  background-color: #8e85fc;
   border-radius:6px;
   color: #fff;
   width: 90%;
   margin: 0 auto;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .part{
@@ -136,4 +136,36 @@ background-color: #f7f5f5;
 position: absolute;
 right: 0;
 top: 10px;
+}
+.headtopBg{
+  background-color: #5a99fb;
+  height: 80px;
+}
+.tixianBeizhu{
+  text-align: right;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: #9a9c9e;
+  margin-right: 18px;  
+}
+.card{
+  margin: 0 16px;
+font-size: 14px;
+overflow: hidden;
+position: relative;
+background: #fff;
+border: 1rpx solid #dddee1;
+border-radius: 5px;
+
+}
+.card .item{
+  display: flex;
+  justify-content: space-between; 
+  font-size: 15px;
+}
+.card .item:first-child{
+  border-bottom: 1px solid #eee;
+}
+.card .item view{
+  padding:12px 8px;
 }

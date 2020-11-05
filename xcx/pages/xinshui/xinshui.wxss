@@ -1,0 +1,19 @@
+.time{
+  background-color: #fa7801;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  color: #fff;
+  padding: 4px;
+  width: 100px;
+  margin-bottom: 11px;
+  font-size: 14px;
+}
+.time image{
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+
+.item{
+  margin-top: 20px;
+}

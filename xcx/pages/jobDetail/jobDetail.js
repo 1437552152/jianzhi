@@ -23,7 +23,9 @@ Page({
       sfSc:0
     }],
     id: '',
-    dataDetail: null
+    dataDetail: null,
+    type:false,  //true为未授权
+    myCV:{}
   },
 
   /**
@@ -39,29 +41,68 @@ Page({
     let userInfo = wx.getStorageSync('userInfo');
     const that=this;
     if (userInfo && userInfo.openid) {
-      wx.requestSubscribeMessage({
-        tmplIds: ["6NsEmMLtpoWXY8FZWhWRM9taqqh8BDu3zUTSBIwZEAA","ilAItMzvtsG4lzaaULpGGpJvsMZeks5TQVWkMZwTQYA"],
-        success: (res) => {
-          debugger;
-
-    }})
+      that.setData({type:true});
+      // wx.requestSubscribeMessage({
+      //   tmplIds: ["6NsEmMLtpoWXY8FZWhWRM9taqqh8BDu3zUTSBIwZEAA","ilAItMzvtsG4lzaaULpGGpJvsMZeks5TQVWkMZwTQYA"],
+      //   success: (res) => {
+      // }})
   }
   },
   
   onReady: function () {
 
   },
-
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e.detail.errMsg == "getPhoneNumber:ok");
+    if (e.detail.errMsg == "getPhoneNumber:ok") {
+      urlApi(`app/index/getNum`, 'POST', { encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,}).then(res => {
+           let data={};
+            data=that.data.myCv;
+            data.mobile=res.data.re.phoneNumber;
+           urlApi("app/updatephone", "post", data).then((res) => {
+            if (res.data.code == 0) { 
+              wx.showToast({
+                title: '授权成功,快去报名吧',
+                icon: "none"
+              });
+              that.setData({type:false})                           
+            }else{
+              wx.showToast({
+                title: '请授权后再报名',
+                icon: "none"
+              })
+            }
+          });
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     this.getData();
-   
-   
+    // 判断是否授权
+    let userInfo = wx.getStorageSync('userInfo');
+    const that=this;
+    if (userInfo && userInfo.openid) {
+        this.getJianJie();
+    }
+  },
+  getJianJie:function(){
+    var that = this;
+    urlApi('app/mycv/info', "get", {}).then((res) => {
+      console.log(res);
+      if (res.data.code == 0) {
+        that.setData({
+          myCv: res.data.myCv,
+          type:res.data.myCv.mobile?false:true
+         })
+      }
+    })
 
   },
-
   getData: function () {
     const that = this;
     urlApi(`app/index/getJobDetail`, 'POST', {jobId:this.data.id}).then(res => {
@@ -146,7 +187,7 @@ Page({
         urlApi(`my/myjob/baoming`, 'POST',body).then(res => {
           if (res.data.code == 0) {
             wx.showToast({
-              title:res.data.msg,
+              title:"报名成功",
               icon: 'none'
             })  
             that.getData(); 
@@ -163,7 +204,7 @@ Page({
       urlApi(`my/myjob/cancelBaoming`, 'POST',body).then(res => {
         if (res.data.code == 0) {
           wx.showToast({
-            title:res.data.msg,
+            title:"取消成功",
             icon: 'none'
           })  
           that.getData(); 

@@ -149,3 +149,11 @@ justify-content: center;
 align-items: center;
 padding-top: 0;
 }
+.authButton{
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  padding: 0;
+  line-height: 23px;
+  padding-top: 8px;  
+}
