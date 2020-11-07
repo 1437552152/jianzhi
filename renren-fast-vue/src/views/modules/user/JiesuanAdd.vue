@@ -8,30 +8,30 @@
       label-width="120px"
     >
       <el-form-item label="所结工资时间" prop="payForTime">
-        <el-date-picker v-model="dataForm.payForTime" type="month" placeholder="时间"></el-date-picker>
+        <el-date-picker v-model="dataForm.payForTime" type="month" placeholder="时间" :disabled="id?true:false"></el-date-picker>
       </el-form-item>
 
       <el-form-item label="当月工资" prop="monthPay">
-        <el-input v-model="dataForm.monthPay" placeholder="请输入当月工资">
+        <el-input v-model="dataForm.monthPay" placeholder="请输入当月工资" :disabled="id?true:false">
           <template slot="append">应发:{{params.jobPrice}}元</template>
         </el-input>
       </el-form-item>
       <el-form-item label="一级分享佣金" prop="jobFxbackprice">
-        <el-input v-model="dataForm.jobFxbackprice" placeholder="请输入一级分享佣金">
+        <el-input v-model="dataForm.jobFxbackprice" placeholder="请输入一级分享佣金" :disabled="id?true:false">
           <template slot="append">应发:{{params.jobFxbackprice}}元</template>
         </el-input>
       </el-form-item>
       <el-form-item label="二级分享佣金" prop="jobFxejbackprice">
-        <el-input v-model="dataForm.jobFxejbackprice" placeholder="请输入二级分享佣金">
+        <el-input v-model="dataForm.jobFxejbackprice" placeholder="请输入二级分享佣金" :disabled="id?true:false">
           <template slot="append">应发:{{params.jobFxejbackprice}}元</template>
         </el-input>
       </el-form-item>
       <el-form-item label="报名佣金" prop="jobBmbackprice">
-        <el-input v-model="dataForm.jobBmbackprice" placeholder="请输入报名佣金">
+        <el-input v-model="dataForm.jobBmbackprice" placeholder="请输入报名佣金" :disabled="id?true:false">
           <template slot="append">应发:{{params.jobBmbackprice}}元</template>
         </el-input>
       </el-form-item>
-
+    
         <el-form-item label="是否上传工资条"  prop="type">
         <el-radio-group v-model="dataForm.type">
           <el-radio label="1">是</el-radio>
@@ -74,6 +74,7 @@ export default {
       visible: false,
        PicUrl: `${window.SITE_CONFIG.baseUrl}/sys/syspic/fileUpload`,
        params:{},
+       id:0,
       dataForm: {
         jobBmbackprice: "", //报名佣金
         jobFxbackprice: "", //一级佣金
@@ -128,8 +129,9 @@ export default {
       }
       return isJPG && isLt2M;
     },
-    init() {
+    init(params) {
       this.visible = true;
+      this.id =0;
       this.$nextTick(() => {
         this.$refs["dataForm"].resetFields();
           this.$http({
@@ -142,6 +144,28 @@ export default {
             }
           });
       });
+       if(params){
+         this.id=params.payStubsId;
+         const that=this;
+        for(let key in that.dataForm){
+          that.$nextTick(() => {
+            if(key!='paySlip'){
+               that.dataForm[key]=params[key];        
+            }
+             
+          })     
+        }
+         if(params['paySlip']){      
+            that.$nextTick(() => {    
+              that.dataForm.type="1";
+              that.dataForm.paySlip=params['paySlip'];
+            })
+        }else{
+          that.$nextTick(() => {    
+              that.dataForm.type="2";
+            })
+        }
+       }
     },
    // 表单提交
     dataFormSubmit() {
@@ -153,8 +177,9 @@ export default {
       }).then(() => {
       that.$refs["dataForm"].validate(valid => {
         if (valid) {
+          
           that.$http({
-            url: that.$http.adornUrl(
+            url: that.$http.adornUrl(that.id?'/my/mypaystubs/update':
               `/my/mypaystubs/save`
             ),
             method: "post",
@@ -166,9 +191,10 @@ export default {
                 "jobFxejbackprice":that.dataForm.jobFxejbackprice,   //二级佣金
                 "jobTitle":that.dataForm.jobTitle,    //工作名称
                 "monthPay":that.dataForm.monthPay,   //结算的日期
-                "paySlip": that.dataForm.paySlip,    //工资条图片地址
+                "paySlip":that.dataForm.type==1?that.dataForm.paySlip:'',    //工资条图片地址
                 "payStubsBz":that.dataForm.payStubsBz,  //工资记录备注
-                'payForTime':moment(that.dataForm.payForTime).format("YYYY-MM")
+                'payForTime':moment(that.dataForm.payForTime).format("YYYY-MM"),
+                'payStubsId':that.id?that.id:''
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {
@@ -192,3 +218,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.avatar{
+  max-width: 200px;
+}
+</style>>

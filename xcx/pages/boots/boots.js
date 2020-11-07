@@ -40,6 +40,7 @@ Page({
               params['avatarurl'] =avatarUrl;
               params['nickname'] =nickName;
               params['jscode'] = a.code;
+              params['parentid']=wx.getStorageSync('parentid')?wx.getStorageSync('parentid'):null;
               urlApi("app/wxlogin","post",params).then((res)=>{
                 if(res.data.code==0){
                   wx.setStorageSync("userInfo", res.data.resultmap);

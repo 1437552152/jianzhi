@@ -22,8 +22,7 @@
         align="center"
         width="50">
       </el-table-column>
-     
-      <el-table-column
+     <!--  <el-table-column
         prop="telephone"
         header-align="center"
         align="center"
@@ -40,7 +39,7 @@
         header-align="center"
         align="center"
         label="公司地址">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="phoneNum"
         header-align="center"

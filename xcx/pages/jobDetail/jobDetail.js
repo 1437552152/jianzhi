@@ -135,7 +135,7 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: wx.getStorageSync('userInfo').nickName + '邀请你去报名啦!',
-      path: `/pages/jobDetail/jobDetail?id=${this.data.id}&parentid=${wx.getStorageSync('userInfo').userId}`
+      path: `/pages/jobDetail/jobDetail?id=${this.data.id}&parentid=${wx.getStorageSync('userInfo').openid}`
     }
 
   },

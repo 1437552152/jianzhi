@@ -36,18 +36,20 @@ Page({
       })
       return;
      }
-
-
      let params={};
-     params.residueMoney=money
+     params.cashoutMoney=money
      urlApi("my/mytx/save", "post", params).then((res) => {
       if (res.data.code == 0) {
         wx.showToast({
           title: '已提交提现申请,请耐心等候',
           icon:"none"
         });
-         //得到佣金情况
-      this.getYongjin();
+        this.setData({'yongjinInfo.yuPay':''})
+        //得到佣金情况
+        this.getYongjin();
+        wx.navigateTo({
+          url: '/pages/my/my',
+        })
       }})
   },
   /**

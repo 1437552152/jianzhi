@@ -63,6 +63,9 @@ Page({
     data.openid=that.data.friendId;
     urlApi("my/myjob/myjobList", "post", data).then((res) => {
       if (res.data.code ==0) {
+        res.data.list.map(item=>{
+          item.total=Number(item.monthPay)+Number(item.jobBmbackprice)
+        })
         that.setData({
           testList:res.data.list
          })

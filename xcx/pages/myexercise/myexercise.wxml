@@ -24,7 +24,8 @@
 							item.luyongType==6?'未到岗':'未结算'}}
 						</i-tag><text>{{item.jobTitle}}</text>
 					</view>
-					<view class="right">{{item.jobPrice}}元/{{item.jobPaytype===1?'时':item.jobPaytype===2?'天':'月'}}</view>
+					<view class="right" wx:if="{{current==4}}">共发工资:{{item.total}}元</view>
+					<view class="right" wx:else>{{item.jobPrice}}元/{{item.jobPaytype===1?'时':item.jobPaytype===2?'天':'月'}}</view>				
 				</view>
 				<view class='num'>工作地点:{{item.jobQycode}}</view>
 				<view wx:if="{{item.cancelResion}}" class="cancelResion">驳回原因:{{item.cancelResion}}</view>
