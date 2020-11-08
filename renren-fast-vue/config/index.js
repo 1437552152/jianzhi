@@ -22,7 +22,7 @@ module.exports = {
     proxyTable: devEnv.OPEN_PROXY === false ? {} : {
       '/proxyApi': {
        /*  target: 'http://101.132.114.177:8090/', */
-        target: 'https://www.yyf2gml.site/renren-fast/',
+        target: 'http://r182s02546.51mypc.cn/renren-fast/',
         changeOrigin: true,
         pathRewrite: {
           '^/proxyApi': '/'

@@ -194,7 +194,8 @@ export default {
                 "paySlip":that.dataForm.type==1?that.dataForm.paySlip:'',    //工资条图片地址
                 "payStubsBz":that.dataForm.payStubsBz,  //工资记录备注
                 'payForTime':moment(that.dataForm.payForTime).format("YYYY-MM"),
-                'payStubsId':that.id?that.id:''
+                'payStubsId':that.id?that.id:'',
+                'openid':that.$route.query.jobId,
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {

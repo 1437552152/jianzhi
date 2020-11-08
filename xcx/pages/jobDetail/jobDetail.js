@@ -25,7 +25,10 @@ Page({
     id: '',
     dataDetail: null,
     type:false,  //true为未授权
-    myCV:{}
+    myCV:{},
+    flag:0,
+    flag1:1,
+    Copyid:0
   },
 
   /**
@@ -34,19 +37,17 @@ Page({
   onLoad: function (options) {
     this.setData({
       id: options.id
-    })
+    });
+    
+    if(options.Copyid){
+      this.setData({
+        Copyid:options.Copyid
+      })
+    }
+    
     if(options.parentid){
       wx.setStorageSync('parentid', options.parentid)
     }
-    let userInfo = wx.getStorageSync('userInfo');
-    const that=this;
-    if (userInfo && userInfo.openid) {
-      that.setData({type:true});
-      // wx.requestSubscribeMessage({
-      //   tmplIds: ["6NsEmMLtpoWXY8FZWhWRM9taqqh8BDu3zUTSBIwZEAA","ilAItMzvtsG4lzaaULpGGpJvsMZeks5TQVWkMZwTQYA"],
-      //   success: (res) => {
-      // }})
-  }
   },
   
   onReady: function () {
@@ -81,14 +82,18 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    this.getData();
-    // 判断是否授权
-    let userInfo = wx.getStorageSync('userInfo');
-    const that=this;
-    if (userInfo && userInfo.openid) {
-        this.getJianJie();
-    }
+  onShow: function () { 
+    this.getStatus(); 
+     if(!this.data.Copyid){
+        // 判断是否授权
+        this.getData();
+        let userInfo = wx.getStorageSync('userInfo');
+        const that=this;
+        if (userInfo && userInfo.openid) {
+            this.getJianJie();
+            that.setData({type:true});    
+        }
+     }
   },
   getJianJie:function(){
     var that = this;
@@ -128,7 +133,17 @@ Page({
 
     })
   },
-
+  getStatus:function(){
+    const that=this;
+    urlApi('app/index/xgzt', "get", {}).then((res) => {
+      if (res.data.code == 0) {
+          that.setData({
+            flag:res.data.re,
+            flag1:res.data.re
+          })
+      }
+    })
+  },
   /**
    * 用户点击右上角分享
    */
@@ -182,6 +197,15 @@ Page({
           }
         })
       }else if(e.currentTarget.dataset.status == 3){
+        wx.requestSubscribeMessage({
+          tmplIds: ["SR5oYWUa64WakJ7m7_UmWaE8GyWzrg4SgeB1_9Ua2OU",
+        '0Sh6v8I4dspl8xm1OZjiVu_tl8WJWCEXYbeHL4P4OCE','AxcElw_0chKKXiRB-pINyh8XUsvlC57Bkmczs_1s5W4'
+        ],
+          success: (res) => {
+            console.log("1111",res);
+        },fail(err){
+          console.log("err",err);
+        }});
         let body = {};
         body['jobId'] =  this.data.id;
         urlApi(`my/myjob/baoming`, 'POST',body).then(res => {

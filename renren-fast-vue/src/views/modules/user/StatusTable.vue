@@ -189,7 +189,8 @@ export default {
             data: this.$http.adornData({
               luyongType:type,
               myJobId:this.params.myJobId,
-              cancelResion:this.checkForm.cancelResion
+              cancelResion:this.checkForm.cancelResion,
+              openid:this.params.openid
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {
@@ -223,7 +224,7 @@ export default {
       });
     },
     goJiesuan(params){
-       this.$router.push({ path: `/user/jiesuan?jobId=${params.jobId}&userId=${params.userId}`})
+       this.$router.push({ path: `/user/jiesuan?jobId=${params.jobId}&userId=${params.userId}&openid=${params.openid}`})
     }
   },
   created() {

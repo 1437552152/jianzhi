@@ -15,7 +15,8 @@ Page({
     UserResume:null,
     baomingInfo:{},
     yongjinInfo:{},
-    flag:0
+    flag:0,
+    flag1:1
   },
 
   /**
@@ -29,7 +30,8 @@ Page({
     urlApi('app/index/xgzt', "get", {}).then((res) => {
       if (res.data.code == 0) {
           that.setData({
-            flag:res.data.re
+            flag:res.data.re,
+            flag1:res.data.re
           })
       }
     })

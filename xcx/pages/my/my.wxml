@@ -1,4 +1,4 @@
-<view class='my' wx:if="{{!flag}}">
+<view class='my' wx:if="{{flag}}">
 	<view class='my_bg'>
 		<image src='../../static/img/orderbg.png'></image>
 	</view>
@@ -65,7 +65,7 @@
 			</i-cell>
 
 			<i-cell title="我的工资条" is-link url="/pages/xinshui/xinshui" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/part4.png" size="28" style="margin-right:20rpx" />
+				<i-icon slot="icon" myIcon="../../static/img/leasing.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
 			<i-cell title="帮助中心" is-link url="/pages/helpList/helpList" typeFlag="1">
@@ -82,7 +82,11 @@
 		</i-cell-group>
 	</view>
 </view>
-   <view wx:else class="noData">
-         <image src="../../static/img/youxiang.png" />
-         <view>暂无数据</view>
-      </view>
+   <view  wx:if="{{!flag1}}" class="concate">
+      <view>联系电话:18133626045</view>
+			<view>邮箱:1437552152@qq.com</view>
+			<view>公司地址:合肥市蜀山区拓基广场2栋</view>
+       <view class="noData">
+			   <image src="../../static/img/gongzhonghao.png" mode="widthFix"> </image>
+			 </view>
+   </view>

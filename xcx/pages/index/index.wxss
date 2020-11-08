@@ -163,3 +163,33 @@ color: #999;
 font-size: 15px;
 margin-left: 4px;
 }
+
+
+/*轮播部分*/
+.index_swiper swiper{
+  width: 750rpx;
+  height: 320rpx;
+}
+.index_swiper swiper image{
+  width: 100%;
+}
+.aboutUs{
+  margin-top: 30px;
+margin-bottom: 30px;
+font-size: 24px;
+text-align: center;
+}
+.content{
+  text-indent: 2em;
+  padding: 15px;
+  line-height: 25px;
+}
+.box{
+  padding-left: 15px;
+padding-right: 15px;
+color: #333;
+margin-bottom: 30px;
+}
+.box .item{
+  margin-bottom: 10px;
+}

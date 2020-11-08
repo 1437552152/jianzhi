@@ -15,11 +15,19 @@ Page({
     NoticeList:[],
     jobTitle:'',
     flag:0,
+    flag1:1,
+    newsList:[
+     {id:1,title:"一年之计在于春，婉妮帮您来变身~",content:"121212"},
+     {id:2,title:"穿越时光，带你回到十年前的自己",content:"1212121"}
+    ]
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      if(options.parentid){
+        wx.setStorageSync('parentid', options.parentid)
+      }
        this.getNotice();
        this.getStatus();
   },
@@ -28,7 +36,8 @@ Page({
     urlApi('app/index/xgzt', "get", {}).then((res) => {
       if (res.data.code == 0) {
           that.setData({
-            flag:res.data.re
+            flag:res.data.re,
+            flag1:res.data.re,
           })
       }
     })
@@ -187,7 +196,11 @@ Page({
   onHide: function () {
 
   },
-
+  gotoPage: function (e) { 
+     wx.navigateTo({
+       url:`../jobDetail/jobDetail?Copyid=${e.currentTarget.dataset.id}`,
+     })
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -213,7 +226,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: wx.getStorageSync('userInfo').nickName + '邀请你去报名啦!',
+      path: `/pages/index/index?parentid=${wx.getStorageSync('userInfo').openid}`
+    }
   },
   goTypeList:function(e){
      wx.navigateTo({

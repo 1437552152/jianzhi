@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: yfye
  * @Date: 2020-07-13 20:42:05
- * @LastEditTime: 2020-10-25 23:20:59
+ * @LastEditTime: 2020-11-08 14:47:54
  * @LastEditors: yfye
  */
 /**
@@ -13,8 +13,8 @@
 
   // api接口请求地址
 /*   window.SITE_CONFIG['baseUrl'] = 'http://101.132.114.177:8090/renren-fast'; */
-window.SITE_CONFIG['baseUrl'] = 'https://www.yyf2gml.site/renren-fast';
-  window.SITE_CONFIG['upLoadUrl'] = 'https://www.yyf2gml.site';
+window.SITE_CONFIG['baseUrl'] = 'http://r182s02546.51mypc.cn/renren-fast';
+  window.SITE_CONFIG['upLoadUrl'] = 'http://r182s02546.51mypc.cn';
   // cdn地址 = 域名 + 版本号
   window.SITE_CONFIG['domain']  = './'; // 域名
   window.SITE_CONFIG['version'] = '';   // 版本号(年月日时分)

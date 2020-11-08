@@ -157,3 +157,11 @@ padding-top: 0;
   line-height: 23px;
   padding-top: 8px;  
 }
+.otherContent{
+  text-indent: 2em;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.otherContent view{
+  margin-top: 20px;
+}
