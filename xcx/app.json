@@ -23,7 +23,9 @@
     "pages/Collection/Collection",
     "pages/WithdrawalDetail/WithdrawalDetail",
     "pages/friendsData/friendsData",
-    "pages/xinshui/xinshui"
+    "pages/xinshui/xinshui",
+    "pages/jiangli/jiangli",
+    "pages/Leiji/Leiji"
   ],
   "window": {
     "backgroundTextStyle": "light",

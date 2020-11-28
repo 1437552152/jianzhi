@@ -1,5 +1,5 @@
 .top{
-  margin-top: 40px;
+  margin-top:20px;
   text-align: center;
 }
 .top .WithTitle{
@@ -17,8 +17,10 @@
   background-color: #8e85fc;
   border-radius:6px;
   color: #fff;
-  width: 90%;
+  width:80%;
   margin: 0 auto;
+  line-height: 35px;
+
   /* padding: 10px; */
 }
 
@@ -161,7 +163,7 @@ border-radius: 5px;
 .card .item{
   display: flex;
   justify-content: space-between; 
-  font-size: 15px;
+  font-size: 13px;
 }
 .card .item:first-child{
   border-bottom: 1px solid #eee;

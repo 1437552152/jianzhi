@@ -28,6 +28,11 @@ Page({
       if(options.parentid){
         wx.setStorageSync('parentid', options.parentid)
       }
+      if(!wx.getStorageSync('userInfo').openid){
+        wx.hideShareMenu({
+          menus: ['shareAppMessage', 'shareTimeline']
+        })
+      }
        this.getNotice();
        this.getStatus();
   },
@@ -180,6 +185,7 @@ Page({
     }else{
       that.getLocation();
     }
+
     // 获取轮播图
     this.getLunbo();
     // 获取工作类型

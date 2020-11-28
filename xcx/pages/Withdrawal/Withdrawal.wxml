@@ -1,4 +1,4 @@
-<form bindsubmit="formSubmit">
+<form bindsubmit="formSubmit" style="font-size:12px">
 	<view class="headtopBg"></view>
 	<view style="margin-top:-30px">
 		<view class="card">
@@ -15,7 +15,7 @@
 		</view>
 	</view>
 	<view class="tixianBeizhu">最低提现金额1.00元</view>
-	<view class="card">
+	<!-- <view class="card">
 		<view class="item">
 			<view>提现方式</view>
 		</view>
@@ -24,8 +24,7 @@
 				<image src="../../static/img/checked.png" style="width:20px;height:20px;vertical-align: middle;margin-right: 5px;"></image>微信支付
 			</view>
 		</view>
-	</view>
-
+	</view> -->
 
 <view class="top">
 	<button class="WithOper" form-type="submit">提现</button>

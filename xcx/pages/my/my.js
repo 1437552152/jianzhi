@@ -23,7 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getStatus();
+   
   },
   getStatus:function(){
     const that=this;
@@ -96,6 +96,7 @@ Page({
    */
   onShow: function () {
       this.setData({userInfo:wx.getStorageSync('userInfo')});
+      this.getStatus();
       const {userInfo}=this.data;
       if(userInfo){
         this.getResume();
@@ -142,6 +143,16 @@ Page({
             yongjinInfo:res.data.map
           })
       }
+    })
+  },
+  goJnagli:function(){
+    wx.navigateTo({
+      url: '/pages/jiangli/jiangli',
+    })
+  },
+  goLeiji:function(){
+    wx.navigateTo({
+      url: '/pages/Leiji/Leiji',
     })
   }
 })

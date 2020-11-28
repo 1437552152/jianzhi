@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: yfye
  * @Date: 2020-10-26 22:34:44
- * @LastEditTime: 2020-10-28 23:06:47
+ * @LastEditTime: 2020-11-24 23:04:39
  * @LastEditors: yfye
 -->
 <template>
@@ -31,7 +31,7 @@
     </div>
     <p>必备技能:{{ params.jobRequireSkill }}</p>
     <p>备注:{{ params.jobBz }}</p>
-    <p>工作时间:{{ params.jobStartTime }}~{{ params.jobEndTime }}</p>
+    <p>工作时间:{{ params.jobStartTimeStr }}</p>
     <p>工作地点:{{ params.jobAddress }}</p>
     </div>
     <span slot="footer" class="dialog-footer">

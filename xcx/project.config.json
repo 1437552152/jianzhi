@@ -28,7 +28,7 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.12.2",
+	"libVersion": "2.14.0",
 	"appid": "wx6f3e1c3108dc6a3d",
 	"projectname": "hair_wx",
 	"debugOptions": {

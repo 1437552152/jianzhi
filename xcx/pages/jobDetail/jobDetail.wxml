@@ -11,13 +11,14 @@
 			<!-- <view class="item">完工结</view> -->
 			<view class="item">招{{dataDetail.jobPrezpNum}}人</view>
 			<view class="item">{{dataDetail.jobSex===1?'只招男生':dataDetail.jobSex===2?'只招女生':'男女不限'}}</view>
+	  	<view class="item">年龄范围{{dataDetail.ageScope}}</view>
 		</view>
 	</view>
 
 	<view class="centerContent">
 		<view class="list">
 			<view class="title">
-				<view class="left"><text></text>工作内容</view>
+				<view class="left"><text></text>工作展示</view>
 				<view class="right"></view>
 			</view>
 			<view class="desc">
@@ -27,7 +28,7 @@
 
 		<view class="list" wx-if="{{dataDetail.jobRequireSkill}}">
 			<view class="title">
-				<view class="left"><text></text>必备技能</view>
+				<view class="left"><text></text>工作详情</view>
 				<view class="right"></view>
 			</view>
 			<view class="desc">
@@ -35,9 +36,22 @@
 			</view>
 		</view>
 
+	<view class="list">
+			<view class="title">
+				<view class="left"><text></text>工作时间</view>
+				<view class="right"></view>
+			</view>
+			<view class="desc">
+				<view>{{dataDetail.jobStartTimeStr}}</view>
+				<!-- <view class="line">|</view>
+				<view>下班时间:{{dataDetail.jobEndTime}}</view> -->
+			</view>
+		</view>
+
+
 		<view class="list" wx-if="{{dataDetail.jobBz}}">
 			<view class="title">
-				<view class="left"><text></text>备注</view>
+				<view class="left"><text></text>注意事项</view>
 				<view class="right"></view>
 			</view>
 			<view class="desc">
@@ -45,20 +59,7 @@
 			</view>
 		</view>
 
-
-
-		<view class="list">
-			<view class="title">
-				<view class="left"><text></text>工作时间</view>
-				<view class="right"></view>
-			</view>
-			<view class="desc">
-				<view>上班时间:{{dataDetail.jobStartTime}}</view>
-				<view class="line">|</view>
-				<view>下班时间:{{dataDetail.jobEndTime}}</view>
-			</view>
-		</view>
-
+	
 
 		<view class="list">
 			<view class="title">
@@ -67,37 +68,9 @@
 			</view>
 			<view class="desc">
 				{{dataDetail.jobAddress}}
-				<map id="map" longitude="{{dataDetail.jobLot}}" latitude="{{dataDetail.jobLat}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height:200px;"></map>
+				<map id="map" longitude="{{dataDetail.jobLot}}" latitude="{{dataDetail.jobLat}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" bindtap="markertap" show-location style="width: 100%; height:200px;"></map>
 			</view>
 		</view>
-
-
-		<!-- <view class="list">
-		<view class="title">
-			<view class="left"><text></text>公司福利</view>
-			<view class="right"></view>
-		</view>
-		<view class="desc">
-			<view class="fuli">
-				<view class="item">
-					<image src="../../static/img/home.png"></image>
-					<view>包吃</view>
-				</view>
-				<view class="item">
-					<image src="../../static/img/home.png"></image>
-					<view>包住</view>
-				</view>
-				<view class="item">
-					<image src="../../static/img/home.png"></image>
-					<view>交通补贴</view>
-				</view>
-				<view class="item">
-					<image src="../../static/img/home.png"></image>
-					<view>有提成</view>
-				</view>
-			</view>
-		</view>
-	</view> -->
 
 		<view class="list" bindtap="goComp" data-compId="{{dataDetail.compId}}" style="padding-bottom:65px">
 			<view class="title">
@@ -128,9 +101,10 @@
 			<view>收藏</view>
 		</view>
 		<view class="one" bindtap="onJsEvent" data-status="2" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
-			<button open-type="share" hover-class="none" class="goshare">
-				<image src='../../static/img/share.png' style="width:24px;height:24px"></image>
-				<view>分享(返￥{{dataDetail.jobFxbackprice}})</view>
+			<button hover-class="none" class="goshare">
+				<!-- <image src='../../static/img/share.png' style="width:24px;height:24px"></image> -->
+				<view>生成海报</view>
+				<view>(推广￥{{dataDetail.jobFxbackprice}})</view>
 			</button>
 		</view>
 
@@ -151,7 +125,7 @@
 			<view style="margin-top:10px">取消报名</view>
 		</view>
 
-		<view wx-if="{{dataDetail.luyongType&&dataDetail.luyongType>1}}" class="two thiree" data-status="4" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
+		<view wx-if="{{dataDetail.luyongType&&dataDetail.luyongType>1&&dataDetail.jobStatue&&dataDetail.jobPrezpNum>dataDetail.alreadySignedNum}}" class="two thiree" data-status="4" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
 			<view>该职位已报名,不可取消</view>
 		</view>
 
@@ -185,3 +159,19 @@
 可是时间无法倒流，这些皱纹真的就只能这样陪伴我们以后的日子，我们还要忍受以后会出现的更多的皱纹么？</view>
 	</view>
 </view>
+
+
+ <view class='bg' hidden="{{isHidden}}">
+        <view class='modalContent'>
+            <view class='cansole' bindtap='hiddenMd'>✘</view>
+            <view class='contents'>
+                <view class="md-content">
+                    <view class="md-left">
+                        <image src="{{shareImg}}" style="width:100%" mode="widthFix"></image>
+                    </view>
+                    <view bindtap="goSave" class="goSave">保存到相册</view>
+                </view>
+            </view>
+
+        </view>
+    </view>

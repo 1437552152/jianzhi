@@ -43,6 +43,14 @@
     <el-form-item label="工作标题" prop="jobTitle">
       <el-input v-model="dataForm.jobTitle" placeholder="工作标题"></el-input>
     </el-form-item>
+
+     <el-form-item label="押金" prop="jobYj">
+      <el-input-number v-model="dataForm.jobYj" placeholder="押金" :disabled="dataForm.jobId?true:false"></el-input-number>
+    </el-form-item>
+
+    <el-form-item label="年龄范围" prop="ageScope">
+      <el-input v-model="dataForm.ageScope" placeholder="请输入年龄范围"></el-input>
+    </el-form-item>
   
     <el-form-item label="报名佣金" prop="jobBmbackprice">
         <el-input-number v-model="dataForm.jobBmbackprice"  :min="0"  label="请输入报名佣金"></el-input-number>
@@ -65,20 +73,16 @@
        </el-radio-group>
     </el-form-item>
 
-    <el-form-item label="工作开始时间" prop="jobStartTime">
-        <el-date-picker
-      v-model="dataForm.jobStartTime"
-      type="datetime"
-      placeholder="选择日期时间">
-    </el-date-picker>
+    <el-form-item label="工作时间" prop="jobStartTimeStr">
+     <el-input v-model="dataForm.jobStartTimeStr" placeholder="工作时间"></el-input>
     </el-form-item>
-    <el-form-item label="工作结束时间" prop="jobEndTime">
+   <!--  <el-form-item label="工作结束时间" prop="jobEndTime">
       <el-date-picker
             v-model="dataForm.jobEndTime"
             type="datetime"
             placeholder="选择日期时间">
           </el-date-picker>
-    </el-form-item>
+    </el-form-item> -->
 
 
     <el-form-item label="预招聘人数" prop="jobPrezpNum">
@@ -100,6 +104,18 @@
 
     <el-form-item label="工作备注" prop="jobBz">
       <el-input v-model="dataForm.jobBz" placeholder="请输入工作备注" type="textarea"></el-input>
+    </el-form-item>
+
+   <el-form-item label="海报上传" prop="jobHbUrl">
+      <el-upload
+        class="avatar-uploader"
+        :action="PicUrl"
+        :show-file-list="false"
+        :on-success="zhanSaveUrlhandleAvatarSuccess"
+        >
+        <img v-if="dataForm.jobHbUrl" :src="dataForm.jobHbUrl" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload><span style="color:red">建议上传尺寸为640*1008</span>
     </el-form-item>
 
  <div class="mod-demo-ueditor" v-if="flag">
@@ -126,6 +142,7 @@ import moment from 'moment';
       return {
         visible: false,
         flag:false,
+        PicUrl:`${window.SITE_CONFIG.baseUrl}/sys/syspic/fileUpload`,
         dataForm: {
           jobId: 0,
           compId: '',
@@ -138,8 +155,7 @@ import moment from 'moment';
           jobRequireSkill: '',
           jobTitle: '',
           jobPrice: '',
-          jobStartTime: '',
-          jobEndTime: '',
+          jobStartTimeStr: '',
           jobBmfs: '',
           jobBz: '',
           jobPrezpNum:0,
@@ -149,7 +165,10 @@ import moment from 'moment';
           jobStatue:1,
           jobSex:'男女不限',
           jobPaytype:'月',
-          jobQycode:''
+          jobQycode:'',
+          jobHbUrl:'',
+          jobYj:0,
+          ageScope:''
         },
           ue: null,
           ueId: `J_ueditorBox_${new Date().getTime()}`,
@@ -179,12 +198,12 @@ import moment from 'moment';
           jobPrice: [
             { required: true, message: '工作薪资不能为空', trigger: 'blur' }
           ],
-          jobStartTime: [
-            { required: true, message: '工作开始时间不能为空', trigger: 'blur' }
+          jobStartTimeStr: [
+            { required: true, message: '工作时间不能为空', trigger: 'blur' }
           ],
-          jobEndTime: [
+         /*  jobEndTime: [
             { required: true, message: '工作结束时间不能为空', trigger: 'blur' }
-          ],
+          ], */
         /*   jobBmfs: [
             { required: true, message: '工作报名方式不能为空', trigger: 'blur' }
           ], */
@@ -215,13 +234,40 @@ import moment from 'moment';
           ],
             jobQycode: [
             { required: true, message: '工作地址不能为空', trigger: 'blur' }
-          ]     
+          ],
+           jobHbUrl: [
+            { required: true, message: '海报地址不能为空', trigger: 'blur' }
+          ],
+          jobYj: [
+            { required: true, message: '押金不能为空', trigger: 'blur' }
+          ],
+           ageScope: [
+            { required: true, message: '年龄范围不能为空', trigger: 'blur' }
+          ],
         },
          dataList:[],
          jobTypeList:[]
       }
     },
     methods: {
+            handleAvatarSuccess(res, file) {
+        if(!res.code){
+          this.dataForm.picSaveUrl =`${window.SITE_CONFIG.upLoadUrl}${res.url}` ;
+        }   
+      },
+     zhanSaveUrlhandleAvatarSuccess(res, file) {
+        if(!res.code){
+          this.dataForm.jobHbUrl =`${window.SITE_CONFIG.upLoadUrl}${res.url}` ;
+        }   
+      },
+
+      beforeAvatarUpload(file) {
+      const isLt2M = file.size / 1024 / 1024 < 2;     
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isLt2M;
+      },
       init (id) {
         this.dataForm.jobId = id || 0
         this.visible = true
@@ -242,8 +288,8 @@ import moment from 'moment';
                 this.dataForm.jobRequireSkill = data.sysJob.jobRequireSkill;
                 this.dataForm.jobTitle = data.sysJob.jobTitle
                 this.dataForm.jobPrice = data.sysJob.jobPrice
-                this.dataForm.jobStartTime = moment(data.sysJob.jobStartTime);
-                this.dataForm.jobEndTime =  moment(data.sysJob.jobEndTime);
+                this.dataForm.jobStartTimeStr = data.sysJob.jobStartTimeStr;
+               /*  this.dataForm.jobEndTime =  moment(data.sysJob.jobEndTime); */
                 this.dataForm.jobBmfs = data.sysJob.jobBmfs
                 this.dataForm.jobBz = data.sysJob.jobBz;
                 this.dataForm.jobPrezpNum = data.sysJob.jobPrezpNum;
@@ -253,9 +299,11 @@ import moment from 'moment';
                 this.dataForm.jobStatue = data.sysJob.jobStatue; 
                 this.dataForm.jobSex = data.sysJob.jobSex===3?'男女不限':(data.sysJob.jobSex===2?'只招女生':'只招男生');   
                 this.dataForm.jobPaytype = data.sysJob.jobPaytype===3?'月':(data.sysJob.jobPaytype===2?'天':'时'); 
-                
+                 this.dataForm.jobHbUrl = data.sysJob.jobHbUrl;
                  this.dataForm.jobLot = data.sysJob.jobLot;
                  this.dataForm.jobLat = data.sysJob.jobLat;
+                  this.dataForm.jobYj= data.sysJob.jobYj;
+                   this.dataForm.ageScope = data.sysJob.ageScope;
 
                   this.dataForm.jobQycode = data.sysJob.jobQycode
                   this.flag=true;
@@ -293,8 +341,8 @@ import moment from 'moment';
                 'jobRequireSkill': this.dataForm.jobRequireSkill,
                 'jobTitle': this.dataForm.jobTitle,
                 'jobPrice': this.dataForm.jobPrice,
-                'jobStartTime': moment(this.dataForm.jobStartTime).format("YYYY-MM-DD HH:mm:ss"),
-                'jobEndTime': moment(this.dataForm.jobEndTime).format("YYYY-MM-DD HH:mm:ss"),
+                'jobStartTimeStr':this.dataForm.jobStartTimeStr,
+                'jobEndTimeStr': "",
                 'jobBmfs': this.dataForm.jobBmfs,
                 'jobBz': this.dataForm.jobBz,
                 'jobPrezpNum':this.dataForm.jobPrezpNum,
@@ -306,7 +354,10 @@ import moment from 'moment';
                 'jobPaytype': this.dataForm.jobPaytype==='月'?3:(this.dataForm.jobPaytype==='天'?2:1), 
                 'jobLot':this.dataForm.jobLot,
                 'jobLat':this.dataForm.jobLat,
-                'jobQycode': this.dataForm.jobQycode   
+                'jobQycode': this.dataForm.jobQycode,
+                'jobHbUrl':this.dataForm.jobHbUrl,
+                'jobYj':this.dataForm.jobYj,
+                'ageScope':this.dataForm.ageScope
               })
             }).then(({data}) => {
               if (data && data.code === 0) {
@@ -391,3 +442,28 @@ import moment from 'moment';
     },
   }
 </script>
+<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width:100px;
+    height:100px;
+    line-height: 100px;
+    text-align: center;
+  }
+  .avatar {
+    width: 100px;
+    height:100px;
+    display: block;
+  }
+</style>

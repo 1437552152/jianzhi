@@ -42,7 +42,8 @@ Page({
       if (res.data.code == 0) {
         wx.showToast({
           title: '已提交提现申请,请耐心等候',
-          icon:"none"
+          icon:"none",
+          duration:3000
         });
         this.setData({'yongjinInfo.yuPay':''})
         //得到佣金情况

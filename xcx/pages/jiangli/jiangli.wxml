@@ -1,0 +1,17 @@
+<!--pages/mytest/mytest.wxml-->
+<view class='mytest'>
+	<view class="list-wapper">
+		<view class='part'>
+          <view class='tabcontents' wx:for="{{testList}}" wx:key="item" wx:for-index="index">
+            <view class='left_part'>
+              <view class='done'>{{index+1}}、活动标题:{{item.jobTitle}}</view>
+              <view class='time'>好友姓名:{{item.userName}}</view>
+              <view class='time'>奖励来源:{{item.getReasion}}</view>
+               <view class='time'>结算时间:{{item.payTime}}</view>
+            </view>
+            <view class='right'>+{{item.payNum}}</view>
+          </view>
+		</view>
+		<view class="bottomDesc">我是有底线的哦~</view>
+	</view>
+</view>

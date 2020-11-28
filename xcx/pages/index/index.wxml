@@ -25,10 +25,10 @@
    </view>
 </view>
 <!-- 轮播图 -->
-<swiper class="swiperStyle"  autoplay="true" indicator-active-color="#ff660e" indicator-color='#fff' duration="1000" indicatorDots="true" interval="5000" style="height:200rpx">
+<swiper class="swiperStyle"  autoplay="true" indicator-active-color="#ff660e" indicator-color='#fff' duration="1000" indicatorDots="true" interval="5000" style="height:300rpx">
     <swiper-item class="swiperItem" wx:for="{{swiper}}" wx:key="item" bindtap="goLunbo" data-item="{{item}}">
         <navigator  url="{{item.picLinkUrl}}">
-            <image class="slide-image"  src="{{item.picSaveUrl}}" style="width:100%;height:200rpx"></image>
+            <image class="slide-image"  src="{{item.picSaveUrl}}" style="width:100%" mode="widthFix"></image>
         </navigator>
     </swiper-item>
 </swiper>

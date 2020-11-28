@@ -67,26 +67,19 @@
         label="职位必备技能">
       </el-table-column>
       <el-table-column
-        prop="jobPrice"
-        header-align="center"
-         width="200"
-        align="center"
-        label="工作薪资/元">
-      </el-table-column>
-      <el-table-column
-        prop="jobStartTime"
+        prop="jobStartTimeStr"
         header-align="center"
         align="center"
          width="200"
-        label="工作开始时间">
+        label="工作时间">
       </el-table-column>
-      <el-table-column
+    <!--   <el-table-column
         prop="jobEndTime"
          width="200"
         header-align="center"
         align="center"
         label="工作结束时间">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="jobBmfs"
         header-align="center"
@@ -156,7 +149,17 @@
         align="center"
         label="报名佣金/元">
       </el-table-column>
-
+<el-table-column
+        prop="jobHbUrl"
+        header-align="center"
+        align="center"
+        label="海报">
+         <template slot-scope="scope">
+            <viewer>
+                <img :src="scope.row.jobHbUrl" key="海报" style="width:100px;height:100px">
+            </viewer>
+        </template>
+      </el-table-column>
      <el-table-column
         prop="jobStatue"
         header-align="center"
@@ -164,9 +167,19 @@
         align="center"
         label="职位状态">
         <template slot-scope="scope">
-         <p>{{ scope.row.jobStatue?'热招中':'已停招'}}</p>
+     <el-tag  size="small">{{ scope.row.jobStatue?'热招中':'已停招'}}</el-tag>
       </template>
       </el-table-column>
+   <el-table-column
+        prop="jobYj"
+        header-align="center"
+         width="200"
+        align="center"
+        label="押金">
+        <template slot-scope="scope">
+        {{ scope.row.jobYj+'元'}}
+      </template>
+      </el-table-column> 
 
       <el-table-column
         fixed="right"
@@ -179,6 +192,11 @@
           <el-button type="text" size="small" @click="deleteHandle(scope.row.jobId)">删除</el-button>
           <el-button type="text" size="small"  v-if="scope.row.jobStatue" @click="updateHandle(scope.row.jobId,!scope.row.jobStatue)">停招</el-button>
           <el-button type="text" size="small"  v-if="!scope.row.jobStatue" @click="updateHandle(scope.row.jobId,!scope.row.jobStatue)">发布</el-button>
+
+
+ <el-button type="text" size="small"  v-if="scope.row.jobStatue" @click="updateZhiDingHandle(scope.row.jobId,scope.row.jobPx)">{{scope.row.jobPx==0?'置顶':'取消置顶'}}</el-button>
+
+
         </template>
       </el-table-column>
     </el-table>
@@ -243,6 +261,20 @@
           this.dataListLoading = false
         })
       },
+     updateZhiDingHandle(id,type){
+      this.$http({
+          url: this.$http.adornUrl('/job/sysjob/changejobpx'),
+          method: 'get',
+          params: this.$http.adornParams({
+            'jobId':id,
+            'jobPx': type==1?'0':1,
+          })
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+            this.getDataList()
+          }
+        })
+     },
       // 每页数
       sizeChangeHandle (val) {
         this.pageSize = val

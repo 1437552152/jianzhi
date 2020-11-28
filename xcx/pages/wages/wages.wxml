@@ -4,7 +4,9 @@
 		<view class='part'>
           <view class='tabcontents' wx:for="{{testList}}" wx:key="item">
             <view class='left_part'>
-              <!-- <view class='done'>状态:成功</view> -->
+              <view class='done'>状态:	<i-tag class="i-tags" color="green" type="border">
+						{{item.txShStatue==0?'审核中':'已打款'}}
+						</i-tag></view>
               <view class='time'>提现时间{{item.cashoutTime}}</view>
             </view>
             <view class='right'>+{{item.cashoutMoney}}</view>

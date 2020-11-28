@@ -44,6 +44,17 @@ Page({
               urlApi("app/wxlogin","post",params).then((res)=>{
                 if(res.data.code==0){
                   wx.setStorageSync("userInfo", res.data.resultmap);
+                  wx.requestSubscribeMessage({
+                    tmplIds: ["SR5oYWUa64WakJ7m7_UmWaE8GyWzrg4SgeB1_9Ua2OU",
+                      '0Sh6v8I4dspl8xm1OZjiVu_tl8WJWCEXYbeHL4P4OCE', 'AxcElw_0chKKXiRB-pINyh8XUsvlC57Bkmczs_1s5W4'
+                    ],
+                    success: (res) => {
+                      console.log("1111", res);
+                    },
+                    fail(err) {
+                      console.log("err", err);
+                    }
+                  });
                   if(that.data.type==1){
                     wx.navigateTo({
                       url:`${that.data.id?that.data.path+'?id='+that.data.id:that.data.path}`,
@@ -90,6 +101,17 @@ Page({
                           urlApi("app/wxlogin","post",params).then((res)=>{
                             if(res.data.code){
                               wx.setStorageSync("userInfo", res.data.resultmap);
+                              wx.requestSubscribeMessage({
+                                tmplIds: ["SR5oYWUa64WakJ7m7_UmWaE8GyWzrg4SgeB1_9Ua2OU",
+                                  '0Sh6v8I4dspl8xm1OZjiVu_tl8WJWCEXYbeHL4P4OCE', 'AxcElw_0chKKXiRB-pINyh8XUsvlC57Bkmczs_1s5W4'
+                                ],
+                                success: (res) => {
+                                  console.log("1111", res);
+                                },
+                                fail(err) {
+                                  console.log("err", err);
+                                }
+                              });
                               if(that.data.type==1){
                                 wx.navigateTo({
                                   url:`${that.data.id?that.data.path+'?id='+that.data.id:that.data.path}`,
