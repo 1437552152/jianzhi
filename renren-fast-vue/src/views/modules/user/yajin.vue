@@ -69,7 +69,7 @@
       </el-table-column>
 
      <el-table-column
-        prop="createTime"
+        prop="backTime"
         header-align="center"
         align="center"
         label="退款时间">
@@ -174,7 +174,7 @@
       },
       UpdateHandle(value,id){
      this.$http({
-          url: this.$http.adornUrl(`/my/mytx/confirm/${id}`),
+          url: this.$http.adornUrl(`/sys/sysdeposit/backMoney/${id}`),
           method: 'get',
           params: this.$http.adornParams()
         }).then(({data}) => {

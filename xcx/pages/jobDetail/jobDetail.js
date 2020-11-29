@@ -53,9 +53,9 @@ Page({
 
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
-      wx.setStorageSync('parentid', scene.split('_')[1])
+      wx.setStorageSync('parentid', scene.split('&')[1])
       this.setData({
-        id: scene.split('_')[0]
+        id: scene.split('&')[0]
       });
     }
   },
@@ -110,21 +110,24 @@ Page({
             urlApi(`sys/sysdeposit/save`, 'POST', body).then(res => {
               wx.showToast({
                 title: '您已支付成功,去报名吧',
-                icon: 'none'
+                icon: 'none',
+                duration: 3000
               });
             })
           },
           fail(res) {
             wx.showToast({
               title: '支付失败',
-              icon: 'none'
+              icon: 'none',
+              duration: 3000
             })
           }
         })
       }, fail(res) {
         wx.showToast({
           title: '支付失败',
-          icon: 'none'
+          icon: 'none',
+          duration: 3000
         })
       }
     })
@@ -144,7 +147,8 @@ Page({
           if (res.data.code == 0) {
             wx.showToast({
               title: '授权成功,快去报名吧',
-              icon: "none"
+              icon: "none",
+              duration: 3000
             });
             that.setData({
               type: false
@@ -152,7 +156,8 @@ Page({
           } else {
             wx.showToast({
               title: '请授权后再报名',
-              icon: "none"
+              icon: "none",
+              duration: 3000
             })
           }
         });
@@ -216,7 +221,8 @@ Page({
       } else {
         wx.showToast({
           title: res.data.msg,
-          icon: 'none'
+          icon: 'none',
+          duration: 3000
         })
       }
 
@@ -265,7 +271,8 @@ Page({
     let that = this;
     wx.showLoading({
       title: '正在保存中',
-      icon: 'none'
+      icon: 'none',
+      duration: 3000
     })
     //获取相册授权
     wx.getSetting({
@@ -304,7 +311,7 @@ Page({
             wx.showToast({
               title: '相册保存成功',
               icon: 'none',
-              duration: 2000
+              duration: 3000
             });
             wx.hideLoading();
             that.setData({
@@ -332,13 +339,15 @@ Page({
           if (res.data.code == 0) {
             wx.showToast({
               title: res.data.msg,
-              icon: 'none'
+              icon: 'none',
+              duration: 3000
             })
             that.getData();
           } else {
             wx.showToast({
               title: res.data.msg,
-              icon: 'none'
+              icon: 'none',
+              duration: 3000
             })
           }
         })
@@ -357,16 +366,16 @@ Page({
         if (!that.data.myCv.nativeplace) {
           wx.showToast({
             title: '请完善简介',
-            icon: "none"
+            icon: "none",
+            duration: 3000
           });
           wx.navigateTo({
             url: '/pages/MyResume/MyResume',
           });
           return;
         }
-        let body = {};
-        body['jobId'] = this.data.id;
-         if(this.data.dataDetail.jobYj>0&&!this.data.dataDetail.IsPay){
+       
+         if(this.data.dataDetail.jobYj>0&&this.data.dataDetail.depositStatue!='0'&&this.data.dataDetail.depositStatue!='1'){
           wx.showModal({
             title: '提示',
             content: `报名该职位您将支付${that.data.dataDetail.jobYj}元`,
@@ -375,17 +384,29 @@ Page({
                 that.goPay(that.data.id,that.data.dataDetail.jobYj,userInfo.username,userInfo.nickName,that.data.dataDetail.jobTitle);
               }}})
          }else{
+            if(this.data.dataDetail.depositStatue=='1'){
+              wx.showToast({
+                title: '您已成功退款,不能再次报名该职位',
+                icon:'none',
+                duration: 3000
+              })
+              return false;
+            }
+          let body = {};
+          body['jobId'] = this.data.id;
           urlApi(`my/myjob/baoming`, 'POST', body).then(res => {
             if (res.data.code == 0) {
               wx.showToast({
                 title: "报名成功",
-                icon: 'none'
+                icon: 'none',
+                duration: 3000
               })
               that.getData();
             } else {
               wx.showToast({
                 title: res.data.msg,
-                icon: 'none'
+                icon: 'none',
+                duration: 3000
               })
             }
           })
@@ -397,13 +418,15 @@ Page({
           if (res.data.code == 0) {
             wx.showToast({
               title: "取消成功",
-              icon: 'none'
+              icon: 'none',
+              duration: 3000
             })
             that.getData();
           } else {
             wx.showToast({
               title: res.data.msg,
-              icon: 'none'
+              icon: 'none',
+              duration: 3000
             })
           }
         })
@@ -414,7 +437,8 @@ Page({
         body['jobHbUrl'] = this.data.dataDetail.jobHbUrl;
         wx.showLoading({
           title: '海报生成中',
-          icon: 'none'
+          icon: 'none',
+          duration: 3000
         })
         urlApi(`app/index/getHbPic`, 'get', body).then(res => {
           if (res.data.status == 1) {
@@ -425,7 +449,8 @@ Page({
           } else {
             wx.showToast({
               title: res.data.msg,
-              icon: 'none'
+              icon: 'none',
+              duration: 3000
             })
           }
           wx.hideLoading();
