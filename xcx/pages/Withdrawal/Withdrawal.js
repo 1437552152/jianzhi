@@ -8,12 +8,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    yongjinInfo:{}
+    yongjinInfo:{},
+    current: '支付宝',
+    changeInputValue:'',
+  },
+  handleChange({ detail = {} }) {
+    this.setData({
+        current: detail.value
+    });
+  },
+  changeInput:function(e){
+     this.setData({changeInputValue:e.detail.value})
   },
   //表单提交
   formSubmit:function(e){
     var that = this;
      var money = e.detail.value.money;
+    
      if(!money){
        wx.showToast({
          title: '请输入提现金额',
@@ -21,6 +32,14 @@ Page({
        })
        return;
      }
+     if(!this.data.changeInputValue){
+      wx.showToast({
+        title: '请填写收款账号',
+        icon:"none"
+      })
+      return;
+    }
+    
      if(Number(money)<1){
       wx.showToast({
         title: '最低提现金额1.00元',
@@ -37,7 +56,9 @@ Page({
       return;
      }
      let params={};
-     params.cashoutMoney=money
+     params.cashoutMoney=money;
+     params.txType=this.data.current=='支付宝'?1:2,
+     params.txAccount=this.data.changeInputValue;
      urlApi("my/mytx/save", "post", params).then((res) => {
       if (res.data.code == 0) {
         wx.showToast({

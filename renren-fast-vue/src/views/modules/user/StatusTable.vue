@@ -21,6 +21,7 @@
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 
       <el-table-column prop="jobTitle" header-align="center" align="center" label="职位标题"></el-table-column>
+       <el-table-column prop="username" header-align="center" align="center" label="用户姓名"></el-table-column>
       <el-table-column prop="nickName" header-align="center" align="center" label="昵称"></el-table-column>
 
       <el-table-column prop="status" header-align="center" align="center" label="状态">
@@ -70,7 +71,7 @@
           </el-radio-group>
       </el-form-item>
        <el-form-item label="原因" prop="cancelResion" v-if="checkForm.luyongType==2">
-          <el-input type="textarea" v-model="checkForm.cancelResion"></el-input>
+          <el-input type="textarea" v-model="checkForm.cancelResion" placeholder="字数限制在20个字以内"></el-input>
       </el-form-item>   
     </el-form>
 
@@ -181,6 +182,12 @@ export default {
              }else if(this.luyongType==2){
                 type=this.checkForm.luyongType==1?3:6;
              }
+ 
+            if(this.checkForm.cancelResion&&this.checkForm.cancelResion.length>20){
+              this.$message.error("原因限制在20个字以内");
+              return false
+            }
+
               this.$http({
             url: this.$http.adornUrl(
               `/my/mysh/update`

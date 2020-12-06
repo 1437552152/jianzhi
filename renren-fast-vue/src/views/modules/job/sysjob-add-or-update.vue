@@ -97,13 +97,13 @@
       <el-input v-model="dataForm.jobDesc" placeholder="职位描述" type="textarea"></el-input>
     </el-form-item>
  -->
-    <el-form-item label="职位必备技能" prop="jobRequireSkill">
-      <el-input v-model="dataForm.jobRequireSkill" placeholder="请输入职位必备技能" type="textarea"></el-input>
+    <el-form-item label="工作详情" prop="jobRequireSkill">
+      <el-input v-model="dataForm.jobRequireSkill" placeholder="请输入工作详情" type="textarea"></el-input>
     </el-form-item>
 
 
-    <el-form-item label="工作备注" prop="jobBz">
-      <el-input v-model="dataForm.jobBz" placeholder="请输入工作备注" type="textarea"></el-input>
+    <el-form-item label="注意事项" prop="jobBz">
+      <el-input v-model="dataForm.jobBz" placeholder="请输入注意事项" type="textarea"></el-input>
     </el-form-item>
 
    <el-form-item label="海报上传" prop="jobHbUrl">
@@ -115,11 +115,11 @@
         >
         <img v-if="dataForm.jobHbUrl" :src="dataForm.jobHbUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-      </el-upload><span style="color:red">建议上传尺寸为640*1008</span>
+      </el-upload><span style="color:red">建议上传尺寸为1200*1890</span>
     </el-form-item>
 
  <div class="mod-demo-ueditor" v-if="flag">
-     <el-form-item label="工作内容" prop="jobIntroduce">
+     <el-form-item label="工作展示" prop="jobIntroduce">
       <script :id="ueId" class="ueditor-box" type="text/plain" style="width: 100%; height: 260px;">{{dataForm.jobIntroduce}}</script>
   </el-form-item>
  </div>
@@ -190,7 +190,7 @@ import moment from 'moment';
             { required: true, message: '职位描述不能为空', trigger: 'blur' }
           ], */
           jobRequireSkill: [
-            { required: false, message: '职位必备技能不能为空', trigger: 'blur' }
+            { required: false, message: '工作详情不能为空', trigger: 'blur' }
           ],
           jobTitle: [
             { required: true, message: '工作标题不能为空', trigger: 'blur' }
@@ -208,7 +208,7 @@ import moment from 'moment';
             { required: true, message: '工作报名方式不能为空', trigger: 'blur' }
           ], */
           jobBz: [
-            { required: false, message: '工作备注不能为空', trigger: 'blur' }
+            { required: false, message: '注意事项不能为空', trigger: 'blur' }
           ],
           jobPrezpNum: [
             { required: true, message: '请填写预招聘人数', trigger: 'blur' }

@@ -24529,12 +24529,12 @@
                     return;
                   }
                   // 判断文件格式是否错误
-            //      var filename = input.value,
-            //        fileext = filename ? filename.substr(filename.lastIndexOf('.')):'';
-             //     if (!fileext || (allowFiles && (allowFiles.join('') + '.').indexOf(fileext.toLowerCase() + '.') == -1)) {
-             //       showErrorLoader(me.getLang('simpleupload.exceedTypeError'));
-             //       return;
-             //     }
+               //   var filename = input.value,
+               //     fileext = filename ? filename.substr(filename.lastIndexOf('.')):'';
+               //   if (!fileext || (allowFiles && (allowFiles.join('') + '.').indexOf(fileext.toLowerCase() + '.') == -1)) {
+               //     showErrorLoader(me.getLang('simpleupload.exceedTypeError'));
+               //     return;
+               //   }
     
                   var params = utils.serializeParam(me.queryCommandValue('serverparam')) || '';
                   var action = utils.formatUrl(imageActionUrl + (imageActionUrl.indexOf('?') == -1 ? '?' : '&') + params);
@@ -24554,16 +24554,12 @@
                       link = me.options.imageUrlPrefix + data.url;
     
                       if(data.state == 'success' && data.url) {
-                        	  if(data.url.indexOf('mp4')>-1){
+						  if(data.url.indexOf('mp4')){
 							   var html='';
-							   html=html+'<p style="text-align:center">' +
-                                '<video style="width:100%" src="'+ data.url + '" _src="' + data.url + '" />' +'</p>';
-								loader = me.document.getElementById(loadingId);
-								loader.removeAttribute('id');
-								domUtils.removeClasses(loader, 'loadingclass'); 
+							   html=html+`<p style="text-align:center"><video src=`${data.url}` controls="controls"></p>`						  
 							   me.execCommand('insertHtml', html);						  
 						  }else{
-							loader = me.document.getElementById(loadingId);
+							 loader = me.document.getElementById(loadingId);
 							loader.setAttribute('src', link);
 							loader.setAttribute('_src', link);
 							loader.setAttribute('title', data.title || '');
@@ -24571,6 +24567,7 @@
 							loader.removeAttribute('id');
 							domUtils.removeClasses(loader, 'loadingclass');  					  
 						  }
+                       
                       } else {
                         showErrorLoader && showErrorLoader(data.state);
                       }

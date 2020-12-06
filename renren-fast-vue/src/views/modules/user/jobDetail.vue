@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: yfye
  * @Date: 2020-10-26 22:34:44
- * @LastEditTime: 2020-11-24 23:04:39
+ * @LastEditTime: 2020-11-30 22:09:00
  * @LastEditors: yfye
 -->
 <template>
@@ -25,8 +25,8 @@
           : "男女不限"
       }}
     </p>
-    <div>
-      工作内容:
+    <div class="content" style="overflow-y:hidden">
+      工作展示:
       <p v-html="params.jobIntroduce"></p>
     </div>
     <p>必备技能:{{ params.jobRequireSkill }}</p>
@@ -105,5 +105,8 @@ export default {
 }
 .userDetail p{
  margin-bottom: 8px;
+}
+.content img{
+  max-width: 100%;
 }
 </style>

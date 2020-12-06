@@ -287,6 +287,8 @@ Page({
             fail() { //这里是用户拒绝授权后的回调
               wx.showToast({
                 title: '相册授权失败',
+                icon:'none',
+                duration: 3000
               });
               wx.hideLoading();
             }
@@ -308,15 +310,16 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           success: function (data) {
-            wx.showToast({
-              title: '相册保存成功',
-              icon: 'none',
-              duration: 3000
-            });
+   
             wx.hideLoading();
             that.setData({
               isHidden: true
-            })
+            });
+            wx.showToast({
+              title: '相册保存成功',
+              icon: 'none',
+              duration:5000
+            });
           },
         })
       }

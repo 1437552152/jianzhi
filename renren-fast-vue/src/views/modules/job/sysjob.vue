@@ -64,7 +64,7 @@
         header-align="center"
          width="200"
         align="center"
-        label="职位必备技能">
+        label="工作详情">
       </el-table-column>
       <el-table-column
         prop="jobStartTimeStr"
@@ -109,7 +109,7 @@
         header-align="center"
          width="200"
         align="center"
-        label="工作备注">
+        label="注意事项">
       </el-table-column>
 
  <el-table-column
