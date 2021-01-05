@@ -80,13 +80,13 @@
         align="center"
         label="工作结束时间">
       </el-table-column> -->
-      <el-table-column
+     <!--  <el-table-column
         prop="jobBmfs"
         header-align="center"
          width="200"
         align="center"
         label="工作报名方式">
-      </el-table-column>
+      </el-table-column> -->
 
       <el-table-column
         prop="jobPrezpNum"

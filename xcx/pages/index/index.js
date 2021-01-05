@@ -34,7 +34,6 @@ Page({
         })
       }
        this.getNotice();
-       this.getStatus();
   },
   getStatus:function(){
     const that=this;
@@ -185,7 +184,7 @@ Page({
     }else{
       that.getLocation();
     }
-
+    this.getStatus();
     // 获取轮播图
     this.getLunbo();
     // 获取工作类型

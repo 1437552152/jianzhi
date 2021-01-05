@@ -1,5 +1,6 @@
 <import src="../../wxParse/wxParse.wxml" />
 <view wx:if="{{flag}}">
+  <official-account></official-account>
 	<view class="header">
 		<view class="title">{{dataDetail.jobTitle}}</view>
 		<view class="price">{{dataDetail.jobPrice}}元/{{dataDetail.jobPaytype===1?'时':dataDetail.jobPaytype===2?'天':'月'}}</view>
@@ -32,7 +33,7 @@
 				<view class="right"></view>
 			</view>
 			<view class="desc">
-				{{dataDetail.jobRequireSkill}}
+			<text>{{dataDetail.jobRequireSkill}}</text>
 			</view>
 		</view>
 
@@ -42,7 +43,7 @@
 				<view class="right"></view>
 			</view>
 			<view class="desc">
-				<view>{{dataDetail.jobStartTimeStr}}</view>
+				<view><text>{{dataDetail.jobStartTimeStr}}</text></view>
 				<!-- <view class="line">|</view>
 				<view>下班时间:{{dataDetail.jobEndTime}}</view> -->
 			</view>
@@ -55,7 +56,7 @@
 				<view class="right"></view>
 			</view>
 			<view class="desc">
-				{{dataDetail.jobBz}}
+				<text>{{dataDetail.jobBz}}</text>
 			</view>
 		</view>
 

@@ -1,0 +1,11 @@
+
+    <web-view src="https://www.yyf2gml.site/WithdrawalAgreement.html">
+
+     <cover-view class="share-button">
+			<cover-view class="share-txt" bindtap="goTixian">
+		      我同意提现协议
+			</cover-view>
+		</cover-view>
+ 
+    </web-view>
+ 

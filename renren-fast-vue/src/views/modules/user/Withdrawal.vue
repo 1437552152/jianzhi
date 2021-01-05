@@ -45,6 +45,23 @@
         align="center"
         label="提现金额">
       </el-table-column>
+
+      <el-table-column
+        prop="txType"
+        header-align="center"
+        align="center"
+        label="提现方式">
+        <template slot-scope="scope">
+          <el-tag type="text" size="small">{{scope.row.txType==1?"支付宝":'银行卡号'}}</el-tag>
+        </template>
+      </el-table-column>
+     <el-table-column
+        prop="txAccount"
+        header-align="center"
+        align="center"
+        label="提现账号">
+      </el-table-column>
+
       <el-table-column
         prop="cashoutTime"
         header-align="center"

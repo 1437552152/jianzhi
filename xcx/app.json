@@ -25,7 +25,8 @@
     "pages/friendsData/friendsData",
     "pages/xinshui/xinshui",
     "pages/jiangli/jiangli",
-    "pages/Leiji/Leiji"
+    "pages/Leiji/Leiji",
+    "pages/xieYi/xieYi"
   ],
   "window": {
     "backgroundTextStyle": "light",

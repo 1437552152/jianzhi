@@ -88,6 +88,19 @@ Page({
   onShow: function () {
       //得到佣金情况
       this.getYongjin();
+      //得到简历情况
+      this.jianli();
+  },
+  jianli:function(){
+    var that = this;
+    urlApi('app/mycv/info', "get", {}).then((res) => {
+      if (res.data.code == 0&&res.data.myCv&&res.data.myCv.myCvEntity) {
+          that.setData({
+            changeInputValue:res.data.myCv.myCvEntity.txAccount||'',
+            current: res.data.myCv.myCvEntity.txType==2?'银行卡':'支付宝'
+          })
+      }
+    })
   },
   getYongjin:function(){
     var that = this;

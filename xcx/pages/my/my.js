@@ -87,9 +87,16 @@ Page({
     }
   },
   goWithdrawal:function(){
-    wx.navigateTo({
-      url: '../Withdrawal/Withdrawal',
-    })
+    let txStatus=wx.getStorageSync('txStatus')
+    if(txStatus==1){
+      wx.navigateTo({
+        url: '../Withdrawal/Withdrawal',
+      })
+    }else{
+      wx.navigateTo({
+        url: '../xieYi/xieYi',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面显示

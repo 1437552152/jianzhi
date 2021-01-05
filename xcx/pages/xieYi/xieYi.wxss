@@ -1,0 +1,26 @@
+.goTixian{
+  width: 80%;
+  margin: 20px auto;
+  background-color: #000;
+  border-radius: 10px;
+  text-align: center;
+  padding: 4px;
+}
+.share-button {
+  z-index: 999999;
+  position: fixed;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:10px;
+  bottom:30rpx;
+  width:60%;
+  height: 72rpx;
+  display: flex;
+  left: 20%;
+  justify-content: center;
+  background-color: #17B3A3;
+  padding: 4px;
+}

@@ -78,7 +78,7 @@
   margin-right: 10px;
 }
 .jianzhiList .list .butie{
-  display: flex;
+  /* display: flex; */
 
 }
 .jianzhiList .list .butie .type{
@@ -86,7 +86,10 @@
   color: #959595;
   font-size: 13px;
   margin-right: 3px;
-  padding: 3px 1px;
+  padding: 3px 2px;
+  float: left;
+  margin-bottom: 4px;
+  
 }
   
 .jianzhiList .list  .right .price{
