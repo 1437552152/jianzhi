@@ -15,7 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.hideShareMenu({
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   },
 
   /**
@@ -36,11 +38,11 @@ Page({
   queryPhoneList: function () {
     var that = this;
     var data = {};
-    urlApi('user/Profile/service', "post", data).then((res) => {
+    urlApi('sys/baseconfig/nopagelist', "get", data).then((res) => {
       console.log(res);
-      if (res.data.code == 1) {
+      if (res.data.code == 0) {
         that.setData({
-          phoneList: res.data.data
+          phoneList: res.data.list
         })
       } else {
         wx.showToast({

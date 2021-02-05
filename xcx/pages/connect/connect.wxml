@@ -1,12 +1,12 @@
 <view class="service-box">
   <view class="service-view1">公共服务</view>
 
-  <view class="service-view2" data-phone="18133626045" catchtap="dictPhoneClick">
-    <view class="service-view3">客服1</view>
-    <view class="service-view3">18133626045<image src="../../static/img/part6.png"></image></view>
+  <view class="service-view2" data-phone="{{item.phoneNum}}" catchtap="dictPhoneClick"  wx:for="{{phoneList}}" wx:key="item"  wx:key="index">
+    <view class="service-view3">客服{{index+1}}</view>
+    <view class="service-view3">{{item.phoneNum}}<image src="../../static/img/part6.png"></image></view>
   </view>
-   <view class="service-view2" data-phone="18133626045" catchtap="dictPhoneClick">
-    <view class="service-view3">客服2</view>
-    <view class="service-view3">18133626045<image src="../../static/img/part6.png"></image></view>
-  </view>
+   <!-- <view class="service-view2">
+    <view class="service-view3">邮箱</view>
+    <view class="service-view3">1437552152@qq.com</view>
+  </view> -->
 </view>

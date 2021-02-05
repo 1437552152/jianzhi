@@ -2,7 +2,11 @@
   "usingComponents": {
     "i-cell-group": "/components/cell-group/index",
     "i-cell": "/components/cell/index",
-    "i-icon": "/components/icon/index"
+    "i-icon": "/components/icon/index",
+    "i-card": "/components/card/index",
+    "i-radio-group": "/components/radio-group/index",
+    "i-radio": "/components/radio/index",
+    "i-panel": "/components/panel/index"
   },
-  "navigationBarTitleText": "账户余额"
+  "navigationBarTitleText": "申请提现"
 }

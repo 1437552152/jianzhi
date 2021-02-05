@@ -12,16 +12,40 @@ Page({
     jobType:[],
     jobList:[],
     city:'',
-    NoticeList:[]
+    NoticeList:[],
+    jobTitle:'',
+    flag:0,
+    flag1:1,
+    newsList:[
+     {id:1,title:"一年之计在于春，婉妮帮您来变身~",content:"121212"},
+     {id:2,title:"穿越时光，带你回到十年前的自己",content:"1212121"}
+    ]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      if(options.parentid){
+        wx.setStorageSync('parentid', options.parentid)
+      }
+      if(!wx.getStorageSync('userInfo').openid){
+        wx.hideShareMenu({
+          menus: ['shareAppMessage', 'shareTimeline']
+        })
+      }
        this.getNotice();
   },
-
+  getStatus:function(){
+    const that=this;
+    urlApi('app/index/xgzt', "get", {}).then((res) => {
+      if (res.data.code == 0) {
+          that.setData({
+            flag:res.data.re,
+            flag1:res.data.re,
+          })
+      }
+    })
+  },
   goLunbo:function(e){
        wx.navigateTo({
          url: '../newDetail/newDetail?id='+e.currentTarget.dataset.item.picId,
@@ -71,7 +95,11 @@ Page({
   onReady: function () {
 
   },
-  searchValue:function(){
+  searchValue:function(e){
+    this.setData({
+      jobTitle:e.detail.value
+    });
+    this.jobList();
   },
   goChoose:function(){
     wx.navigateTo({
@@ -81,12 +109,10 @@ Page({
    jobList:function(){
     const that=this;
     let body={};
-    wx.showLoading({
-      title: '加载中',
-    })
     if(wx.getStorageSync('location')&&wx.getStorageSync('location')!='全国'){
        body.city=wx.getStorageSync('location');
     }
+    body.jobTitle=this.data.jobTitle;
    
     urlApi('app/index/getJoblist','get',body).then(res=>{
       if(res.data.code==0){
@@ -101,7 +127,6 @@ Page({
           title:res.data.msg,
           icon:'none'
         })
-        wx.hideLoading()
       }
     
     })
@@ -159,6 +184,7 @@ Page({
     }else{
       that.getLocation();
     }
+    this.getStatus();
     // 获取轮播图
     this.getLunbo();
     // 获取工作类型
@@ -175,7 +201,11 @@ Page({
   onHide: function () {
 
   },
-
+  gotoPage: function (e) { 
+     wx.navigateTo({
+       url:`../jobDetail/jobDetail?Copyid=${e.currentTarget.dataset.id}`,
+     })
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -201,7 +231,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: wx.getStorageSync('userInfo').nickName + '邀请你去报名啦!',
+      path: `/pages/index/index?parentid=${wx.getStorageSync('userInfo').openid}`
+    }
   },
   goTypeList:function(e){
      wx.navigateTo({

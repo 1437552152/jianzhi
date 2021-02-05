@@ -1,11 +1,11 @@
 {
-  "pages": [ 
+  "pages": [
     "pages/index/index",
+    "pages/Withdrawal/Withdrawal",
     "pages/my/my",
     "pages/MyResume/MyResume",
     "pages/boots/boots",
     "pages/wages/wages",
-    "pages/Withdrawal/Withdrawal",
     "pages/MyTeam/MyTeam",
     "pages/signUpList/signUpList",
     "pages/myexercise/myexercise",
@@ -21,7 +21,12 @@
     "pages/personalinfo/personalinfo",
     "pages/connect/connect",
     "pages/Collection/Collection",
-    "pages/WithdrawalDetail/WithdrawalDetail"
+    "pages/WithdrawalDetail/WithdrawalDetail",
+    "pages/friendsData/friendsData",
+    "pages/xinshui/xinshui",
+    "pages/jiangli/jiangli",
+    "pages/Leiji/Leiji",
+    "pages/xieYi/xieYi"
   ],
   "window": {
     "backgroundTextStyle": "light",

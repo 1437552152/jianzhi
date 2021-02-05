@@ -1,17 +1,38 @@
-<view class="top">
-    <view class="WithTitle">余额(元)</view>
-    <view class="WithMoney">0.00</view>
-    <view class="WithOper" bindtap="goWithdrawal">提现</view>
-</view>
-	<view class='part'>
-		<i-cell-group>
-			<i-cell title="工资明细" is-link url="/pages/wages/wages" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
-			</i-cell>
-
-    	<i-cell title="提现明细" is-link url="/pages/WithdrawalDetail/WithdrawalDetail" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/tixian.png" size="28" style="margin-right:20rpx" />
-			</i-cell>
-
-		</i-cell-group>
+<form bindsubmit="formSubmit" style="font-size:12px">
+	<view class="headtopBg"></view>
+	<view style="margin-top:-30px">
+		<view class="card">
+			<view class="item">
+				<view>可提现金额</view>
+				<view>￥{{yongjinInfo.yuPay}}</view>
+			</view>
+			<view class="item">
+				<view>提现金额</view>
+				<view>
+					<input type="number" name="money" minlength="1" maxlength="10000" placeholder="请输入要提取的金额"></input>
+				</view>
+			</view>
+		</view>
 	</view>
+	<view class="tixianBeizhu">最低提现金额1.00元</view>
+	<i-panel title="收款方式">
+			<i-radio-group current="{{current}}" bindchange="handleChange">
+					<i-radio position="right" value="支付宝" color="#07c061"></i-radio>
+					<i-radio position="right" value="银行卡" color="#07c061"></i-radio>
+			</i-radio-group>
+	</i-panel>
+ <input class="input"  placeholder="{{current=='支付宝'?'请输入支付宝账号':'请输入银行卡账号'}}"
+     bindinput="changeInput" value="{{changeInputValue}}"/>
+ <p style="color:red;margin:4px;margin-left: 10px;">收款账号请谨慎填写</p>
+
+<view class="top">
+	<button class="WithOper" form-type="submit">提现</button>
+</view>
+</form>
+<view class='part'>
+	<i-cell-group>
+		<i-cell title="提现明细" is-link url="/pages/wages/wages" typeFlag="1">
+			<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
+		</i-cell>
+	</i-cell-group>
+</view>

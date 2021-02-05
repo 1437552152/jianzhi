@@ -1,5 +1,4 @@
-<!--pages/my/my.wxml-->
-<view class='my'>
+<view class='my' wx:if="{{flag}}">
 	<view class='my_bg'>
 		<image src='../../static/img/orderbg.png'></image>
 	</view>
@@ -9,13 +8,16 @@
 				<image src="{{userInfo.avatarUrl}}"></image>
 			</view>
 			<view class='two'>
-				<view class='name'>{{userInfo.nickName}}</view>
+				<view class='name'>{{userInfo.username||userInfo.nickName}}</view>
 				<view class='num' bindtap="goWithdrawal">
-					<text>余额:0.00元</text>立即提现
+					<text>余额:{{yongjinInfo.yuPay}}元</text>立即提现
 					<i-icon type="enter" color="#ffffff" />
 				</view>
 			</view>
 		</view>
+		<view class="jiangli">
+	  	<view bindtap="goJnagli">上月推广奖励:{{yongjinInfo.lastMonthPay}}元</view>
+		   <view bindtap="goLeiji">累计收益:{{yongjinInfo.allPay}}元</view></view>
 	</view>
 	<view class='personalinfo' wx:else>
 		<view class='left_part'>
@@ -60,25 +62,17 @@
 				<i-icon slot="icon" myIcon="../../static/img/friends.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
-			<i-cell title="推广奖励" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/searySearch.png" size="28" style="margin-right:20rpx" />
-			</i-cell>
-
-			<i-cell title="累计收益" is-link url="/pages/MyTeam/MyTeam" typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/part1.png" size="28" style="margin-right:20rpx" />
-			</i-cell>
-
 			<i-cell title="我的收藏" is-link url="/pages/Collection/Collection" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part4.png" size="28" style="margin-right:20rpx" />
+			</i-cell>
+
+			<i-cell title="我的工资条" is-link url="/pages/xinshui/xinshui" typeFlag="1">
+				<i-icon slot="icon" myIcon="../../static/img/leasing.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
 
 			<i-cell title="帮助中心" is-link url="/pages/helpList/helpList" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part2.png" size="28" style="margin-right:20rpx" />
 			</i-cell>
-
-			<!-- <i-cell title="关于我们" is-link url="/pages/AboutUs/AboutUs"  typeFlag="1">
-				<i-icon slot="icon" myIcon="../../static/img/part3.png" size="28" style="margin-right:20rpx" />
-			</i-cell> -->
 
 			<i-cell title="联系客服" is-link url="/pages/connect/connect" typeFlag="1">
 				<i-icon slot="icon" myIcon="../../static/img/part6.png" size="28" style="margin-right:20rpx" />
@@ -90,3 +84,11 @@
 		</i-cell-group>
 	</view>
 </view>
+   <view  wx:if="{{!flag1}}" class="concate">
+      <view>联系电话:18133626045</view>
+			<view>邮箱:1437552152@qq.com</view>
+			<view>公司地址:合肥市蜀山区拓基广场2栋</view>
+       <view class="noData">
+			   <image src="../../static/img/gongzhonghao.png" mode="widthFix"> </image>
+			 </view>
+   </view>

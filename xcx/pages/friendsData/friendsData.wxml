@@ -1,0 +1,44 @@
+<!--pages/mytest/mytest.wxml-->
+<view class='mytest'>
+	<!-- tab切换 -->
+	<i-tabs current="{{ current }}" color="#19be6b" bindchange="handleChange">
+		<i-tab key="1" title="全部"></i-tab>
+		<i-tab key="2" title="已录用"></i-tab>
+		<i-tab key="3" title="已到岗"></i-tab>
+		<i-tab key="4" title="已结算"></i-tab>
+	</i-tabs>
+
+	<view class="list-wapper">
+		<view class='part' wx:key="index">
+			<view class='module' bindtap="goSignFun" wx:for="{{testList}}" wx:key="item" data-param="{{item}}" >
+				<view class='name'>
+					<view class="left">
+					<!-- 1、已报名 2、已录用 3、已到岗 4、已结算
+5、报名后审核不通过  6、通过录用未到岗   7、到岗后未结算 -->
+						<i-tag class="i-tags" name="标签一" color="green" type="border" wx-if="{{current==1}}">
+							{{item.luyongType==1?'报名待审核':
+							item.luyongType==2?'已录用,到岗待审核':
+							item.luyongType==3?'已到岗':
+							item.luyongType==4?'已结算':
+							item.luyongType==5?'报名审核不通过':
+							item.luyongType==6?'未到岗':'未结算'}}
+						</i-tag><text>{{item.jobTitle}}</text>
+					</view>
+		  		<view class="right" wx:if="{{current==4}}">共发工资:{{item.total}}元</view>
+					<view class="right" wx:else>{{item.jobPrice}}元/{{item.jobPaytype===1?'时':item.jobPaytype===2?'天':'月'}}</view>				
+				</view>
+				<view class='num'>工作地点:{{item.jobQycode}}</view>
+				<view wx:if="{{item.cancelResion}}" class="cancelResion">驳回原因:{{item.cancelResion}}</view>
+				<view wx:if="{{current==4}}" class="jiesuan">
+				   <view class='num'>实发工资:{{item.monthPay}}元</view>
+			     <view class='num'>报名佣金:{{item.jobBmbackprice}}元</view>
+					 <view class='num'>所结工资时间:{{item.payForTime}}</view>
+				</view>
+				<view wx:if="{{current==4&&item.payStubsBz}}" class="jiesuan">
+				   <view class='num'>备注:{{item.payStubsBz}}</view>	
+				</view>
+			</view>
+		</view>
+		<view class="bottomDesc">我是有底线的哦~</view>
+	</view>
+</view>

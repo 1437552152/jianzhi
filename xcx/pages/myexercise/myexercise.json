@@ -4,5 +4,5 @@
     "i-tab": "/components/tab/index",
     "i-tag":"/components/tag/index"
   },
-  "navigationBarTitleText": "报名单列表"
+  "navigationBarTitleText": "报名列表"
 }

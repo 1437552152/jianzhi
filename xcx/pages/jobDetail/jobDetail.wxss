@@ -112,14 +112,14 @@ font-size: 14px;
   border: 1px solid #ddd;
 }
 .goBM .one{
-  flex: 1;
+  flex: 1.4;
   color: #000;
   padding: 3px 2px;
-  padding-top:7px;
+  /* padding-top:7px; */
   font-size:12px;
 }
 .goBM .two{
-  flex:3;
+  flex:2.5;
   background-color: #ff660e;
   color: #fff;
   padding: 3px 2px;
@@ -133,11 +133,12 @@ margin-top: 6px;
 }
 .goshare{
   border: none;
-  padding: 0;
-  line-height: 16px;
+  line-height: 23px;
   border-radius: 0;
   background-color: #fff;
-  font-size: 12px;
+  font-size: 14px;
+  padding: 0;
+  
 }
 button::after {
   border: none;
@@ -149,3 +150,114 @@ justify-content: center;
 align-items: center;
 padding-top: 0;
 }
+.authButton{
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  padding: 0;
+  line-height: 23px;
+  padding-top: 8px;  
+}
+.otherContent{
+  text-indent: 2em;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.otherContent view{
+  margin-top: 20px;
+}
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  z-index: 999999;
+}
+
+.modalContent {
+  border: 1px solid #ccc;
+  height: 900rpx;
+  width: 600rpx;
+  position: absolute; /*让节点脱离文档流,我的理解就是,从页面上浮出来,不再按照文档其它内容布局*/
+  margin: 0 auto;
+  top: 5%; /*节点脱离了文档流,如果设置位置需要用top和left,right,bottom定位*/
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999998; /*个人理解为层级关系,由于这个节点要在顶部显示,所以这个值比其余节点的都大*/
+  background: white;
+}
+
+.cansole
+{
+  /*float: right;
+  margin-right: 20rpx;
+  margin-top: 20rpx;*/
+  position: absolute;
+  top: 18rpx;
+  right: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+.contents{
+  padding: 20rpx;
+  font-size: 28rpx;
+
+}
+.tl-div{
+  position: absolute;
+  bottom: -8rpx;
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #CCCCCC;
+  border-top: 1px solid #EEEEEE;
+
+}
+.md-content{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  margin-top: 25px;  
+}
+.md-left{
+  /* float: left;
+  width: 90rpx;
+  height: 90rpx;
+  margin-right: 18rpx; */
+}
+.md-left image{
+  max-height: 350px;
+  /* width: 90rpx;
+  height: 90rpx; */
+}
+.md-right{
+  float: left;
+  width: calc(100%-120rpx);
+  height: auto;
+}
+.tl-font-28-333{
+  font-size:28rpx;
+  font-weight:400;
+  color:#333333;
+}
+.tl-font-24-999{
+  font-size:24rpx;
+  font-weight:400;
+  color:#999;
+}
+.goSave{
+  width: 80%;
+text-align: center;
+background-color: #8e85fc;
+margin: 20px auto;
+padding: 6px;
+border-radius: 13px;
+color: #fff;
+}
+/*****************模态框独立样式操作 end************************/

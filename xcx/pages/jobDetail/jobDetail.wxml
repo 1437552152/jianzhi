@@ -1,142 +1,178 @@
-  <import src="../../wxParse/wxParse.wxml" />
-<view class="header">
-	<view class="title">{{dataDetail.jobTitle}}</view>
-	<view class="price">{{dataDetail.jobPrice}}元/{{dataDetail.jobPaytype===1?'时':dataDetail.jobPaytype===2?'天':'月'}}</view>
-	<view class="subTitle">
-		<view>{{dataDetail.jobQycode}}|{{dataDetail.typeName}}</view>
-		<view class="date">{{dataDetail.jobCreateTime||''}}</view>
-	</view>
-	<view class="desc">
-		<!-- <view class="item">完工结</view> -->
-		<view class="item">招{{dataDetail.jobPrezpNum}}人</view>
-		<view class="item">{{dataDetail.jobSex===1?'只招男生':dataDetail.jobSex===2?'只招女生':'男女不限'}}</view>
-	</view>
-</view>
-
-<view class="centerContent">
-	<view class="list">
-		<view class="title">
-			<view class="left"><text></text>工作内容</view>
-			<view class="right"></view>
+<import src="../../wxParse/wxParse.wxml" />
+<view wx:if="{{flag}}">
+  <official-account></official-account>
+	<view class="header">
+		<view class="title">{{dataDetail.jobTitle}}</view>
+		<view class="price">{{dataDetail.jobPrice}}元/{{dataDetail.jobPaytype===1?'时':dataDetail.jobPaytype===2?'天':'月'}}</view>
+		<view class="subTitle">
+			<view>{{dataDetail.jobQycode}}|{{dataDetail.typeName}}</view>
+			<view class="date">{{dataDetail.jobCreateTime||''}}</view>
 		</view>
 		<view class="desc">
-		 <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+			<!-- <view class="item">完工结</view> -->
+			<view class="item">招{{dataDetail.jobPrezpNum}}人</view>
+			<view class="item">{{dataDetail.jobSex===1?'只招男生':dataDetail.jobSex===2?'只招女生':'男女不限'}}</view>
+	  	<view class="item">年龄范围{{dataDetail.ageScope}}</view>
 		</view>
 	</view>
 
-	<view class="list" wx-if="{{dataDetail.jobRequireSkill}}">
-		<view class="title">
-			<view class="left"><text></text>必备技能</view>
-			<view class="right"></view>
+	<view class="centerContent">
+		<view class="list">
+			<view class="title">
+				<view class="left"><text></text>工作展示</view>
+				<view class="right"></view>
+			</view>
+			<view class="desc">
+				<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+			</view>
 		</view>
-		<view class="desc">
-	  	{{dataDetail.jobRequireSkill}}
-		</view>
-	</view>
 
-	<view class="list" wx-if="{{dataDetail.jobBz}}">
-		<view class="title">
-			<view class="left"><text></text>备注</view>
-			<view class="right"></view>
+		<view class="list" wx-if="{{dataDetail.jobRequireSkill}}">
+			<view class="title">
+				<view class="left"><text></text>工作详情</view>
+				<view class="right"></view>
+			</view>
+			<view class="desc">
+			<text>{{dataDetail.jobRequireSkill}}</text>
+			</view>
 		</view>
-		<view class="desc">
-	  	{{dataDetail.jobBz}}
-		</view>
-	</view>
-
-
 
 	<view class="list">
-		<view class="title">
-			<view class="left"><text></text>工作时间</view>
-			<view class="right"></view>
+			<view class="title">
+				<view class="left"><text></text>工作时间</view>
+				<view class="right"></view>
+			</view>
+			<view class="desc">
+				<view><text>{{dataDetail.jobStartTimeStr}}</text></view>
+				<!-- <view class="line">|</view>
+				<view>下班时间:{{dataDetail.jobEndTime}}</view> -->
+			</view>
 		</view>
-		<view class="desc">
-			<view>上班时间:{{dataDetail.jobStartTime}}</view>
-			<view class="line">|</view>
-			<view>下班时间:{{dataDetail.jobEndTime}}</view>
-		</view>
-	</view>
 
 
-	<view class="list">
-		<view class="title">
-			<view class="left"><text></text>工作地点</view>
-			<view class="right"></view>
+		<view class="list" wx-if="{{dataDetail.jobBz}}">
+			<view class="title">
+				<view class="left"><text></text>注意事项</view>
+				<view class="right"></view>
+			</view>
+			<view class="desc">
+				<text>{{dataDetail.jobBz}}</text>
+			</view>
 		</view>
-		<view class="desc">
-			{{dataDetail.jobAddress}}
-			<map id="map" longitude="{{dataDetail.jobLot}}" latitude="{{dataDetail.jobLat}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height:200px;"></map>
-		</view>
-	</view>
 
+	
 
-	<!-- <view class="list">
-		<view class="title">
-			<view class="left"><text></text>公司福利</view>
-			<view class="right"></view>
+		<view class="list">
+			<view class="title">
+				<view class="left"><text></text>工作地点</view>
+				<view class="right"></view>
+			</view>
+			<view class="desc">
+				{{dataDetail.jobAddress}}
+				<map id="map" longitude="{{dataDetail.jobLot}}" latitude="{{dataDetail.jobLat}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" bindtap="markertap" show-location style="width: 100%; height:200px;"></map>
+			</view>
 		</view>
-		<view class="desc">
-			<view class="fuli">
-				<view class="item">
-					<image src="../../static/img/home.png"></image>
-					<view>包吃</view>
-				</view>
-				<view class="item">
-					<image src="../../static/img/home.png"></image>
-					<view>包住</view>
-				</view>
-				<view class="item">
-					<image src="../../static/img/home.png"></image>
-					<view>交通补贴</view>
-				</view>
-				<view class="item">
-					<image src="../../static/img/home.png"></image>
-					<view>有提成</view>
+
+		<view class="list" bindtap="goComp" data-compId="{{dataDetail.compId}}" style="padding-bottom:65px">
+			<view class="title">
+				<view class="left"><text></text>机构信息</view>
+				<view class="right"></view>
+			</view>
+			<view class="desc">
+				<view class="contactUs">
+					<view class="infoMationOne">
+						<image src="../../static/img/huo.png" />
+					</view>
+					<view class="infoMationTwo">
+						<view>{{dataDetail.compName}}</view>
+						<view>联系电话：{{dataDetail.compPnone}}</view>
+					</view>
+					<view class="infoMationThree">
+						<image src="../../static/img/jiantou_right.png" />
+					</view>
 				</view>
 			</view>
 		</view>
-	</view> -->
 
-	<view class="list" bindtap="goComp" data-compId="{{dataDetail.compId}}" style="padding-bottom:65px">
-		<view class="title">
-			<view class="left"><text></text>机构信息</view>
-			<view class="right"></view>
-		</view>
-		<view class="desc">
-			<view class="contactUs">
-				<view class="infoMationOne">
-					<image src="../../static/img/huo.png" />
-				</view>
-				<view class="infoMationTwo">
-					<view>{{dataDetail.compName}}</view>
-					<view>联系电话：{{dataDetail.compPnone}}</view>
-				</view>
-				<view class="infoMationThree">
-					<image src="../../static/img/jiantou_right.png" />
-				</view>
-			</view>
-		</view>
 	</view>
 
-</view>
-
-<view class="goBM">
-    <view class="one" bindtap="onJsEvent" data-status="1"  data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
-      <image src="{{!sfSc?'../../static/img/collect.png':'../../static/img/collectChecked.png'}}" style="width:24px;height:24px"></image>
-      <view>收藏</view>
-    </view>
-    <view class="one" bindtap="onJsEvent" data-status="2" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
-     <button open-type="share" hover-class="none" class="goshare">
-		  <image src='../../static/img/share.png' style="width:24px;height:24px"></image>
-      <view>分享(返￥{{dataDetail.jobFxbackprice}})</view>
+	<view class="goBM">
+		<view class="one" bindtap="onJsEvent" data-status="1" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
+			<image src="{{!sfSc?'../../static/img/collect.png':'../../static/img/collectChecked.png'}}" style="width:24px;height:24px"></image>
+			<view>收藏</view>
+		</view>
+		<view class="one" bindtap="onJsEvent" data-status="2" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
+			<button hover-class="none" class="goshare">
+				<!-- <image src='../../static/img/share.png' style="width:24px;height:24px"></image> -->
+				<view>生成海报</view>
+				<view>(推广￥{{dataDetail.jobFxbackprice}})</view>
 			</button>
-    </view>
-    <view wx-if="{{dataDetail.jobStatue}}" class="two" bindtap="onJsEvent1" data-status="3" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
-       <view>我要报名(返￥{{dataDetail.jobBmbackprice}})</view>
-      <view>({{dataDetail.alreadySignedNum||0}}人已报名)</view>
-    </view>
-		 <view wx-if="{{!dataDetail.jobStatue||dataDetail.jobPrezpNum==dataDetail.alreadySignedNum}}" class="two thiree">
-       <view>该职位已停招</view>
-    </view>
+		</view>
+
+		<!-- 1、已报名 2、已录用 3、已到岗 4、已结算
+5、报名后审核不通过  6、通过录用未到岗   7、到岗后未结算 -->
+
+		<view wx-if="{{!type&&dataDetail.jobPrezpNum>dataDetail.alreadySignedNum&&((dataDetail.jobStatue&&!dataDetail.luyongType))}}" class="two" bindtap="onJsEvent" data-status="3" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
+			<view>我要报名(返￥{{dataDetail.jobBmbackprice}})</view>
+			<view>({{dataDetail.alreadySignedNum||0}}人已报名)</view>
+		</view>
+
+		<button wx-if="{{type&&dataDetail.jobPrezpNum>dataDetail.alreadySignedNum&&((dataDetail.jobStatue&&!dataDetail.luyongType))}}" class="two authButton" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+			<view>我要报名(返￥{{dataDetail.jobBmbackprice}})</view>
+			<view>({{dataDetail.alreadySignedNum||0}}人已报名)</view>
+		</button>
+
+		<view wx-if="{{dataDetail.luyongType==1}}" class="two" bindtap="onJsEvent" data-status="4" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
+			<view style="margin-top:10px">取消报名</view>
+		</view>
+
+		<view wx-if="{{dataDetail.luyongType&&dataDetail.luyongType>1&&dataDetail.jobStatue&&dataDetail.jobPrezpNum>dataDetail.alreadySignedNum}}" class="two thiree" data-status="4" data-url="/pages/jobDetail/jobDetail" data-id="{{id}}" data-type="1">
+			<view>该职位已报名,不可取消</view>
+		</view>
+
+		<view wx-if="{{!dataDetail.jobStatue||dataDetail.jobPrezpNum<=dataDetail.alreadySignedNum}}" class="two thiree">
+			<view>该职位已停招</view>
+		</view>
+	</view>
 </view>
+<view  wx:if="{{!flag1}}">
+	<view wx:if="{{Copyid==1}}" class="otherContent">
+		<view> 又是一年春，百花来争艳,马上要脱下厚厚的冬装，感受美好的春光了,亲爱的你，准备好了么？</view>
+		<view>这些日子，合肥的天气总是忽冷忽热,还不是因为老天知道你还没准备好,再给你一点变美的时间 </view>
+		<view>昨天，2018年3月16日，正月二十九.过完昨天，这个年就过完啦，年前那句“过完年再说”已经需要兑现喽~
+	今天开始就是二月了，二月春风似剪刀，剪开了身上厚厚的衣服，马上就要露出最真实的你了</view>
+		<view>在这么重要的时间点，婉妮当然也为大家准备了一份特别的惊喜。
+			婉妮减肥十分店——望江路店升级改造，盛大开业啦
+			10点16分开业典礼正式拉开了帷幕，婉妮董事长刘立松先生为开业致辞，在欢呼声和礼炮声中，婉妮望江路店升级开业啦！</view>
+	</view>
+		<view class="otherContent">
+		<view>假如你变回到十年前的自己,你会怎么做？先去买房投资？还是先去努力减肥？</view>
+		<view>不管你是多大年纪，总有个时候，当你看到镜子里的自己时，你会想，时间要是回到过去就好了，我会怎么怎么样……
+要是回到十年前，我一定会好好保养自己,让现在的自己光鲜亮丽,要是回到十年前，我一定会好好研究工作
+让现在的自己更成功,要是回到十年前，我一定会好好减肥,让现在的自己瘦成一道闪电
+要是回到十年前，我一定会好好的投资,买好多套房坐收房租</view>
+		<view>做为女人，如果能变回到十年前，最开心的可能就是，再次见到那个满脸胶原蛋白的自己，没有皱纹的自己。
+可是时间无法倒流，这些美好的愿望好像都只能是想想罢了。</view>
+		<view>女人们几乎都是怕老的，怕变老，怕比同龄人老。很多人年龄可能并不大，
+但是皱纹不少，这就让自己看起来比实际年龄大了好几岁，面部皱纹和颈部皱纹成了显老的最大元凶。
+有句话叫“一条颈纹老三岁，三年颈纹老十年”。
+如果没有颈纹，我们是不是就变成了十年前的自己？
+可是时间无法倒流，这些皱纹真的就只能这样陪伴我们以后的日子，我们还要忍受以后会出现的更多的皱纹么？</view>
+	</view>
+</view>
+
+
+ <view class='bg' hidden="{{isHidden}}">
+        <view class='modalContent'>
+            <view class='cansole' bindtap='hiddenMd'>✘</view>
+            <view class='contents'>
+                <view class="md-content">
+                    <view class="md-left">
+                        <image src="{{shareImg}}" style="width:100%" mode="widthFix"></image>
+                    </view>
+                    <view bindtap="goSave" class="goSave">保存到相册</view>
+                </view>
+            </view>
+
+        </view>
+    </view>

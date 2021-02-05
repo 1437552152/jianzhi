@@ -24,12 +24,12 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.2",
-	"appid": "wx401428319f31d346",
+	"libVersion": "2.14.0",
+	"appid": "wx6f3e1c3108dc6a3d",
 	"projectname": "hair_wx",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -60,7 +60,14 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"scene": 1047
+				}
+			]
 		}
 	}
 }

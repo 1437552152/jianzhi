@@ -19,6 +19,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideShareMenu({
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   },
 
   /**
@@ -52,7 +55,7 @@ Page({
     var that = this;
     var data = {};
     const {type} = this.data;
-    urlApi(type===1?"/app/myrelation/list":'/app/myrelation/nextlist', "get", data).then((res) => {
+    urlApi(type==1?"/app/myrelation/list":'/app/myrelation/nextlist', "get", data).then((res) => {
       if(res.data.code===0){
         that.setData({
           testList:res.data.page.list

@@ -61,3 +61,11 @@ font-size: 15px;
   align-items: center;
   justify-content: center;
 }
+.cancelResion{
+  color: #e75b5e;
+  font-size: 13px;
+}
+.jiesuan{
+  display: flex;
+justify-content: space-between;
+}

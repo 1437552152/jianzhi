@@ -13,7 +13,7 @@ color: #333333;
 font-size: 30rpx;
 }
 .left_part .time{
-  margin-top:10rpx;
+  margin-top:23rpx;
   font-size: 24rpx;
   color: #999999
 }

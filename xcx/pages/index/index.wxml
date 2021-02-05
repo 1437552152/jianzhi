@@ -1,62 +1,92 @@
-<view>
-<!-- 头部定位 -->
-<view class="notice" wx-if="{{NoticeList.length}}">
-<image src="../../static/img/notice.png"></image>
-<swiper class="swiperw" vertical='true' autoplay="true" indicator-active-color="transparent" indicator-color='transparent' duration="1000" indicatorDots="false" interval="5000" >
-    <swiper-item class="swiperItem" wx:for="{{NoticeList}}" wx:key="item">
-        {{item.picTitle}}
-    </swiper-item>
-</swiper>
-</view>
-
-<view class="header">
-   <view class="dingwei">
-    <view style="flex:1" bindtap="goChoose"><image src="../../static/img/positionMap.png" style="width:16px;height:16px" />{{city}}</view>
-    <view style="flex:4"><input class="input" placeholder="搜索" 
-    bindtap="searchValue" placeholder-style="font-size:12px;margin-left:8px"/></view>
+<view wx:if="{{flag}}">
+    <view>
+        <official-account></official-account>
     </view>
-</view>
+	<!-- 头部定位 -->
+	<view class="notice" wx-if="{{NoticeList.length}}">
+		<image src="../../static/img/notice.png"></image>
+		<swiper class="swiperw" vertical='true' autoplay="true" indicator-active-color="transparent" indicator-color='transparent' duration="1000" indicatorDots="false" interval="5000">
+			<swiper-item class="swiperItem" wx:for="{{NoticeList}}" wx:key="item">
+				{{item.picTitle}}
+			</swiper-item>
+		</swiper>
+	</view>
 
+	<view class="header">
+		<view class="dingwei">
+			<view style="flex:1" bindtap="goChoose">
+				<image src="../../static/img/positionMap.png" style="width:16px;height:16px" />{{city}}</view>
+			<view style="flex:4"><input class="input" placeholder="搜索" bindinput="searchValue" placeholder-style="font-size:12px;margin-left:8px" /></view>
+		</view>
+	</view>
 
-<!-- 菜单 -->
-<view class="nav">
-   <view class="item" wx:for="{{jobType}}" wx:key="item" data-param="{{item}}" bindtap="goTypeList">
-       <image src="{{item.picSaveUrl}}" />
-       <view class="text">{{item.typeName}}</view>
-   </view>
+	<!-- 菜单 -->
+	<view class="nav">
+		<view class="item" wx:for="{{jobType}}" wx:key="item" data-param="{{item}}" bindtap="goTypeList">
+			<image src="{{item.picSaveUrl}}" />
+			<view class="text">{{item.typeName}}</view>
+		</view>
+	</view>
+	<!-- 轮播图 -->
+	<swiper class="swiperStyle" autoplay="true" indicator-active-color="#ff660e" indicator-color='#fff' duration="1000" indicatorDots="true" interval="5000" style="height:300rpx">
+		<swiper-item class="swiperItem" wx:for="{{swiper}}" wx:key="item" bindtap="goLunbo" data-item="{{item}}">
+			<navigator url="{{item.picLinkUrl}}">
+				<image class="slide-image" src="{{item.picSaveUrl}}" style="width:100%" mode="widthFix"></image>
+			</navigator>
+		</swiper-item>
+	</swiper>
+	<!-- 列表 -->
+	<view class="jianzhiList">
+		<view class="hotJianzhi">
+			<image src="../../static/img/hot.png"></image>火爆精选
+		</view>
+		<view class="list" bindtap="goDetail" data-list="{{item}}" wx:for="{{jobList}}" wx:key="item">
+			<view class="left">
+				<view class="title">{{item.jobTitle}}</view>
+				<view class="jiesuanWay">
+					<view class="cell">{{item.jobQycode}}</view>
+					<!-- <view class="cell">{{item.typeName}}</view> -->
+				</view>
+				<view class="butie" wx:if="{{item.compWelfare.length}}">
+					<view class="type" wx:for="{{item.compWelfare}}">{{item}}</view>
+				</view>
+			</view>
+			<view class="right">
+				<view class="price">{{item.jobPrice}}元/{{item.jobPaytype===1?'时':item.jobPaytype===2?'天':'月'}}</view>
+				<view class="price">推广奖励:{{item.jobFxbackprice}}元</view>
+			</view>
+		</view>
+		<view class="bottomDesc" wx-if="{{jobList.length}}">我是有底线的哦~</view>
+		<view wx-if="{{jobList.length==0}}" class="noData">
+			<image src="../../static/img/youxiang.png" />
+			<view>该区域暂无数据</view>
+		</view>
+	</view>
+   
 </view>
-<!-- 轮播图 -->
-<swiper class="swiperStyle"  autoplay="true" indicator-active-color="#ff660e" indicator-color='#fff' duration="1000" indicatorDots="true" interval="5000" style="height:200rpx">
-    <swiper-item class="swiperItem" wx:for="{{swiper}}" wx:key="item" bindtap="goLunbo" data-item="{{item}}">
-        <navigator  url="{{item.picLinkUrl}}">
-            <image class="slide-image"  src="{{item.picSaveUrl}}" style="width:100%;height:200rpx"></image>
-        </navigator>
-    </swiper-item>
-</swiper>
-<!-- 列表 -->
-<view class="jianzhiList">
-    <view class="hotJianzhi"><image src="../../static/img/hot.png"></image>火爆兼职</view>
-    <view class="list" bindtap="goDetail" data-list="{{item}}" wx:for="{{jobList}}" wx:key="item" >
-       <view class="left">
-           <view class="title">{{item.jobTitle}}</view>
-           <view class="jiesuanWay">
-              <view class="cell">{{item.jobQycode}}</view>
-              <!-- <view class="cell">{{item.typeName}}</view> -->
-           </view>
-           <view class="butie" wx:if="{{item.compWelfare.length}}">
-              <view class="type" wx:for="{{item.compWelfare}}">{{item}}</view>      
-           </view>
-       </view>
-       <view class="right">
-          <view class="price">{{item.jobPrice}}元/{{item.jobPaytype===1?'时':item.jobPaytype===2?'天':'月'}}</view>
-           <view class="price">推广奖励:{{item.jobFxbackprice}}元</view>
-       </view>
-    </view>
-    <view class="bottomDesc" wx-if="{{jobList.length}}" >我是有底线的哦~</view>
-    <view wx-if="{{jobList.length==0}}" class="noData">
-    <image src="../../static/img/youxiang.png" />
-    <view>该区域暂无兼职</view>
-    </view>
-</view>
+<view wx:if="{{!flag1}}">
+	<view class="index_swiper">
+		<swiper autoplay indicator-dots circular>
+			<swiper-item>
+				<image mode="widthFix" src="../../static/img/news.png"></image>
+			</swiper-item>
+			<swiper-item>
+				<image mode="widthFix" src="../../static/img/timg.jpg"></image>
+			</swiper-item>
+		</swiper>
+	</view>
+	<view class="aboutUs">关于我们</view>
+	<view class="content">
+		　婉妮化妆品，成立于2005年，目前在合肥有15家直营连锁店，有近百名经验丰富的专业减肥美师，已经为合肥数万名爱美人士提供了周到舒心的服务。
+		　　婉妮人始终秉承“勤劳、服务、务实、满意”的企业理念，为您创造健康，打造美丽，倡导“做美丽女人，享健康生活”的时尚人生。
+		　　专心·专注于减肥事业，致力于研究和发展经络养生绿色减肥法，立志做中国的减肥专家。我们采用标准化操作流程，并根据顾客不同肥胖体型，制定个性化的减肥方案。可全身减，可局部重点减，既减体表脂肪，又减内脏脂肪；
+		调整肥胖者亢进的食欲，养成健康的饮食习惯；调整内分泌，加速脂肪分解。
+	</view>
 
+	<view class="aboutUs">婉妮资讯</view>
+	<view class="box">
+		<view class="item" wx:for="{{newsList}}" wx:key="item" bindtap="gotoPage" data-id="{{item.id}}">
+			{{index+1}}、{{item.title}}
+		</view>
+	</view>
 </view>

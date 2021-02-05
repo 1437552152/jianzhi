@@ -19,7 +19,14 @@
         <el-input v-model="dataForm.picTitle" placeholder="标题"></el-input>
       </el-form-item>
 
-      <el-form-item label="图片上传" prop="picSaveUrl">
+     <el-form-item label="是否上传图片"  prop="type">
+        <el-radio-group v-model="dataForm.type">
+          <el-radio label="1">是</el-radio>
+          <el-radio label="2">否</el-radio>
+        </el-radio-group>
+      </el-form-item>
+
+      <el-form-item label="图片上传" prop="picSaveUrl" v-if="dataForm.type==1">
         <el-upload
           class="avatar-uploader"
           :action="PicUrl"
@@ -84,7 +91,8 @@ export default {
         picLinkUrl: "",
         orderid: "",
         descript: "",
-        pzType: ""
+        pzType: "",
+        type:"1"
       },
       ue: null,
       ueId: `J_ueditorBox_${new Date().getTime()}`,
@@ -96,9 +104,12 @@ export default {
         picTitle: [
           { required: true, message: "标题不能为空", trigger: "blur" }
         ],
+         type: [
+          { required: true, message: "请选择是否上传图片", trigger: "change" }
+        ],
         picSaveUrl: [
           {
-            required: false,
+            required: true,
             message: "图片保存的服务器地址不能为空",
             trigger: "blur"
           }
@@ -158,7 +169,7 @@ export default {
               this.dataForm.orderid = data.sysPic.orderid;
               this.dataForm.descript = data.sysPic.descript;
               this.dataForm.pzType = data.sysPic.pzType;
-
+              this.dataForm.type = data.sysPic.type;     
               this.flag = true;
               this.visabled();
             } else {
@@ -189,7 +200,8 @@ export default {
               picLinkUrl: this.dataForm.picLinkUrl,
               orderid: this.dataForm.orderid,
               descript: this.dataForm.descript,
-              pzType: this.dataForm.pzType
+              pzType: this.dataForm.pzType,
+              type: this.dataForm.type,           
               // 'byzd': this.dataForm.byzd
             })
           }).then(({ data }) => {

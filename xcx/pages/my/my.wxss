@@ -9,7 +9,7 @@ page{
 }
 .my .my_bg{
   background: #fff;
-  height: 250rpx;
+  height:300rpx;
 }
 .index_menu navigator image{
   width: 60rpx;
@@ -49,11 +49,10 @@ position:relative;
 border:1px solid #fff;
 }
 .personalinfo{
- display:flex;
-justify-content:space-between;
-padding-left:60rpx;
+ /* display:flex;
+justify-content:space-between; */
+padding-left:20rpx;
 padding-right:60rpx;
-align-items:center;
 position:absolute;
 top:70rpx;
 left:0;
@@ -61,7 +60,6 @@ right:0;
 }
 .left_part{
   display: flex;
-  justify-content: space-between;
 }
 .one image{
   width: 100rpx;
@@ -156,4 +154,29 @@ background-color: #f7f5f5;
 position: absolute;
 right: 0;
 top: 10px;
+}
+.jiangli{
+  color: #fff;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-around;
+}
+.noData{
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+}
+
+.noData image{
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  width:160px;
+  height:89px;
+}
+.concate{
+  padding-left: 15px;
+padding-right: 15px;
+margin-top: 20px;
+line-height: 30px;
 }

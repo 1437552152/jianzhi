@@ -13,7 +13,10 @@ Page({
   data: {
     userInfo: null,
     UserResume:null,
-    baomingInfo:{}
+    baomingInfo:{},
+    yongjinInfo:{},
+    flag:0,
+    flag1:1
   },
 
   /**
@@ -21,6 +24,17 @@ Page({
    */
   onLoad: function (options) {
    
+  },
+  getStatus:function(){
+    const that=this;
+    urlApi('app/index/xgzt', "get", {}).then((res) => {
+      if (res.data.code == 0) {
+          that.setData({
+            flag:res.data.re,
+            flag1:res.data.re
+          })
+      }
+    })
   },
   onJsEvent:function(el){
     let e= {
@@ -73,20 +87,30 @@ Page({
     }
   },
   goWithdrawal:function(){
-    wx.navigateTo({
-      url: '../Withdrawal/Withdrawal',
-    })
+    let txStatus=wx.getStorageSync('txStatus')
+    if(txStatus==1){
+      wx.navigateTo({
+        url: '../Withdrawal/Withdrawal',
+      })
+    }else{
+      wx.navigateTo({
+        url: '../xieYi/xieYi',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
       this.setData({userInfo:wx.getStorageSync('userInfo')});
+      this.getStatus();
       const {userInfo}=this.data;
       if(userInfo){
         this.getResume();
         // 去请求用户录用情况
         this.getBaoming();
+        //得到佣金情况
+        this.getYongjin();
       }
   },
   getBaoming:function(){
@@ -114,6 +138,28 @@ Page({
             UserResume:res.data.myCv
           })
       }
+    })
+  },
+  getYongjin:function(){
+    var that = this;
+    var data = {};
+    urlApi('app/myshouyi/getMyShouYi', "get", data).then((res) => {
+      console.log(res);
+      if (res.data.code == 0) {
+          that.setData({
+            yongjinInfo:res.data.map
+          })
+      }
+    })
+  },
+  goJnagli:function(){
+    wx.navigateTo({
+      url: '/pages/jiangli/jiangli',
+    })
+  },
+  goLeiji:function(){
+    wx.navigateTo({
+      url: '/pages/Leiji/Leiji',
     })
   }
 })

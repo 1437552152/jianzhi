@@ -50,7 +50,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    wx.hideShareMenu({
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   },
 
 
@@ -63,7 +65,7 @@ Page({
       if (res.data.code == 0) {
         that.setData({
           userDetail: res.data.myCv,
-          birthday:res.data.myCv.myCvEntity&&res.data.myCv.myCvEntity.birthday?res.data.myCv.myCvEntity.birthday:'2020-09-01',
+          birthday:res.data.myCv.myCvEntity&&res.data.myCv.birthday?res.data.myCv.birthday:'2020-09-01',
           stadyTime:res.data.myCv.myCvEntity&&res.data.myCv.myCvEntity.stadyTime?res.data.myCv.myCvEntity.stadyTime:'2020-09-01',
           myDiploma:res.data.myCv.myCvEntity&&res.data.myCv.myCvEntity.myDiploma?res.data.myCv.myCvEntity.myDiploma:'',
         })

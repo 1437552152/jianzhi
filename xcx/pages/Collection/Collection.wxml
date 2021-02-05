@@ -20,9 +20,9 @@
     </view>
      <view class="bottomDesc" wx-if="{{scList.length}}" >我是有底线的哦~</view>
       <view wx-if="{{scList.length==0}}" class="noData">
-    <image src="../../static/img/youxiang.png" />
-    <view>暂无收藏</view>
-    </view>
+         <image src="../../static/img/youxiang.png" />
+         <view>暂无收藏</view>
+      </view>
 </view>
 
 </view>

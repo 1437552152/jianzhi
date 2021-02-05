@@ -1,0 +1,6 @@
+<view>
+   <view class="item"  wx:for="{{testList}}" wx:key="item" wx-if="{{item.paySlip}}">
+     <view class="time"><image src="../../static/img/zhong.png" style="width:16px;height:16px"></image>{{item.payForTime}}</view> 
+      <view bindtap="preview" data-src="{{item.paySlip}}" style="width:90%;margin:0 auto;"><image style="width:100%" src="{{item.paySlip}}" mode="widthFix" /></view>
+   </view>
+</view>

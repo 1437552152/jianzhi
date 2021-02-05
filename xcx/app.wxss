@@ -9,3 +9,6 @@ page{
   font-size: 12px;
   color: #999;
 }
+video{
+  width:100%;
+}

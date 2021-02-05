@@ -4,7 +4,7 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-    <el-form-item label="联系电话" prop="telephone">
+    <!-- <el-form-item label="联系电话" prop="telephone">
       <el-input v-model="dataForm.telephone" placeholder="联系电话"></el-input>
     </el-form-item>
     <el-form-item label="公司邮箱" prop="companyEmail">
@@ -12,7 +12,7 @@
     </el-form-item>
     <el-form-item label="公司地址" prop="companyAddr">
       <el-input v-model="dataForm.companyAddr" placeholder="公司地址"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="手机号码" prop="phoneNum">
       <el-input v-model="dataForm.phoneNum" placeholder="手机号码"></el-input>
     </el-form-item>

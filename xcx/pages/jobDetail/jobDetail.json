@@ -1,4 +1,5 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "兼职详情"
+  "usingComponents": {
+  },
+  "navigationBarTitleText": "详情"
 }

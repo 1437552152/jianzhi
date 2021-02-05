@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.compName" placeholder="公司名称" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -59,12 +59,6 @@
         align="center"
         label="公司的福利待遇">
       </el-table-column>
-     <!--  <el-table-column
-        prop="compQycode"
-        header-align="center"
-        align="center"
-        label="公司地址">
-      </el-table-column> -->
        <el-table-column
         prop="compAddr"
         header-align="center"
@@ -103,7 +97,7 @@
     data () {
       return {
         dataForm: {
-          key: ''
+          compName: ''
         },
         dataList: [],
         pageIndex: 1,
@@ -131,7 +125,7 @@
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'key': this.dataForm.key
+            'compName': this.dataForm.compName
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
