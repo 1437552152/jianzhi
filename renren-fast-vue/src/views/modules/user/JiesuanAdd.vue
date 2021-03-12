@@ -245,7 +245,7 @@ export default {
                   payStubsId: that.id ? that.id : "",
                   openid: that.$route.query.jobId,
                   firstFirends:this.firstFirends,
-                  twoFirends:this.firstFirends
+                  twoFirends:this.twoFirends
                 })
               })
               .then(({ data }) => {
